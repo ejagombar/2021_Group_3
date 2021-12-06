@@ -2,6 +2,12 @@
 
 #C++ GITGNORE
 
+#additional files that were found
+*.vcxproj
+*.vcxproj.filters
+*.sln
+*_autogen/
+
 # Prerequisites
 *.d
 
