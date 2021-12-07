@@ -7,9 +7,9 @@ using namespace std;
 class Vector
 {
 public:
-    void get_x (float a);
-    void get_y (float b);
-    void get_z (float c);
+    void set_x (float a);
+    void set_y (float b);
+    void set_z (float c);
     void print ();
     void additionThis (Vector a);
     void subtractionThis (Vector a);
@@ -27,13 +27,13 @@ private:
 };
 
 
-void Vector::get_x (float a){
+void Vector::set_x (float a){
     x = a;
 }
-void Vector::get_y (float b){
+void Vector::set_y (float b){
     y = b;
 }
-void Vector::get_z (float c){
+void Vector::set_z (float c){
     z = c;
 }
 void Vector::print(){
@@ -57,9 +57,9 @@ void Vector::addition_And_Get_New (Vector Old,Vector& New){
     a = x + Old.x;
     b = y + Old.y;
     c = z + Old.z;
-    New.get_x (a);
-    New.get_y (b);
-    New.get_z (c);
+    New.set_x (a);
+    New.set_y (b);
+    New.set_z (c);
 }
 
 void Vector::subtraction_And_Get_New (Vector Old, Vector& New) {
@@ -67,9 +67,9 @@ void Vector::subtraction_And_Get_New (Vector Old, Vector& New) {
     a = x - Old.x;
     b = y - Old.y;
     c = z - Old.z;
-    New.get_x (a);
-    New.get_y (b);
-    New.get_z (c);
+    New.set_x (a);
+    New.set_y (b);
+    New.set_z (c);
 }
 
 float Vector::scalar_Product (Vector a){
@@ -78,9 +78,9 @@ float Vector::scalar_Product (Vector a){
 }
 
 void Vector::vector_Product_And_Get_New (Vector Old, Vector& New){
-    New.get_x (y*Old.z - z*Old.y);
-    New.get_y (z*Old.x - x*Old.z);
-    New.get_z (x*Old.y - y*Old.x);
+    New.set_x (y*Old.z - z*Old.y);
+    New.set_y (z*Old.x - x*Old.z);
+    New.set_z (x*Old.y - y*Old.x);
 }
 
 void Vector::copy_From_Vector (Vector a){
@@ -99,14 +99,14 @@ void Vector::show_Vector (float& a,float& b,float& c){
 int main()
 {
     Vector a;
-    a.get_x(19);
-    a.get_y(5);
-    a.get_z(1.5);
+    a.set_x(19);
+    a.set_y(5);
+    a.set_z(1.5);
 
     Vector b;
-    b.get_x(0.66);
-    b.get_y(2.3);
-    b.get_z(16);
+    b.set_x(0.66);
+    b.set_y(2.3);
+    b.set_z(16);
 
     Vector c;
 
