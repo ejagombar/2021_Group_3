@@ -13,29 +13,27 @@ using namespace std;
 
 
 //Passing in a file of type ifstream
-void Model::loadModelFile(const string fileName)
+bool Model::loadModelFile(const string fileName)
 {
 	ifstream fileIn;
 
 	fileIn.open(fileName);
 	if (fileIn.is_open())
     {
-        std::cout << "FILE OPEN \n";
-
         GetObjectCountsAndType(fileIn);
 
         fileIn.close();
 
-        cout << numOfVertices << "\n" << numOfMaterials << "\n" << numOfCells;
-        cout << "\nNum of Tetrahedron: " << cellTypeCount[0] << " Num of Hexahedron: " << cellTypeCount[1] << " Num of Pyramid: " << cellTypeCount[2];
+     
 	}
     else
     {
-        cout << "Failed to open file";
+        cout << "ERROR - Failed to open file";
+        return 0;
     }
     
 
-
+    return 1;
 }
 
 void Model::saveModelFile()
@@ -93,8 +91,6 @@ bool Model::GetObjectCountsAndType(ifstream& fileIn)
 void Model::CalculateCentre() {
 
 
-
-
 }
 
 uint16_t Model::GetNumOfVertices()
@@ -105,6 +101,16 @@ uint16_t Model::GetNumOfVertices()
 uint16_t Model::GetNumOfCells()
 {
     return numOfCells;
+}
+
+uint16_t Model::GetNumOfMaterials()
+{
+    return numOfMaterials;
+}
+
+void Model::GetCellTypeCount(uint16_t CountArrOut[])
+{
+    memmove(CountArrOut, cellTypeCount, sizeof(CountArrOut));
 }
 
 
@@ -118,6 +124,11 @@ int main()
     Model myModel;
 
     myModel.loadModelFile("exampleModel1.mod");
+
+    cout << myModel.GetNumOfVertices() << "\n" << myModel.GetNumOfCells() << "\n" << myModel.GetNumOfMaterials();
+    uint16_t cellTypeCount[3];
+    myModel.GetCellTypeCount(cellTypeCount);
+    //cout << "\nNum of Tetrahedron: " << cellTypeCount[0] << " Num of Hexahedron: " << cellTypeCount[1] << " Num of Pyramid: " << cellTypeCount[2];
 
 	return 0;
 

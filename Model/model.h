@@ -21,13 +21,16 @@ class Model
 
 public:
 
-    void loadModelFile(const string fileName);
+    bool loadModelFile(const string fileName);
     void saveModelFile();
 
     void CalculateCentre();
 
     uint16_t GetNumOfVertices();
     uint16_t GetNumOfCells();
+    uint16_t GetNumOfMaterials();
+
+    void GetCellTypeCount(uint16_t CountArrOut[]);
     
     //void GetModelCentre();
 
