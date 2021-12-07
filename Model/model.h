@@ -1,37 +1,41 @@
-//-----------------------------//
+﻿//-----------------------------//
 //        Edward Agombar       //
 //           20240645          //
 //-----------------------------//
 
+
+#pragma once
+#include <iostream>
+#include <fstream>
+
+using namespace std;
 
 
 //-------------------------------Model Class-------------------------------
 //-------------------------------------------------------------------------
 
 
-
 class Model {
 
 
-    public:
+public:
 
-        void loadModelFile();
-        void saveModelFile();
+    void loadModelFile(const string fileName);
+    void saveModelFile();
 
-        void CalculateCentre();
+    void CalculateCentre();
 
-        void GetNumOfVertices();
-        void GetNumOfCellType();
-        Vector GetModelCentre();
-        
+    //void GetNumOfVertices();
+    //void GetNumOfCellType();
+    //void GetModelCentre();
 
-    private:
 
-        Cell* cells;
-        Vector* vectors;
-        int numOfVertices;
-        Vector ModelCentre;
+private:
+
+    //Cell* cells;
+    //Vector* vectors;
+    int numOfVertices;
+    //Vector ModelCentre;
 
 
 };
-
