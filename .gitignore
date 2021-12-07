@@ -454,3 +454,4 @@ _deps
 build/*
 
 *_autogen/
+Cell/Cell Class Testing File/out/
