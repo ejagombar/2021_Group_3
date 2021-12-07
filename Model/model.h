@@ -49,7 +49,7 @@ public:
 private:
 
     vector <Cell> cellArray;
-    vector <Vector> vectorArray;
+    vector <Vector> verticeArray;
 
     Vector ModelCentre;
     uint16_t numOfCells;

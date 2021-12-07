@@ -95,7 +95,37 @@ bool Model::LoadModelFile(const string fileName)
     fileIn.open(fileName);
     if (fileIn.is_open())
     {
-        GetObjectCountsAndType(fileIn);
+        if (!GetObjectCountsAndType(fileIn)) return 0;
+
+        //the vertice and cell vector arrays can be set to length now we know the numbers of each
+        verticeArray.resize(numOfVertices); 
+        cellArray.resize(numOfCells);
+
+        fileIn.clear(); //clear eof and fail flags from the file stream 
+        fileIn.seekg(0); //return to start of file
+
+        string line{};
+        char firstLetter;
+
+        while (getline(fileIn, line)) //sets current line to the line string and repeats until no lines left
+        {
+            if (fileIn.is_open() && (!line.empty())) //make sure file is still open and line is not empty
+            {
+                firstLetter = line.front();
+                switch (firstLetter) {
+                case 't':
+                    //
+                    break;
+                case 'h':
+                    //
+                    break;
+                case 'p':
+                    //
+                    break;
+                }
+            
+            }
+        }
 
         fileIn.close();
 
