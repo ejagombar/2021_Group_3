@@ -15,7 +15,8 @@ using namespace std;
 //-------------------------------------------------------------------------
 
 
-class Model {
+class Model
+{
 
 
 public:
@@ -25,16 +26,23 @@ public:
 
     void CalculateCentre();
 
-    //void GetNumOfVertices();
-    //void GetNumOfCellType();
+    uint16_t GetNumOfVertices();
+    uint16_t GetNumOfCells();
+    
     //void GetModelCentre();
 
 
 private:
 
+    bool GetObjectCountsAndType(ifstream& fileIn);
+
     //Cell* cells;
     //Vector* vectors;
-    int numOfVertices;
+
+    uint16_t numOfVertices;
+    uint16_t numOfCells;
+    uint16_t numOfMaterials;
+    uint16_t cellTypeCount[3]; //Order: Tetrahedron, Hexahedron, Pyramid
     //Vector ModelCentre;
 
 
