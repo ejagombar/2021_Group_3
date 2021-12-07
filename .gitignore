@@ -451,6 +451,6 @@ _deps
 *.vcxproj
 *.vcxproj.filters
 
-.build/
+build/*
 
 *_autogen/
