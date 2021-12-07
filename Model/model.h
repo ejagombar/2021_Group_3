@@ -7,9 +7,13 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <string>
 
 using namespace std;
 
+class Vector {};
+class Cell {};
 
 //-------------------------------Model Class-------------------------------
 //-------------------------------------------------------------------------
@@ -23,15 +27,14 @@ public:
 
     bool LoadModelFile(const string fileName);
     void SaveModelFile();
-
     void CalculateCentre();
 
     uint16_t GetNumOfVertices();
     uint16_t GetNumOfCells();
     uint16_t GetNumOfMaterials();
     uint16_t GetCellTypeCount(uint16_t cellType);
+    Vector GetModelCentre();
     
-    //void GetModelCentre();
 
     Model();                                              //Constructor
 
@@ -45,16 +48,15 @@ public:
 
 private:
 
-    bool GetObjectCountsAndType(ifstream& fileIn);
+    vector <Cell> cellArray;
+    vector <Vector> vectorArray;
 
-    //Cell* cells;
-    //Vector* vectors;
-
-    uint16_t numOfVertices;
+    Vector ModelCentre;
     uint16_t numOfCells;
+    uint16_t numOfVertices;
     uint16_t numOfMaterials;
     uint16_t cellTypeCount[3]; //Order: Tetrahedron, Hexahedron, Pyramid
-    //Vector ModelCentre;
 
-
+    bool GetObjectCountsAndType(ifstream& fileIn);
+    
 };

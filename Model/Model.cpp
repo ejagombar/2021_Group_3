@@ -2,7 +2,7 @@
 //
 
 #include "Model.h"
-#include <string>
+
 
 
 using namespace std;
@@ -10,16 +10,16 @@ using namespace std;
 //------------------------------Constructors-------------------------------
 //-------------------------------------------------------------------------
 
-Model::Model() //Constructor
+Model::Model()                                        //Constructor
 {
-
+ 
 }
 
 
-Model::~Model() {} //Destructor
+Model::~Model() {}                                    //Destructor
 
 
-Model::Model(const Model& ModelCopy) //Copy Constructor
+Model::Model(const Model& ModelCopy)                  //Copy Constructor
     :numOfVertices(ModelCopy.numOfVertices),
     numOfCells(ModelCopy.numOfCells),
     numOfMaterials(ModelCopy.numOfMaterials)
@@ -71,6 +71,11 @@ uint16_t Model::GetCellTypeCount(uint16_t cellType) //returns number of cells in
     {
         cout << "\nERROR - cellType out of range";
     }
+}
+
+Vector Model::GetModelCentre()
+{
+    return ModelCentre;
 }
 
 
