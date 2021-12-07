@@ -455,3 +455,5 @@ build/*
 
 *_autogen/
 Model/out/build/x64-Debug/
+
+Cell/Cell Class Testing File/out/
