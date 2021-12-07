@@ -21,18 +21,26 @@ class Model
 
 public:
 
-    bool loadModelFile(const string fileName);
-    void saveModelFile();
+    bool LoadModelFile(const string fileName);
+    void SaveModelFile();
 
     void CalculateCentre();
 
     uint16_t GetNumOfVertices();
     uint16_t GetNumOfCells();
     uint16_t GetNumOfMaterials();
-
-    void GetCellTypeCount(uint16_t CountArrOut[]);
+    uint16_t GetCellTypeCount(uint16_t cellType);
     
     //void GetModelCentre();
+
+    Model();                                              //Constructor
+
+    ~Model();                                             //Destructor
+
+    Model(const Model& ModelCopy);                        //Copy constructor
+
+    const Model& operator=(const Model& ModelCopy);       //Assignment operator
+
 
 
 private:
