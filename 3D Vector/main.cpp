@@ -17,10 +17,10 @@ public:
     void subtraction_And_Get_New (Vector Old, Vector& New);
 
     float scalar_Product (Vector a);
-    float vector_Product_And_Get_New (Vector Old, Vector& New);
+    void vector_Product_And_Get_New (Vector Old, Vector& New);
 
-    float copy_From_Vector (Vector a);
-    float show_Vector (float a[3]);
+    void copy_From_Vector (Vector a);
+    float show_Vector (float& a,float& b,float& c);
 
 private:
     float x,y,z;
@@ -72,7 +72,28 @@ void Vector::subtraction_And_Get_New (Vector Old, Vector& New) {
     New.get_z (c);
 }
 
+float Vector::scalar_Product (Vector a){
+    float i;
+    return i = (x*a.x)+(y*a.y)+(z*a.z);
+}
 
+void Vector::vector_Product_And_Get_New (Vector Old, Vector& New){
+    New.get_x (y*Old.z - z*Old.y);
+    New.get_y (z*Old.x - x*Old.z);
+    New.get_z (x*Old.y - y*Old.x);
+}
+
+void Vector::copy_From_Vector (Vector a){
+    x = a.x;
+    y = a.y;
+    z = a.z;
+}
+
+float Vector::show_Vector (float& a,float& b,float& c){
+    a = x;
+    b = y;
+    c = z;
+}
 
 
 int main()
@@ -89,8 +110,15 @@ int main()
 
     Vector c;
 
-    a.addition_And_Get_New(b,c);
+    c.copy_From_Vector(b);
 
+    c.print();
+
+    float x,y,z;
+
+    a.show_Vector(x,y,z);
+
+    cout<<"\n"<<x<<"\n"<<y<<"\n"<<z;
 
 
 }
