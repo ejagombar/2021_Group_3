@@ -20,7 +20,7 @@ public:
     void vector_Product_And_Get_New (Vector Old, Vector& New);
 
     void copy_From_Vector (Vector a);
-    float show_Vector (float& a,float& b,float& c);
+    void show_Vector (float& a,float& b,float& c);
 
 private:
     float x,y,z;
@@ -89,7 +89,7 @@ void Vector::copy_From_Vector (Vector a){
     z = a.z;
 }
 
-float Vector::show_Vector (float& a,float& b,float& c){
+void Vector::show_Vector (float& a,float& b,float& c){
     a = x;
     b = y;
     c = z;
