@@ -451,7 +451,7 @@ _deps
 *.vcxproj
 *.vcxproj.filters
 
-.build/
+build/*
 
 *_autogen/
 Model/out/build/x64-Debug/
