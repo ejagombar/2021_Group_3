@@ -38,11 +38,11 @@ public:
 
     Model();                                              //Constructor
 
-    ~Model();                                             //Destructor
-
+    ~Model();                                         
     Model(const Model& ModelCopy);                        //Copy constructor
 
     const Model& operator=(const Model& ModelCopy);       //Assignment operator
+    //Destructor
 
 
 
@@ -58,5 +58,8 @@ private:
     uint16_t cellTypeCount[3]; //Order: Tetrahedron, Hexahedron, Pyramid
 
     bool GetObjectCountsAndType(ifstream& fileIn);
+    void ReadCellFromFile(string &line);
+    void ReadVectorFromFile(string &line);
+    void ReadMaterialFromFile(string &line);
     
 };
