@@ -113,14 +113,14 @@ bool Model::LoadModelFile(const string fileName)
             {
                 firstLetter = line.front();
                 switch (firstLetter) {
-                case 't':
-                    //
+                case 'v':
+                    ReadVectorFromFile(line);
                     break;
-                case 'h':
-                    //
+                case 'm':
+                    ReadMaterialFromFile(line);
                     break;
-                case 'p':
-                    //
+                case 'c':
+                    ReadCellFromFile(line);
                     break;
                 }
             
@@ -190,7 +190,6 @@ bool Model::GetObjectCountsAndType(ifstream& fileIn)
                     cout << "\nERROR - Cell type not found";
                     return 0; //error as cell type not found
                 }
-
             }
         }
     }
@@ -206,6 +205,146 @@ bool Model::GetObjectCountsAndType(ifstream& fileIn)
 }
 
 
+//-------------------ReadCellFromFile----------------------
+void Model::ReadCellFromFile(string& line)
+{
+    uint8_t searchState = 0;
+    int8_t tempState = 4;
+    string cellId, cellMaterial, cellType, verticeId;
+    Vector* vectorPtr; //CHANGE THIS to correction vector class name
+    uint8_t numOfElements;
+
+    for (int i = 0; i < line.length(); i++)
+    {
+        char currentChar = line[i];
+
+        if (currentChar == ' ')
+        {
+            searchState += 1;
+        }
+        else
+        {
+            switch (searchState)
+            {
+            case 0: //Reading first character defining it as a cell - does not need to be stored 
+                break;
+            case 1: //Reading second data entry in cell - cell ID
+                cellId.push_back(currentChar);
+                break;
+            case 2: //Reading third data entry - cell type
+                cellType.push_back(currentChar);
+                switch (currentChar) {
+                case 't': numOfElements = 4; break;
+                case 'h': numOfElements = 8; break;
+                case 'p': numOfElements = 5; break;
+                default:
+                    cout << "\nERROR - Cell type not found";
+                }
+                vectorPtr = (Vector*)malloc(numOfElements * sizeof(Vector)); //CHANGE THIS to correct vector class names
+                break;
+            case 3:
+                cellMaterial.push_back(currentChar);
+                break;
+            default: // adds the rest of the data points to the array
+
+                if (searchState != tempState)
+                {   
+                    cout << "Vert: " << verticeId << endl;
+                    verticeId.clear();
+                    tempState = searchState;
+                }
+                verticeId.push_back(currentChar);  
+            }
+        }
+    }
+    cout << "Vert: " << verticeId << endl;
+
+    cout << "\nID:" << cellId << " Material:" << cellMaterial << " Type:" << cellType << endl;
+
+}
+
+
+//-------------------ReadVectorFromFile--------------------
+void Model::ReadVectorFromFile(string& line)
+{
+    uint8_t searchState = 0;
+    string vertexId, vertexX, vertexY, vertexZ;
+
+    for (int i = 0; i < line.length(); i++)
+    {
+        char currentChar = line[i];
+
+        if (currentChar == ' ')
+        {
+            searchState += 1;
+        }
+        else
+        {
+            switch (searchState)
+            {
+            case 0: //Reading first character defining it as a vertex - does not need to be stored 
+                break;
+            case 1: //Reading second data entry in vertex - vertex ID
+                vertexId.push_back(currentChar);
+                break;
+            case 2: //Reading third data entry - x position
+                vertexX.push_back(currentChar);
+                break;
+            case 3:  //Reading fourth data entry - y position
+                vertexY.push_back(currentChar);
+                break;
+            case 4: //Reading fourth data entry - z position
+                vertexZ.push_back(currentChar);
+                break;
+            default:
+                cout << "\nERROR - State not found";
+            }
+        }
+    }
+    cout << "\nID:" << vertexId << " X:" << vertexX << " Y:" << vertexY << " Z:" << vertexZ << endl;
+}
+
+
+//-----------------ReadMaterialFromFile--------------------
+void Model::ReadMaterialFromFile(string& line)
+{
+    uint8_t searchState = 0;
+    string materialId , materialDensity, materialColour, materialName;
+ 
+    for (int i = 0; i < line.length(); i++)
+    {
+        char currentChar = line[i];
+
+        if (currentChar == ' ')
+        {
+            searchState += 1;
+        }
+        else
+        {
+            switch (searchState)
+            {
+            case 0: //Reading first character defining it as a material - does not need to be stored 
+                break;
+            case 1: //Reading second data entry in material - material index
+                materialId.push_back(currentChar);
+                break;
+            case 2: //Reading third data entry - density
+                materialDensity.push_back(currentChar);
+                break;
+            case 3:  //Reading fourth data entry - colour
+                materialColour.push_back(currentChar); 
+                break;
+            case 4: //Reading fourth data entry - name
+                materialName.push_back(currentChar);
+                break;
+            default:
+                cout << "\nERROR - State not found";
+            }
+        }
+    }
+    cout << "\nID: " << materialId << "\nDensity: " << materialDensity << "\nColour: " << materialColour << "\nName: " << materialName << endl;
+}
+
 
 //--------------------CalculateCentre----------------------
 void Model::CalculateCentre() {
@@ -213,6 +352,9 @@ void Model::CalculateCentre() {
 
 }
 
+
+//---------------------------------Main------------------------------------
+//-------------------------------------------------------------------------
 
 int main()
 {
