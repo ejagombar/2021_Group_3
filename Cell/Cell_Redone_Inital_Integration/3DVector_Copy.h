@@ -2,7 +2,6 @@
 #define Vector_H
 #include <iostream>
 using namespace std;
-
 class Vector
 {
 public:
@@ -23,9 +22,16 @@ public:
     const Vector& operator= (const Vector& a);   //Overload '=' operator
     Vector operator+= (const Vector& a);         //Overload '+=' operator
 
-    friend istream& operator>> (istream& in, Vector& a);   //Overload '>>' operator
-    friend ostream& operator<< (ostream& out, Vector& a);   //Overload '<<' operator
+    //friend istream& operator>> (istream& in, interval& a);   //Overload '>>' operator
+    //friend ostream& operator<< (ostream& out, interval& a);   //Overload '<<' operator
 
+    float Get_x();
+    float Get_y();
+    float Get_z();
+
+    void Set_x(float a);
+    void Set_y(float a);
+    void Set_z(float a);
 
 private:
     float x;
@@ -38,5 +44,4 @@ Vector operator+(float f,Vector & a);  //Overload operators, recognizing differe
 
 
 
-#endif // 3D_VECTOR_H
-
+#endif 3D_VECTOR_H
