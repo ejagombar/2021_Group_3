@@ -60,6 +60,7 @@ public slots:
     void on_checkBoxclip_stateChanged();
 
     void handlFilter();
+    void handlFilter_T();
 
 //signals:
     //void statusUpdateMessage( const QString & message, int timeout );

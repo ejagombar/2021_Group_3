@@ -33,8 +33,10 @@
 #include <QColorDialog>
 #include <vtkGeometryFilter.h>
 #include <vtkShrinkFilter.h>
+#include <vtkSplineFilter.h>
 #include <vtkPlane.h>
 #include <vtkClipDataSet.h>
+#include <vtkSphereSource.h>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -67,6 +69,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect( ui->BoxClip, &QCheckBox::stateChanged, this, &::MainWindow::on_checkBoxclip_stateChanged);
 
     connect( ui->Filter, &QPushButton::released, this, &::MainWindow::handlFilter );
+    connect( ui->Filter_T, &QPushButton::released, this, &::MainWindow::handlFilter_T );
 }
 
 void MainWindow::on_checkBox_stateChanged()
@@ -171,7 +174,6 @@ void MainWindow::on_checkBox_stateChanged()
            actor->SetMapper(mapper);
        }
 
-
        actor->GetProperty()->SetColor( Red,Green,Blue );
 
        renderer->AddActor(actor);
@@ -179,6 +181,26 @@ void MainWindow::on_checkBox_stateChanged()
 
        renderWindow->Render();
      }
+}
+
+void MainWindow::handlFilter_T() {
+
+    vtkNew<vtkArrowSource> source;
+    vtkNew<vtkSplineFilter> filter;
+    filter->SetInputConnection(source->GetOutputPort());
+    filter->SetNumberOfSubdivisions(100);
+    //filter->SetSpline(reader);
+    //filter->Update();
+
+    vtkNew<vtkPolyDataMapper> geometryMapper;
+    geometryMapper->SetInputData(filter->GetOutput());
+    vtkNew<vtkActor> geometryActor;
+    geometryActor->SetMapper(geometryMapper);
+
+    vtkNew<vtkRenderer> renderer;
+    renderer->AddActor(geometryActor);
+    renderer->ResetCamera();
+    renderer->SetBackground(0, 0, 0);
 }
 
 
@@ -386,11 +408,9 @@ void MainWindow::on_cone_triggered() {
     randerbegan(actor);
 }
 
-
 void MainWindow::on_ColorChoose_triggered() {
     ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );			// ###### ask the QtVTKOpenGLWidget for its renderWindow ######
 
-    // Add the actor to the scene
     renderer->AddActor(actor);
     QColor ColourDialog = QColorDialog::getColor();
 
@@ -456,12 +476,31 @@ void MainWindow::on_saveButton_triggered()
 }
 
 void MainWindow::handlFilter() {
+
+    vtkNew<vtkArrowSource> source;
+    vtkNew<vtkSplineFilter> filter;
+    filter->SetInputConnection(source->GetOutputPort());
+    filter->SetNumberOfSubdivisions(100);
+    //filter->SetSpline(reader);
+    //filter->Update();
+
+    vtkNew<vtkPolyDataMapper> geometryMapper;
+    geometryMapper->SetInputData(filter->GetOutput());
+    vtkNew<vtkActor> geometryActor;
+    geometryActor->SetMapper(geometryMapper);
+
+    vtkNew<vtkRenderer> renderer;
+    renderer->AddActor(geometryActor);
     renderer->ResetCamera();
+    renderer->SetBackground(0, 0, 0);
+
+    /*renderer->ResetCamera();
     renderer->GetActiveCamera()->Azimuth(30);
     renderer->GetActiveCamera()->Elevation(30);
     renderer->ResetCameraClippingRange();
-    renderWindow->Render();
+    renderWindow->Render();*/
 }
+
 
 void MainWindow::randerbegan(vtkSmartPointer<vtkActor> actor){
     ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );
