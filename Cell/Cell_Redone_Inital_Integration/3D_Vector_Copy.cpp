@@ -1,4 +1,4 @@
-#include "3DVector.h"
+#include "3DVector_Copy.h"
 #include <iostream>
 
 
@@ -71,14 +71,14 @@ Vector Vector::operator+= (const Vector& a){
     return (*this);
 }
 
-
-ostream & operator<<(ostream & out,Vector& a)  //----------Overload '<<' operator
+/*
+ostream & operator<<(ostream & out,interval& a)  //----------Overload '<<' operator
 {
-	out<<"\n("<<a.x<<","<<a.y<<","<<a.z<<")";
+	out<<"\n("<<x<<","<<y<<","<<z<<")";
 	return (out);
 }
 
-istream& operator>>(istream& in, Vector& a)  //----------Overload '>>' operator
+istream& operator>>(istream& in, interval& a)  //----------Overload '>>' operator
 {
     cout<<"\n"<<"Please input the x value: ";
     in>>a.x;
@@ -88,25 +88,14 @@ istream& operator>>(istream& in, Vector& a)  //----------Overload '>>' operator
     in>>a.z;
     return (in);
 }
+*/
 
+//BEN SECTION
 
+float Vector::Get_x(){return x;}
+float Vector::Get_y(){return y;}
+float Vector::Get_z(){return z;}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void Vector::Set_x(float a){x=a;}
+void Vector::Set_y(float a){y=a;}
+void Vector::Set_z(float a){z=a;}
