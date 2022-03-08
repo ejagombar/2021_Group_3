@@ -457,3 +457,5 @@ build/*
 Model/out/build/x64-Debug/
 
 Cell/Cell Class Testing File/out/
+
+build-Group3Project-Desktop_Qt_6_2_3_MSVC2019_64bit-Debug/*
