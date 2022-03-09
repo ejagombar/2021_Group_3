@@ -86,10 +86,3 @@ void Material::set_Density(float densityIn)
 {
 	density = densityIn;
 }
-
-
-int main()
-{
-	std::cout << "Hello CMake." << std::endl;
-	return 0;
-}
