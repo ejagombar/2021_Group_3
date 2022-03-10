@@ -65,11 +65,12 @@ uint16_t Model::GetCellTypeCount(uint16_t cellType) //returns number of cells in
 {                                                  // 0 - Tetrahedron, 1 - Hexahedron, 2 - Pyramid
     if ((cellType < sizeof(cellTypeCount)) && (cellType >= 0))
     {
-        return cellTypeCount[cellType]; //returns value as long as cellType is in range 
+        return cellTypeCount[(int)cellType]; //returns value as long as cellType is in range 
     }
     else
     {
         cout << "\nERROR - cellType out of range";
+        return -1;
     }
 }
 
