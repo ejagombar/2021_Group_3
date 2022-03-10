@@ -10,7 +10,7 @@ include(CTest)
 
 add_executable(${PROJECT_NAME} "tests/testModel.cpp")
 
-add_executable(test1 "tests/testModel.cpp")
+add_executable(testModel "tests/testModel.cpp")
 add_executable(testMaterial "tests/testMaterial.cpp")
 
 #Adds all the directories containing the classes that make up the library
@@ -19,20 +19,27 @@ add_subdirectory(Material)
 add_subdirectory(Model)
 add_subdirectory(tests)
 
-target_include_directories(${PROJECT_NAME} PUBLIC Material Model)
 
+#Add libraries and library directories for executable project
+target_include_directories(${PROJECT_NAME} PUBLIC Material Model)
 target_link_directories(${PROJECT_NAME} PRIVATE Material Model)
 
 target_link_libraries(${PROJECT_NAME} StaticMaterialLib StaticModelLib)
 
 
-#add_executable(testModel "tests/testModel.cpp")
-#add_executable(testMaterial "tests/testMaterial.cpp")
+#Add libraries and library directories for test 
+target_include_directories(testModel  PUBLIC Material Model)
+target_link_directories(testModel PRIVATE Material Model)
+target_link_libraries(testModel StaticMaterialLib StaticModelLib)
 
-add_test(test1 test1)
+target_include_directories(testMaterial PUBLIC Material Model)
+target_link_directories(testMaterial PRIVATE Material Model)
+target_link_libraries(testMaterial StaticMaterialLib StaticModelLib)
+
+
+add_test(testModel testModel )
 add_test(testMaterial testMaterial)
 
-#Adds the directory that holds the test programs 
 
 
 
