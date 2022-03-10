@@ -10,7 +10,7 @@ include(CTest)
 
 add_executable(${PROJECT_NAME} "tests/testModel.cpp")
 
-add_executable(testModel "tests/testModel.cpp")
+add_executable(test1 "tests/testModel.cpp")
 add_executable(testMaterial "tests/testMaterial.cpp")
 
 #Adds all the directories containing the classes that make up the library
@@ -29,7 +29,7 @@ target_link_libraries(${PROJECT_NAME} StaticMaterialLib StaticModelLib)
 #add_executable(testModel "tests/testModel.cpp")
 #add_executable(testMaterial "tests/testMaterial.cpp")
 
-add_test(testModel testModel)
+add_test(test1 test1)
 add_test(testMaterial testMaterial)
 
 #Adds the directory that holds the test programs 
