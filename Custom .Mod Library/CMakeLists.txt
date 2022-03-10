@@ -11,15 +11,13 @@ add_executable(${PROJECT_NAME} main.cpp)
 #Adds all the directories containing the classes that make up the library
 
 add_subdirectory(Material)
+add_subdirectory(Model)
 
-target_include_directories(${PROJECT_NAME} PUBLIC Material) 
+target_include_directories(${PROJECT_NAME} PUBLIC Material Model)
 
-target_link_directories(${PROJECT_NAME} PRIVATE Material)
+target_link_directories(${PROJECT_NAME} PRIVATE Material Model)
 
-
-target_link_libraries(${PROJECT_NAME} StaticMaterialLib)
-
-
+target_link_libraries(${PROJECT_NAME} StaticMaterialLib StaticModelLib)
 
 #Adds the directory that holds the test programs 
 add_subdirectory(Tests)

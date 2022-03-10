@@ -353,24 +353,3 @@ void Model::CalculateCentre() {
 }
 
 
-//---------------------------------Main------------------------------------
-//-------------------------------------------------------------------------
-
-int main()
-{
-	cout << "Hello CMake." << endl;
-
-    Model myModel;
-
-    myModel.LoadModelFile("exampleModel1.mod");
-
-    cout << myModel.GetNumOfVertices() << "\n" << myModel.GetNumOfCells() << "\n" << myModel.GetNumOfMaterials();
-    uint16_t cellTypeCount[3];
-    cout << "\nNum of Tetrahedron: " << myModel.GetCellTypeCount(0)
-        << " Num of Hexahedron: " << myModel.GetCellTypeCount(1)
-        << " Num of Pyramid: " << myModel.GetCellTypeCount(2);
-
-	return 0;
-
-
-}

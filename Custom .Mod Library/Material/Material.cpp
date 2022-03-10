@@ -10,6 +10,16 @@
 //------------------------------Constructors-------------------------------
 //-------------------------------------------------------------------------
 
+Material::Material()
+{
+	ID = 0;
+	name = "";
+	materialColour.r = 0;
+	materialColour.g = 0;
+	materialColour.b = 0;
+	density = 0;
+}
+
 Material::Material(int IDIn, std::string nameIn, colour colourIn, float densityIn)
 {
 	ID = IDIn;

@@ -36,7 +36,7 @@ public:
     void set_Density(float densityIn);
 
 
-    Material() {};                                              //Constructor
+    Material();                                              //Constructor
     Material(int IDIn, std::string nameIn, colour colourIn, float densityIn);
 
     ~Material() {};
