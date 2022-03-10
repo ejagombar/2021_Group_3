@@ -89,6 +89,16 @@ istream& operator>>(istream& in, Vector& a)  //----------Overload '>>' operator
     return (in);
 }
 
+//BEN SECTION sets and gets for x y and z
+
+float Vector::Get_x(){return x;}
+float Vector::Get_y(){return y;}
+float Vector::Get_z(){return z;}
+
+void Vector::Set_x(float a){x=a;}
+void Vector::Set_y(float a){y=a;}
+void Vector::Set_z(float a){z=a;}
+
 
 
 

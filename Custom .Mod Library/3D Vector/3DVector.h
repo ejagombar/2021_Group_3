@@ -26,6 +26,16 @@ public:
     friend istream& operator>> (istream& in, Vector& a);   //Overload '>>' operator
     friend ostream& operator<< (ostream& out, Vector& a);   //Overload '<<' operator
 
+    //Sets and Gets for x y and z
+
+    float Get_x();
+    float Get_y();
+    float Get_z();
+
+    void Set_x(float a);
+    void Set_y(float a);
+    void Set_z(float a);
+
 
 private:
     float x;
