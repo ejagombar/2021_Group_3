@@ -49,7 +49,6 @@ cell::cell( uint8_t No_Vertices, Vector3D *vectors, float Density_Value) //Const
 
 cell::~cell() //Destructor
 {
-    delete[] &VecPtrs;
 }
 
 cell::cell(const cell& cell_object) //Copy Constructor

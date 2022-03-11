@@ -50,7 +50,9 @@ int main()
     }
 
     cout << "now leave";
-    throw std::exception();
+    //throw std::exception();
+
+    return 1;
 
 }
 
