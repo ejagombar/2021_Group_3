@@ -37,6 +37,70 @@
 #include <vtkPlane.h>
 #include <vtkClipDataSet.h>
 #include <vtkSphereSource.h>
+#include <vtkVoxelContoursToSurfaceFilter.h>
+#include <vtkWindowedSincPolyDataFilter.h>
+#include <vtkSmartPointer.h>
+#include <vtkPolyDataReader.h>
+#include <vtkPolyData.h>
+#include<vtkVertexGlyphFilter.h>
+#include<vtkPolyDataMapper.h>
+#include<vtkOutlineFilter.h>
+#include<vtkSmoothPolyDataFilter.h>
+#include<vtkDataSetSurfaceFilter.h>
+#include<vtkClipDataSet.h>
+#include<vtkCutter.h>
+#include<vtkShrinkFilter.h>
+#include<vtkReflectionFilter.h>
+
+//QT lib
+#include<qobject.h>
+#include<qdebug.h>
+#include<QString>
+#include<QFileDialog>
+#include<QColor>
+#include<QColorDialog>
+
+//vtk lib
+
+#include<vtkSTLReader.h>
+#include<vtkCamera.h>
+#include<vtkPolyData.h>
+#include<vtkRenderer.h>
+#include<vtkPolyDataMapper.h>
+#include<vtkNamedColors.h>
+
+#include<vtkCubeSource.h>
+#include<vtkSphereSource.h>
+#include<vtkCylinderSource.h>
+#include<vtkDiskSource.h>
+#include<vtkLineSource.h>
+#include<vtkPyramid.h>
+#include<vtkTetra.h>
+#include<vtkConeSource.h>
+
+
+#include <vtkLight.h>
+#include<vtkProperty.h>
+#include <vtkDataSetMapper.h>
+#include <vtkRenderWindow.h>
+#include <vtkSmartPointer.h>
+#include <vtkRenderWindowInteractor.h>
+#include <vtkGenericOpenGLRenderWindow.h>
+#include <vtkSTLWriter.h>
+#include <vtkNew.h>
+#include <vtkUnstructuredGrid.h>
+#include <vtkPoints.h>
+#include <vtkCellArray.h>
+#include <vtkCellType.h>
+#include<vtkCellArray.h>
+#include<vtkDataSetSurfaceFilter.h>
+
+#include<vtkGenericOutlineFilter.h>
+#include <vtkDataSetMapper.h>
+#include <vtkDataSetSurfaceFilter.h>
+
+#include <vtkUnstructuredGrid.h>
+#include <vtkUnstructuredGridReader.h>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -183,24 +247,47 @@ void MainWindow::on_checkBox_stateChanged()
      }
 }
 
-void MainWindow::handlFilter_T() {
+void MainWindow::handlFilter_T() {   
 
-    vtkNew<vtkArrowSource> source;
-    vtkNew<vtkSplineFilter> filter;
-    filter->SetInputConnection(source->GetOutputPort());
-    filter->SetNumberOfSubdivisions(100);
-    //filter->SetSpline(reader);
-    //filter->Update();
+    vtkSmartPointer<vtkDataSetSurfaceFilter> filter;
+    vtkSmartPointer<vtkGenericOutlineFilter> Filter;
+    //vtkNew<vtkShrinkFilter> filter;
+    //filter->SetShrinkFactor(0.6);
 
-    vtkNew<vtkPolyDataMapper> geometryMapper;
-    geometryMapper->SetInputData(filter->GetOutput());
-    vtkNew<vtkActor> geometryActor;
-    geometryActor->SetMapper(geometryMapper);
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
 
-    vtkNew<vtkRenderer> renderer;
-    renderer->AddActor(geometryActor);
-    renderer->ResetCamera();
-    renderer->SetBackground(0, 0, 0);
+    vtkNew<vtkPolyDataMapper> mapper;
+    //vtkNew<vtkDataSetMapper> mapper;
+
+    //QByteArray ba = fileName.toLocal8Bit();
+    //const char *c_str2 = ba.data();
+    //reader->SetFileName(c_str2);
+
+    vtkNew<vtkSTLReader> reader;
+
+    reader->SetFileName(fileName.toLatin1().data());
+
+    reader->Update();
+
+    //surfacefilter->SetInputConnection(reader->GetOutputPort());
+    filter->SetInputConnection(reader->GetOutputPort());
+    //filter->SetInputData(reader->GetOutputPort());
+    filter->Update();
+
+    vtkPolyData* polydata = filter->GetOutput();
+
+    Filter->SetInputData(polydata);
+
+    mapper->SetInputConnection(Filter->GetOutputPort());
+
+    actor->SetMapper(mapper);
+    actor->GetProperty()->SetColor( Red,Green,Blue );
+
+    ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );
+    renderer->AddActor(actor);
+    renderer->SetBackground( Red_B,Green_B,Blue_B );
+
+    renderWindow->Render();
 }
 
 
@@ -477,28 +564,11 @@ void MainWindow::on_saveButton_triggered()
 
 void MainWindow::handlFilter() {
 
-    vtkNew<vtkArrowSource> source;
-    vtkNew<vtkSplineFilter> filter;
-    filter->SetInputConnection(source->GetOutputPort());
-    filter->SetNumberOfSubdivisions(100);
-    //filter->SetSpline(reader);
-    //filter->Update();
-
-    vtkNew<vtkPolyDataMapper> geometryMapper;
-    geometryMapper->SetInputData(filter->GetOutput());
-    vtkNew<vtkActor> geometryActor;
-    geometryActor->SetMapper(geometryMapper);
-
-    vtkNew<vtkRenderer> renderer;
-    renderer->AddActor(geometryActor);
     renderer->ResetCamera();
-    renderer->SetBackground(0, 0, 0);
-
-    /*renderer->ResetCamera();
     renderer->GetActiveCamera()->Azimuth(30);
     renderer->GetActiveCamera()->Elevation(30);
     renderer->ResetCameraClippingRange();
-    renderWindow->Render();*/
+    renderWindow->Render();
 }
 
 

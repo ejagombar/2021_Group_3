@@ -40,8 +40,21 @@ public:
     ~MainWindow();
     void randerbegan(vtkSmartPointer<vtkActor> actor);
 
+    void setBackgndColor();
+    void setModelColor();
+
+    void LaunchOutLineFilter();
+    void LaunchClipFilter();
+    void LaunchShrinkFilter();
+    void LaunchSmoothFilter();
+    void LaunchReflectFilter();
+    void LaunchCurveFilter();
+
+
+
 private:
     Ui::MainWindow *ui;
+
     vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
     vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();
     vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
@@ -67,3 +80,46 @@ public slots:
 };
 
 #endif // MAINWINDOW_H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
