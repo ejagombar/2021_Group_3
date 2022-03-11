@@ -3,3 +3,37 @@
 
 cmake_minimum_required (VERSION 3.8)
 
+include(ctest)
+
+link_directories(${CMAKE_SOURCE_DIR}/src)
+
+add_executable(testMaterial "testMaterial.cpp")
+
+target_link_libraries(testMaterial PRIVATE LibsModule)
+
+add_test(testMaterial testMaterial)
+
+
+
+
+
+
+
+
+#add_executable(testModel "testModel.cpp")
+#add_executable(test3D_Vector "test3D_Vector.cpp")
+#add_executable(testCell "testCell.cpp")
+
+
+
+#target_link_libraries(testModel PRIVATE LibsModule)
+#target_link_libraries(test3D_Vector PRIVATE LibsModule)
+#target_link_libraries(testCell PRIVATE LibsModule)
+
+
+
+
+#add_test(testModel testModel)
+#add_test(test3D_Vector test3D_Vector)
+#add_test(testCell testCell)
+

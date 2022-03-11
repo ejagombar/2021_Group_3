@@ -1,15 +1,15 @@
 #include <iostream>
-#include"3DVector.h"
-#include"3D_Vector.cpp"
+#include"../include/3D_Vector.h"
+
 using namespace std;
 
 int main()
 {
     cout << "Hello world!" << endl;
-    Vector a(2, 4, 5);
-    Vector b;
+    Vector3D a(2, 4, 5);
+    Vector3D b;
     a += b;
-    Vector c(b);
+    Vector3D c(b);
     cout << a;
     return 0;
 }

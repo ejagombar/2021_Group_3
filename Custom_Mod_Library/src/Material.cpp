@@ -1,7 +1,7 @@
 ﻿// Material.cpp : Defines the entry point for the application.
 //
 
-#include "Material.h"
+#include "../include/Material.h"
 #include <iostream>
 
 

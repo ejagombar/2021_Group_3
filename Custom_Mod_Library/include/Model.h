@@ -3,18 +3,19 @@
 //           20240645          //
 //-----------------------------//
 
+#ifndef MODEL_H
+#define MODEL_H
 
-#pragma once
 #include <iostream>
 #include <fstream>
-#include <vector>
 #include <string>
 #include <cstring>
+#include <vector>
+
+#include "Cell.h"
 
 using namespace std;
 
-class Vector {};
-class Cell {};
 
 //-------------------------------Model Class-------------------------------
 //-------------------------------------------------------------------------
@@ -34,7 +35,7 @@ public:
     uint16_t GetNumOfCells();
     uint16_t GetNumOfMaterials();
     uint16_t GetCellTypeCount(uint16_t cellType);
-    Vector GetModelCentre();
+    Vector3D GetModelCentre();
     
 
     Model();                                              //Constructor
@@ -49,10 +50,10 @@ public:
 
 private:
 
-    vector <Cell> cellArray;
-    vector <Vector> verticeArray;
+    std::vector <cell> cellArray;
+    std::vector <Vector3D> verticeArray;
 
-    Vector ModelCentre;
+    Vector3D ModelCentre;
     uint16_t numOfCells;
     uint16_t numOfVertices;
     uint16_t numOfMaterials;
@@ -64,3 +65,6 @@ private:
     void ReadMaterialFromFile(string &line);
     
 };
+
+
+#endif

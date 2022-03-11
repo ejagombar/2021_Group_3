@@ -1,5 +1,7 @@
 #include <iostream>
 #include "../include/Material.h"
+#include "../include/Model.h"
+#include "../include/Cell.h"
 
 int main()
 {

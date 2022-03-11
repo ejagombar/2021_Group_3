@@ -1,4 +1,5 @@
-#include Cell.h
+#include "../include/Cell.h"
+
 
 cell::cell() //Default constructor
 {
@@ -6,7 +7,7 @@ cell::cell() //Default constructor
     density = 0;
 }
 
-cell::cell(const char No_Vertices, Vector *vectors, float Density_Value) //Constructor function
+cell::cell(const char No_Vertices, Vector3D *vectors, float Density_Value) //Constructor function
 {
 
     //Enforce 4,5 or 8 Number_Of_Vertices
@@ -77,12 +78,12 @@ const cell& cell::operator=(const cell& cell_object) //Assignment
 
 }
 
-Vector cell::Get_VecPtrs(int index) //Get for VecPtrs
+Vector3D cell::Get_VecPtrs(int index) //Get for VecPtrs
 {
     return(VecPtrs[index]);
 }
 
-void cell::Set_VecPtrs(int index, Vector Vector_Object) //Set for VecPtrs
+void cell::Set_VecPtrs(int index, Vector3D Vector_Object) //Set for VecPtrs
 {
     VecPtrs[index] = Vector_Object;
 }

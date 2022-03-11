@@ -2,9 +2,9 @@
 //        Edward Agombar       //
 //           20240645          //
 //-----------------------------//
+#ifndef Material_H
+#define Material_H
 
-
-#pragma once
 
 #include <string>
 
@@ -56,3 +56,6 @@ private:
     float density;
 
 };
+
+
+#endif

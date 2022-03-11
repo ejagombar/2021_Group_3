@@ -3,8 +3,9 @@
 
 #include <iostream>
 #include <math.h>
-using namespace std;
+#include "3D_Vector.h"
 
+using namespace std;
 
 class cell;
 
@@ -12,14 +13,14 @@ class cell{
 
 public:
     cell(); //Default constructor
-    cell(const char No_Vertices, Vector *vectors,float); //Actual constructor, No_Vertices should not change in the constructor function therefore is cosnt
+    cell(const char No_Vertices, Vector3D*vectors,float); //Actual constructor, No_Vertices should not change in the constructor function therefore is cosnt
     ~cell(); //Destructor
     cell(const cell&); //Copy constructor
     const cell& operator=(const cell&); //Assignment
 
     //Get and Set for the array of vectors.
-    Vector Get_VecPtrs(int);
-    void Set_VecPtrs(int, Vector);
+    Vector3D Get_VecPtrs(int);
+    void Set_VecPtrs(int, Vector3D);
 
     //Get function for Number of Vertices
     char Get_Number_Of_Vertices();
@@ -34,7 +35,7 @@ public:
 private:
 
     char Number_Of_Vertices; //Can only be 4,5 or 8, enforced in constructor function
-    Vector VecPtrs[8];
+    Vector3D VecPtrs[8];
     float density; //NEEDS TO COME FROM MATERIAL CLASS
 };
 

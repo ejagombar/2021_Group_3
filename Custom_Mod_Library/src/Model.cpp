@@ -1,7 +1,7 @@
 ﻿// Model.cpp : Defines the entry point for the application.
 //
 
-#include "Model.h"
+#include "../include/Model.h"
 
 
 
@@ -12,7 +12,6 @@ using namespace std;
 
 Model::Model()                                        //Constructor
 {
- 
 }
 
 
@@ -74,7 +73,7 @@ uint16_t Model::GetCellTypeCount(uint16_t cellType) //returns number of cells in
     }
 }
 
-Vector Model::GetModelCentre()
+Vector3D Model::GetModelCentre()
 {
     return ModelCentre;
 }
@@ -212,7 +211,7 @@ void Model::ReadCellFromFile(string& line)
     uint8_t searchState = 0;
     int8_t tempState = 4;
     string cellId, cellMaterial, cellType, verticeId;
-    Vector* vectorPtr; //CHANGE THIS to correction vector class name
+    Vector3D* vectorPtr; //CHANGE THIS to correction vector class name
     uint8_t numOfElements;
 
     for (int i = 0; i < line.length(); i++)
@@ -241,7 +240,7 @@ void Model::ReadCellFromFile(string& line)
                 default:
                     cout << "\nERROR - Cell type not found";
                 }
-                vectorPtr = (Vector*)malloc(numOfElements * sizeof(Vector)); //CHANGE THIS to correct vector class names
+                vectorPtr = (Vector3D*)malloc(numOfElements * sizeof(Vector3D)); //CHANGE THIS to correct vector class names
                 break;
             case 3:
                 cellMaterial.push_back(currentChar);
