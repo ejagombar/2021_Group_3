@@ -3,16 +3,6 @@
 
 cmake_minimum_required (VERSION 3.8)
 
-include(ctest)
-
-link_directories(${CMAKE_SOURCE_DIR}/src)
-
-add_executable(testMaterial "testMaterial.cpp")
-
-target_link_libraries(testMaterial PRIVATE LibsModule)
-
-add_test(testMaterial testMaterial)
-
 
 
 
