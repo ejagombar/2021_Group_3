@@ -13,7 +13,7 @@ class cell{
 
 public:
     cell(); //Default constructor
-    cell(const char No_Vertices, Vector3D*vectors,float); //Actual constructor, No_Vertices should not change in the constructor function therefore is cosnt
+    cell(uint8_t No_Vertices, Vector3D*vectors,float); //Actual constructor
     ~cell(); //Destructor
     cell(const cell&); //Copy constructor
     const cell& operator=(const cell&); //Assignment

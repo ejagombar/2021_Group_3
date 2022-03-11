@@ -1,13 +1,10 @@
 #include "../include/Cell.h"
 
-#define NUM 8
-
 
 int main()
 {
 
-
-    Vector3D Test_Vector_Array[NUM];
+    Vector3D Test_Vector_Array[8];
 
     Vector3D Test_Zero(0, 0, 0);
     Vector3D Test_One(1, 0, 0);
@@ -27,10 +24,13 @@ int main()
     Test_Vector_Array[5] = Test_Six;
     Test_Vector_Array[6] = Test_Seven;
 
+    cout << "attempting to create cell...";
+    cell Test_Cell(8, Test_Vector_Array, 100);
+    cout << "done";
 
-    cell Test_Cell(NUM, Test_Vector_Array, 100);
+    //cout << "Test_Cell Vertice " << 3 << " X: " << Test_Cell.Get_VecPtrs(3).Get_x() << ", Y: " << Test_Cell.Get_VecPtrs(3).Get_y() << ", Z: " << Test_Cell.Get_VecPtrs(3).Get_z() << endl;
 
-    for (int i = 0; i < NUM; i++)
+    for (int i = 0; i < 8; i++)
     {
         cout << "Test_Cell Vertice " << i << " X: " << Test_Cell.Get_VecPtrs(i).Get_x() << ", Y: " << Test_Cell.Get_VecPtrs(i).Get_y() << ", Z: " << Test_Cell.Get_VecPtrs(i).Get_z() << endl;
     }
@@ -39,11 +39,13 @@ int main()
     cell Copy_Test(Test_Cell);
     Copy_Test.Set_VecPtrs(7, Test_One);
 
-    for (int i = 0; i < NUM; i++)
+    cout << "cell copied";
+
+    for (int i = 0; i < 8; i++)
     {
         cout << "Copy_Test_Cell Vertice " << i << " X: " << Copy_Test.Get_VecPtrs(i).Get_x() << ", Y: " << Copy_Test.Get_VecPtrs(i).Get_y() << ", Z: " << Copy_Test.Get_VecPtrs(i).Get_z() << endl;
     }
-
+    
+    cout << "now leave";
     return 0;
-
 }

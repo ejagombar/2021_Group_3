@@ -7,12 +7,13 @@ cell::cell() //Default constructor
     density = 0;
 }
 
-cell::cell(const char No_Vertices, Vector3D *vectors, float Density_Value) //Constructor function
+cell::cell( uint8_t No_Vertices, Vector3D *vectors, float Density_Value) //Constructor function
 {
 
     //Enforce 4,5 or 8 Number_Of_Vertices
     if (int(No_Vertices)==4 || int(No_Vertices)==5 || int(No_Vertices)==8)
     {
+        cout << "Made it into constructor";
         Number_Of_Vertices = int(No_Vertices); //Read in the number of vertices the cell is to have
         density = Density_Value;
         //Switch case
@@ -48,10 +49,7 @@ cell::cell(const char No_Vertices, Vector3D *vectors, float Density_Value) //Con
 
 cell::~cell() //Destructor
 {
-    if (VecPtrs)
-    {
-        delete[] &VecPtrs;
-    }
+    delete[] &VecPtrs;
 }
 
 cell::cell(const cell& cell_object) //Copy Constructor
