@@ -3,7 +3,7 @@ name: cmake-test
 # Act when main branch is pushed
 on:
   push:
-    branches: [ master ] # Note: this needs to be set to your default branch name (this might be "main"# List of jobs to do
+    branches: [ main ] # Note: this needs to be set to your default branch name (this might be "main"# List of jobs to do
 jobs:
   # The job that will build worksheet 7
 
@@ -21,10 +21,10 @@ jobs:
     # Step 1: Run CMake on Worksheet7 folder
     
     - name: Configure CMake # A name for the step for analysis later
-      run: cmake -B ${{github.workspace}}/build Worksheet7/ # The command to run at this step
+      run: cmake -B ${{github.workspace}}/build Custom_Mod_Library # The command to run at this step
     # Step 2: Run make to build (remember - use Linux build command)
     - name: Build
-      working-directory: ${{github.workspace}}/build # cd to the build directory before running
+      working-directory: ${{github.workspace}}/build  # cd to the build directory before running
       run: make
     # Step 3: Run the tests
     - name: Test
