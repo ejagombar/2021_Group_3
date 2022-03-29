@@ -251,13 +251,13 @@ void MainWindow::handlFilter_T() {
 
     vtkSmartPointer<vtkDataSetSurfaceFilter> filter;
     vtkSmartPointer<vtkGenericOutlineFilter> Filter;
-    //vtkNew<vtkShrinkFilter> filter;
-    //filter->SetShrinkFactor(0.6);
+    vtkNew<vtkShrinkFilter> Sfilter;
+    Sfilter->SetShrinkFactor(0.6);
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
 
-    vtkNew<vtkPolyDataMapper> mapper;
-    //vtkNew<vtkDataSetMapper> mapper;
+    //vtkNew<vtkPolyDataMapper> mapper;
+    vtkNew<vtkDataSetMapper> mapper;
 
     //QByteArray ba = fileName.toLocal8Bit();
     //const char *c_str2 = ba.data();
@@ -269,14 +269,13 @@ void MainWindow::handlFilter_T() {
 
     reader->Update();
 
-    //surfacefilter->SetInputConnection(reader->GetOutputPort());
-    filter->SetInputConnection(reader->GetOutputPort());
-    //filter->SetInputData(reader->GetOutputPort());
-    filter->Update();
-
-    vtkPolyData* polydata = filter->GetOutput();
+    vtkPolyData* polydata = reader->GetOutput();
 
     Filter->SetInputData(polydata);
+
+    //filter->SetInputConnection(Filter->GetOutputPort());
+
+    Filter->Update();
 
     mapper->SetInputConnection(Filter->GetOutputPort());
 
@@ -289,7 +288,6 @@ void MainWindow::handlFilter_T() {
 
     renderWindow->Render();
 }
-
 
 void MainWindow::on_checkBoxclip_stateChanged()
 {
@@ -438,7 +436,6 @@ void MainWindow::on_checkBoxclip_stateChanged()
      }
 }
 
-
 void MainWindow::on_disk_triggered() {
 
     shape = 1;
@@ -466,6 +463,7 @@ void MainWindow::on_arrow_triggered() {
 
     // Create a mapper that will hold the cube's geometry in a format suitable for rendering
     vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+
     mapper->SetInputConnection( cubeSource->GetOutputPort() );
 
     actor->SetMapper(mapper);
@@ -526,7 +524,6 @@ void MainWindow::on_Color_triggered() {
     renderWindow->Render();
 }
 
-
 void MainWindow::on_openButton_triggered()
 {
     shape = 0;
@@ -570,7 +567,6 @@ void MainWindow::handlFilter() {
     renderer->ResetCameraClippingRange();
     renderWindow->Render();
 }
-
 
 void MainWindow::randerbegan(vtkSmartPointer<vtkActor> actor){
     ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );
