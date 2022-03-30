@@ -38,7 +38,7 @@ Filter::Filter()
     curvatureactor=vtkSmartPointer<vtkActor>::New();
 }
 
-void filter::outLineFilter(ModelRender* OutlineModel){
+void Filter::outLineFilter(mediator* OutlineModel){
     outlinepolydata=OutlineModel->getPolyData();
     outlinefilter->SetInputData(outlinepolydata);
     outlinefilter->Update();
@@ -50,7 +50,7 @@ void filter::outLineFilter(ModelRender* OutlineModel){
     OutlineModel->getRenderWindow()->Render();
 }
 
-void filter::shrinkFilter(ModelRender *ShrinkModel){
+void Filter::shrinkFilter(mediator *ShrinkModel){
 
    // reset filter
    ShrinkModel->getRenderer()->RemoveAllViewProps();
@@ -70,9 +70,8 @@ void filter::shrinkFilter(ModelRender *ShrinkModel){
 }
 
 
-void filter::smoothFilter(ModelRender *SmoothModel){
-     //reset filter
-      SmoothModel->getRenderer()->RemoveAllViewProps();
+void Filter::smoothFilter(mediator *SmoothModel){
+
       //get poly data from model
       smoothdelaunay->SetInputData(SmoothModel->getPolyData());
       smoothdelaunay->Update();
@@ -100,7 +99,7 @@ void filter::smoothFilter(ModelRender *SmoothModel){
 }
 
 
-void filter::clipFilter(ModelRender *ClipModel){
+void Filter::clipFilter(mediator *ClipModel){
     //reset filter
     ClipModel->getRenderer()->RemoveAllViewProps();
     vtkSmartPointer<vtkPlane>plane=vtkSmartPointer<vtkPlane>::New();
@@ -121,7 +120,7 @@ void filter::clipFilter(ModelRender *ClipModel){
 }
 
 
-void filter::reflectFilter(ModelRender *ReflectModel){
+void Filter::reflectFilter(mediator *ReflectModel){
 
    ReflectModel->getRenderer()->RemoveAllViewProps();
 
@@ -147,7 +146,7 @@ void filter::reflectFilter(ModelRender *ReflectModel){
 }
 
 
-void filter::curvatureFilter(ModelRender *curvatureModel){
+void Filter::curvatureFilter(mediator *curvatureModel){
      //get poly data from Model
      curvatureModel->getRenderer()->RemoveAllViewProps();
      curvaturepoly=curvatureModel->getPolyData();
@@ -194,7 +193,7 @@ void filter::curvatureFilter(ModelRender *curvatureModel){
 
 }
 
-void filter::resetFilter(ModelRender *resetModel){
+void Filter::resetFilter(mediator *resetModel){
 
     resetModel->getRenderer()->RemoveAllViewProps();
 

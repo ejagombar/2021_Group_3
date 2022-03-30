@@ -62,16 +62,23 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="checkBox_4">
+       <widget class="QCheckBox" name="smooth">
         <property name="text">
-         <string>CheckBox</string>
+         <string>Smooth Filter</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="checkBox_2">
+       <widget class="QCheckBox" name="curvatures">
         <property name="text">
-         <string>CheckBox</string>
+         <string>Curvatures Filter</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="SSS">
+        <property name="text">
+         <string>Smooth</string>
         </property>
        </widget>
       </item>

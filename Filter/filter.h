@@ -38,14 +38,15 @@ class Filter : public QObject
     Q_OBJECT
 public:
 
-    explicit filter();
-    void outLineFilter(ModelRender* OutlineModel);
-    void shrinkFilter(ModelRender* ShrinkModel);
-    void smoothFilter(ModelRender*SmoothModel);
-    void clipFilter(ModelRender* ClipModel);
-    void reflectFilter(ModelRender* ReflectModel);
-    void curvatureFilter(ModelRender* curvatureModel);
-    void resetFilter(ModelRender*resetModel);
+    explicit Filter();
+    void outLineFilter(mediator* OutlineModel);
+    void shrinkFilter(mediator* ShrinkModel);
+    void smoothFilter(mediator* SmoothModel);
+    void clipFilter(mediator* ClipModel);
+    void reflectFilter(mediator* ReflectModel);
+    void curvatureFilter(mediator* curvatureModel);
+    void resetFilter(mediator* resetModel);
+
     signals:
 private:
     /*********Outline filter******************/

@@ -56,6 +56,7 @@ public:
     vtkSmartPointer<vtkPolyData> getPolyData();
     vtkSmartPointer<vtkDataSetSurfaceFilter> getSurfaceFilter();
 
+
     QString  getFileName();
     void setFileName(QString Name);
     void STLfileReader(QString fileName);

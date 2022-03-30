@@ -27,6 +27,9 @@
 #include <iostream>
 #include <QFile>
 
+#include "mediator.h"
+#include "filter.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -43,18 +46,19 @@ public:
     void setBackgndColor();
     void setModelColor();
 
-    void LaunchOutLineFilter();
-    void LaunchClipFilter();
-    void LaunchShrinkFilter();
+    //void LaunchOutLineFilter();
+    //void LaunchClipFilter();
+    //void LaunchShrinkFilter();
     void LaunchSmoothFilter();
-    void LaunchReflectFilter();
-    void LaunchCurveFilter();
-
-    float Red_B=0,Green_B=0,Blue_B=0;
-    float Red=1,Green=1,Blue=1;
+    //void LaunchReflectFilter();
+    //void LaunchCurveFilter();
 
 private:
     Ui::MainWindow *ui;
+
+    void filterFunctionConnect();
+    mediator* Model = new mediator();
+    Filter * vtkFilter = new Filter();
 
     vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
     vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();

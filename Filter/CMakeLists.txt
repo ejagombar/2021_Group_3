@@ -41,6 +41,8 @@ add_executable( QtVTKExample MACOSX_BUNDLE
 				main.cpp mainwindow.cpp 
 				mainwindow.h 
 				mainwindow.ui
+				filter.cpp filter.h
+				mediator.cpp mediator.h
 				${UI_Srcs}
 				${QRC_Srcs}
 				)

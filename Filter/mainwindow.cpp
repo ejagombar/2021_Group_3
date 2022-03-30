@@ -114,6 +114,9 @@ vtkNew<vtkSTLReader> reader;
 vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
 vtkSmartPointer<vtkPlane> planeLeft = vtkSmartPointer<vtkPlane>::New();
 
+float Red_B=0,Green_B=0,Blue_B=0;
+float Red=1,Green=1,Blue=1;
+
 double S=1;
 int shape=0;
 
@@ -132,10 +135,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->ColorChoose->setIcon(QIcon(":/Icons/dark.png"));
     ui->Color->setIcon(QIcon());
 
+    this->filterFunctionConnect();
+
     connect( ui->BoxShrink, &QCheckBox::stateChanged, this, &::MainWindow::on_checkBox_stateChanged);
     connect( ui->BoxClip, &QCheckBox::stateChanged, this, &::MainWindow::on_checkBoxclip_stateChanged);
 
     connect( ui->Filter, &QPushButton::released, this, &::MainWindow::handlFilter );
+
     connect( ui->Filter_T, &QPushButton::released, this, &::MainWindow::handlFilter_T );
 }
 
@@ -146,7 +152,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_checkBox_stateChanged()
 {
-
    if( ui->BoxShrink->isChecked() )
      {
        S=0.7;
@@ -255,61 +260,35 @@ void MainWindow::on_checkBox_stateChanged()
      }
 }
 
+void MainWindow::filterFunctionConnect(){
+
+    //connect(ui->outline,&QPushButton::clicked,this,&MainWindow::LaunchOutLineFilter);
+    //connect(ui->shrink,&QPushButton::clicked,this,&MainWindow::LaunchShrinkFilter);
+    //connect(ui->clip,&QPushButton::clicked,this,&MainWindow::LaunchClipFilter);
+    connect(ui->smooth,&QCheckBox::stateChanged,this,&MainWindow::LaunchSmoothFilter);
+    //connect(ui->reflection,&QPushButton::clicked,this,&MainWindow::LaunchReflectFilter);
+    //connect(ui->curvatures,&QCheckBox::stateChanged,this,&MainWindow::LaunchCurveFilter);
+    //connect(ui->reset,&QPushButton::clicked,this,&MainWindow::resetFunc);
+}
+
+
+void MainWindow::LaunchSmoothFilter()
+{
+    if( ui->BoxClip->isChecked() )
+    {
+        vtkFilter->smoothFilter(Model);
+    }
+    else if(ui->BoxClip->isChecked() == false)
+    {
+
+    }
+}
+
+
 void MainWindow::handlFilter_T() {   
-
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
-
-    //vtkNew<vtkPolyDataMapper> mapper;
-    vtkNew<vtkDataSetMapper> mapper;
-    vtkSmartPointer<vtkSmoothPolyDataFilter> smoothfilter;
-    vtkSmartPointer<vtkPolyData> smoothpolydata;
-
-    vtkSmartPointer<vtkPolyDataMapper> inputmapper;
-    vtkSmartPointer<vtkPolyDataMapper> smoothmapper;
-
-    vtkSmartPointer<vtkDelaunay2D> smoothdelaunay;
-    vtkSmartPointer<vtkPolyDataNormals> smoothnormals;
-    vtkSmartPointer<vtkActor> smoothactor;
-
-    //QByteArray ba = fileName.toLocal8Bit();
-    //const char *c_str2 = ba.data();
-    //reader->SetFileName(c_str2);
-
-    vtkNew<vtkSTLReader> reader;
-
-    reader->SetFileName(fileName.toLatin1().data());
-
-    reader->Update();
-
-    vtkSmartPointer<vtkPolyData> polydata;
-    polydata = vtkSmartPointer<vtkPolyData>::New();
-    polydata = reader->GetOutput();
-
-    smoothdelaunay->SetInputData(polydata);
-    smoothdelaunay->Update();
-    smoothfilter->SetInputConnection(smoothdelaunay->GetOutputPort());
-    smoothfilter->SetNumberOfIterations(15);
-    // the larger the factor the smoother the model
-    smoothfilter->SetRelaxationFactor(0.1);
-    //stop smoothing the edge
-    smoothfilter->FeatureEdgeSmoothingOff();
-    smoothfilter->BoundarySmoothingOn();
-    smoothfilter->Update();
-
-    // Update normals on smoothed PolyData
-    vtkSmartPointer<vtkPolyDataNormals> normalGenerator = vtkSmartPointer<vtkPolyDataNormals>::New();
-    normalGenerator->SetInputConnection(smoothfilter->GetOutputPort());
-    normalGenerator->ComputePointNormalsOn();
-    normalGenerator->ComputeCellNormalsOn();
-    normalGenerator->Update();
-    smoothmapper->SetInputConnection(normalGenerator->GetOutputPort());
-    smoothactor->SetMapper(smoothmapper);
-    //rendering
-    //SmoothModel->getRenderer()->AddActor(smoothactor);
-    //SmoothModel->getRenderWindow()->Render();
-    renderer->AddActor(smoothactor);
-    renderWindow->Render();
-
+    QString file = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
+    Model->STLfileReader(file);
+    Model->setPipeline();
 }
 
 void MainWindow::on_checkBoxclip_stateChanged()
@@ -550,8 +529,7 @@ void MainWindow::on_Color_triggered() {
 void MainWindow::on_openButton_triggered()
 {
     shape = 0;
-
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
+    /*QString fileName = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
 
     vtkNew<vtkPolyDataMapper> mapper;
     mapper->SetInputConnection(reader->GetOutputPort());
@@ -565,7 +543,10 @@ void MainWindow::on_openButton_triggered()
     actor->SetMapper(mapper);
     actor->GetProperty()->SetColor( Red,Green,Blue );
 
-    randerbegan(actor);
+    randerbegan(actor);*/
+    QString file = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
+    Model->STLfileReader(file);
+    Model->setPipeline();
 }
 
 void MainWindow::on_saveButton_triggered()
@@ -599,10 +580,6 @@ void MainWindow::randerbegan(vtkSmartPointer<vtkActor> actor){
     renderWindow->Render();
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
 
 
 

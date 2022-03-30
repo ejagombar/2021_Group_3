@@ -15,7 +15,7 @@ mediator::mediator()
     surfacefilter = vtkSmartPointer<vtkDataSetSurfaceFilter>::New();
 }
 
-void ModelRender::STLfileReader(QString fileName){
+void mediator::STLfileReader(QString fileName){
 
     reader->SetFileName(fileName.toLatin1().data());
     reader->Update();
@@ -23,58 +23,59 @@ void ModelRender::STLfileReader(QString fileName){
 
 }
 
-void ModelRender::setPipeline(){
+void mediator::setPipeline(){
     polydata=reader->GetOutput();
     mapper->SetInputConnection(reader->GetOutputPort());
     actor->SetMapper(mapper);
     prop->SetColor(1.0, 0, 0);
     actor->SetProperty(prop);
-    renderer->SetBackground(Red_B,Green_B,Blue_B);
-    mylight->SetColor(0,0,0);
+    renderer->SetBackground(1,1,1);
+    //mylight->SetColor(0,0,0);
     //renderer->RemoveAllViewProps();
-    renderer->AddLight(mylight);
+    //renderer->AddLight(mylight);
+
     renderer->AddActor(actor);
     renderer->GetRenderWindow()->Render();
 }
 
 
-void ModelRender::setFileName(QString Name){
+void mediator::setFileName(QString Name){
     this->file= Name;
 }
 
-QString ModelRender::getFileName(){
+QString mediator::getFileName(){
     return this->file;
 }
-vtkSmartPointer<vtkRenderer> ModelRender::getRenderer(){
+vtkSmartPointer<vtkRenderer> mediator::getRenderer(){
     return this->renderer;
 }
 
-vtkSmartPointer<vtkActor> ModelRender::getActor(){
+vtkSmartPointer<vtkActor> mediator::getActor(){
     return this->actor;
 
 }
-vtkSmartPointer<vtkProperty> ModelRender::getProp(){
+vtkSmartPointer<vtkProperty> mediator::getProp(){
     return this->prop;
 
 }
-vtkSmartPointer<vtkSTLReader> ModelRender::getSTLReader(){
+vtkSmartPointer<vtkSTLReader> mediator::getSTLReader(){
    return this->reader;
 }
-vtkSmartPointer<vtkDataSetMapper> ModelRender::getMapper(){
+vtkSmartPointer<vtkDataSetMapper> mediator::getMapper(){
    return this->mapper;
 }
-vtkSmartPointer<vtkLight> ModelRender::getLight(){
+vtkSmartPointer<vtkLight> mediator::getLight(){
     return this->mylight;
 }
-vtkSmartPointer<vtkGenericOpenGLRenderWindow> ModelRender::getRenderWindow(){
+vtkSmartPointer<vtkGenericOpenGLRenderWindow> mediator::getRenderWindow(){
     return this->renderWindow;
 }
 
-vtkSmartPointer<vtkPolyData> ModelRender::getPolyData(){
+vtkSmartPointer<vtkPolyData> mediator::getPolyData(){
     return this->polydata;
 }
 
-vtkSmartPointer<vtkDataSetSurfaceFilter> ModelRender::getSurfaceFilter(){
+vtkSmartPointer<vtkDataSetSurfaceFilter> mediator::getSurfaceFilter(){
 
     return this->surfacefilter;
 }
