@@ -95,6 +95,9 @@
 #include<vtkCellArray.h>
 #include<vtkDataSetSurfaceFilter.h>
 
+#include<vtkDelaunay2D.h>
+#include<vtkPolyDataNormals.h>
+
 #include<vtkGenericOutlineFilter.h>
 #include <vtkDataSetMapper.h>
 #include <vtkDataSetSurfaceFilter.h>
@@ -249,15 +252,19 @@ void MainWindow::on_checkBox_stateChanged()
 
 void MainWindow::handlFilter_T() {   
 
-    vtkSmartPointer<vtkDataSetSurfaceFilter> filter;
-    vtkSmartPointer<vtkGenericOutlineFilter> Filter;
-    vtkNew<vtkShrinkFilter> Sfilter;
-    Sfilter->SetShrinkFactor(0.6);
-
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
 
     //vtkNew<vtkPolyDataMapper> mapper;
     vtkNew<vtkDataSetMapper> mapper;
+    vtkSmartPointer<vtkSmoothPolyDataFilter> smoothfilter;
+    vtkSmartPointer<vtkPolyData> smoothpolydata;
+
+    vtkSmartPointer<vtkPolyDataMapper> inputmapper;
+    vtkSmartPointer<vtkPolyDataMapper> smoothmapper;
+
+    vtkSmartPointer<vtkDelaunay2D> smoothdelaunay;
+    vtkSmartPointer<vtkPolyDataNormals> smoothnormals;
+    vtkSmartPointer<vtkActor> smoothactor;
 
     //QByteArray ba = fileName.toLocal8Bit();
     //const char *c_str2 = ba.data();
@@ -269,24 +276,35 @@ void MainWindow::handlFilter_T() {
 
     reader->Update();
 
-    vtkPolyData* polydata = reader->GetOutput();
+    vtkSmartPointer<vtkPolyData> polydata;
+    polydata = vtkSmartPointer<vtkPolyData>::New();
+    polydata = reader->GetOutput();
 
-    Filter->SetInputData(polydata);
+    smoothdelaunay->SetInputData(polydata);
+    smoothdelaunay->Update();
+    smoothfilter->SetInputConnection(smoothdelaunay->GetOutputPort());
+    smoothfilter->SetNumberOfIterations(15);
+    // the larger the factor the smoother the model
+    smoothfilter->SetRelaxationFactor(0.1);
+    //stop smoothing the edge
+    smoothfilter->FeatureEdgeSmoothingOff();
+    smoothfilter->BoundarySmoothingOn();
+    smoothfilter->Update();
 
-    //filter->SetInputConnection(Filter->GetOutputPort());
-
-    Filter->Update();
-
-    mapper->SetInputConnection(Filter->GetOutputPort());
-
-    actor->SetMapper(mapper);
-    actor->GetProperty()->SetColor( Red,Green,Blue );
-
-    ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );
-    renderer->AddActor(actor);
-    renderer->SetBackground( Red_B,Green_B,Blue_B );
-
+    // Update normals on smoothed PolyData
+    vtkSmartPointer<vtkPolyDataNormals> normalGenerator = vtkSmartPointer<vtkPolyDataNormals>::New();
+    normalGenerator->SetInputConnection(smoothfilter->GetOutputPort());
+    normalGenerator->ComputePointNormalsOn();
+    normalGenerator->ComputeCellNormalsOn();
+    normalGenerator->Update();
+    smoothmapper->SetInputConnection(normalGenerator->GetOutputPort());
+    smoothactor->SetMapper(smoothmapper);
+    //rendering
+    //SmoothModel->getRenderer()->AddActor(smoothactor);
+    //SmoothModel->getRenderWindow()->Render();
+    renderer->AddActor(smoothactor);
     renderWindow->Render();
+
 }
 
 void MainWindow::on_checkBoxclip_stateChanged()
