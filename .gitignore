@@ -10,7 +10,7 @@
 
 # build folder
 build-QtVTKExample-Desktop_Qt_6_2_3_MSVC2019_64bit-Debug/*
-
+build-Filter_Done-Desktop_Qt_6_2_3_MSVC2019_64bit-Debug/*
 build-Filter-Desktop_Qt_6_2_3_MSVC2019_64bit-Debug/*
 
 # Prerequisites

@@ -2,7 +2,7 @@
 #include <QApplication>
 #include <QSurfaceFormat>
 #include <QVTKOpenGLWidget.h>
-
+#include<QFile>
 #include "mainwindow.h"
 
 int main( int argc, char** argv )
@@ -22,5 +22,6 @@ int main( int argc, char** argv )
   window.show();
 
   return a.exec();
+
 }
 // /main.cpp------------------------------------------------------------------

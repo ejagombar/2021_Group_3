@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file>fileopen.png</file>
+        <file>filesave.png</file>
+        <file>print.png</file>
+        <file>help.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>Adaptic.qss</file>
+    </qresource>
+</RCC>

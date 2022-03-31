@@ -60,9 +60,6 @@ private:
     mediator* Model = new mediator();
     Filter * vtkFilter = new Filter();
 
-    vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
-    vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();
-    vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
     //vtkSmartPointer<vtkPlane> planeLeft;
 
 public slots:

@@ -110,8 +110,10 @@
 #include "filter.h"
 
 vtkNew<vtkActor> actor;
-vtkNew<vtkSTLReader> reader;
-vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
+
+vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();
+vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
+
 vtkSmartPointer<vtkPlane> planeLeft = vtkSmartPointer<vtkPlane>::New();
 
 float Red_B=0,Green_B=0,Blue_B=0;
@@ -152,9 +154,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_checkBox_stateChanged()
 {
+    vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
    if( ui->BoxShrink->isChecked() )
      {
        S=0.7;
+       vtkNew<vtkSTLReader> reader;
 
        if (shape == 1){
            vtkNew<vtkSphereSource> cubeSource;
@@ -213,6 +217,7 @@ void MainWindow::on_checkBox_stateChanged()
    else if(ui->BoxShrink->isChecked() == false)
     {
        S=1;
+       vtkNew<vtkSTLReader> reader;
 
        if (shape == 1){
            vtkNew<vtkSphereSource> cubeSource;
@@ -293,9 +298,10 @@ void MainWindow::handlFilter_T() {
 
 void MainWindow::on_checkBoxclip_stateChanged()
 {
-
+    vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
    if( ui->BoxClip->isChecked() )
      {
+       vtkNew<vtkSTLReader> reader;
        if (shape == 1){
            vtkNew<vtkSphereSource> source;
            planeLeft->SetOrigin(0.0, 0.0, 0.0);
@@ -365,6 +371,7 @@ void MainWindow::on_checkBoxclip_stateChanged()
      }
    else if(ui->BoxClip->isChecked() == false)
     {
+       vtkNew<vtkSTLReader> reader;
        if (shape == 1){
            vtkNew<vtkSphereSource> source;
            planeLeft->SetOrigin(-9990.0, 0.0, 0.0);
@@ -441,7 +448,7 @@ void MainWindow::on_checkBoxclip_stateChanged()
 void MainWindow::on_disk_triggered() {
 
     shape = 1;
-
+    vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
     vtkSmartPointer<vtkSphereSource> cubeSource = vtkSmartPointer<vtkSphereSource>::New();
 
     vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
@@ -453,14 +460,19 @@ void MainWindow::on_disk_triggered() {
     vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();
     actor->GetProperty()->SetColor( Red,Green,Blue );
 
-    randerbegan(actor);
+    ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );
+    renderer->AddActor(actor);
+    renderer->SetBackground( Red_B,Green_B,Blue_B );
+
+    renderWindow->Render();
+    //randerbegan(actor);
 
 }
 
 void MainWindow::on_arrow_triggered() {
 
     shape = 2;
-
+    vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
     vtkSmartPointer<vtkArrowSource> cubeSource = vtkSmartPointer<vtkArrowSource>::New();
 
     // Create a mapper that will hold the cube's geometry in a format suitable for rendering
@@ -474,13 +486,18 @@ void MainWindow::on_arrow_triggered() {
     vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();
     actor->GetProperty()->SetColor( Red,Green,Blue );
 
-    randerbegan(actor);
+    ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );
+    renderer->AddActor(actor);
+    renderer->SetBackground( Red_B,Green_B,Blue_B );
+
+    renderWindow->Render();
+    //randerbegan(actor);
 }
 
 void MainWindow::on_cone_triggered() {
 
     shape = 3;
-
+    vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
     vtkSmartPointer<vtkConeSource> cubeSource = vtkSmartPointer<vtkConeSource>::New();
 
     // Create a mapper that will hold the cube's geometry in a format suitable for rendering
@@ -492,11 +509,18 @@ void MainWindow::on_cone_triggered() {
 
     vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();
     actor->GetProperty()->SetColor( Red,Green,Blue );
-    randerbegan(actor);
+
+    ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );
+    renderer->AddActor(actor);
+    renderer->SetBackground( Red_B,Green_B,Blue_B );
+
+    renderWindow->Render();
+    //randerbegan(actor);
 }
 
 void MainWindow::on_ColorChoose_triggered() {
-    ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );			// ###### ask the QtVTKOpenGLWidget for its renderWindow ######
+
+    /*ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );			// ###### ask the QtVTKOpenGLWidget for its renderWindow ######
 
     renderer->AddActor(actor);
     QColor ColourDialog = QColorDialog::getColor();
@@ -507,11 +531,11 @@ void MainWindow::on_ColorChoose_triggered() {
 
     renderer->SetBackground( Red_B,Green_B,Blue_B );
 
-    renderWindow->Render();
+    renderWindow->Render();*/
 }
 
 void MainWindow::on_Color_triggered() {
-    ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );			// ###### ask the QtVTKOpenGLWidget for its renderWindow ######
+    /*ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );			// ###### ask the QtVTKOpenGLWidget for its renderWindow ######
 
     // Add the actor to the scene
     renderer->AddActor(actor);
@@ -523,16 +547,15 @@ void MainWindow::on_Color_triggered() {
 
     actor->GetProperty()->SetColor( Red,Green,Blue );
 
-    renderWindow->Render();
+    renderWindow->Render();*/
 }
 
 void MainWindow::on_openButton_triggered()
 {
     shape = 0;
-    /*QString fileName = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
-
-    vtkNew<vtkPolyDataMapper> mapper;
-    mapper->SetInputConnection(reader->GetOutputPort());
+    vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
+    vtkNew<vtkSTLReader> reader;
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
 
     QByteArray ba = fileName.toLocal8Bit();
 
@@ -540,13 +563,18 @@ void MainWindow::on_openButton_triggered()
     reader->SetFileName(c_str2);
     reader->Update();
 
+    vtkNew<vtkPolyDataMapper> mapper;
+    mapper->SetInputConnection(reader->GetOutputPort());
+
     actor->SetMapper(mapper);
     actor->GetProperty()->SetColor( Red,Green,Blue );
 
-    randerbegan(actor);*/
-    QString file = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
-    Model->STLfileReader(file);
-    Model->setPipeline();
+    ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );
+    renderer->AddActor(actor);
+    renderer->SetBackground( Red_B,Green_B,Blue_B );
+
+    renderWindow->Render();
+    //randerbegan(actor);
 }
 
 void MainWindow::on_saveButton_triggered()
@@ -564,20 +592,21 @@ void MainWindow::on_saveButton_triggered()
 }
 
 void MainWindow::handlFilter() {
-
+    /*
     renderer->ResetCamera();
     renderer->GetActiveCamera()->Azimuth(30);
     renderer->GetActiveCamera()->Elevation(30);
     renderer->ResetCameraClippingRange();
-    renderWindow->Render();
+    renderWindow->Render();*/
 }
 
 void MainWindow::randerbegan(vtkSmartPointer<vtkActor> actor){
+    /*
     ui->qvtkWidget->GetRenderWindow()->AddRenderer( renderer );
     renderer->AddActor(actor);
     renderer->SetBackground( Red_B,Green_B,Blue_B );
 
-    renderWindow->Render();
+    renderWindow->Render();*/
 }
 
 

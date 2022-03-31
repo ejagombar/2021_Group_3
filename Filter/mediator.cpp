@@ -17,7 +17,10 @@ mediator::mediator()
 
 void mediator::STLfileReader(QString fileName){
 
-    reader->SetFileName(fileName.toLatin1().data());
+    QByteArray ba = fileName.toLocal8Bit();
+    const char *c_str2 = ba.data();
+
+    reader->SetFileName(c_str2);
     reader->Update();
     file=fileName;
 
@@ -27,8 +30,8 @@ void mediator::setPipeline(){
     polydata=reader->GetOutput();
     mapper->SetInputConnection(reader->GetOutputPort());
     actor->SetMapper(mapper);
-    prop->SetColor(1.0, 0, 0);
-    actor->SetProperty(prop);
+    //actor->SetColor(0, 0, 0);
+    //actor->SetProperty(prop);
     renderer->SetBackground(1,1,1);
     //mylight->SetColor(0,0,0);
     //renderer->RemoveAllViewProps();
@@ -39,9 +42,9 @@ void mediator::setPipeline(){
 }
 
 
-void mediator::setFileName(QString Name){
+/*void mediator::setFileName(QString Name){
     this->file= Name;
-}
+}*/
 
 QString mediator::getFileName(){
     return this->file;
