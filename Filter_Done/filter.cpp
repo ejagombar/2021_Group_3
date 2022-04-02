@@ -43,7 +43,7 @@ void filter::reflect(ModelRender *ReflectModel){
     reflectactor->GetProperty()->SetColor(colors->GetColor3d("Gray").GetData());
 
     ReflectModel->getRenderer()->AddActor(reflectactor);
-    ReflectModel->getRenderer()->AddActor(ReflectModel->getActor());
+    //ReflectModel->getRenderer()->AddActor(ReflectModel->getActor());
     ReflectModel->getRenderWindow()->Render();
 }
 
@@ -64,6 +64,30 @@ void filter::outLine(ModelRender* OutlineModel){
 void filter::smooth(ModelRender *SmoothModel){
 
     SmoothModel->getRenderer()->RemoveAllViewProps();
+
+    smoothdelaunay->SetInputData(SmoothModel->getPolyData());
+    smoothdelaunay->Update();
+    smoothfilter->SetInputConnection(smoothdelaunay->GetOutputPort());
+    smoothfilter->SetNumberOfIterations(20);
+
+    smoothfilter->SetRelaxationFactor(0.5);
+    smoothfilter->Update();
+
+    vtkSmartPointer<vtkPolyDataNormals> normalGenerator = vtkSmartPointer<vtkPolyDataNormals>::New();
+    normalGenerator->SetInputConnection(smoothfilter->GetOutputPort());
+    normalGenerator->ComputePointNormalsOn();
+    normalGenerator->ComputeCellNormalsOn();
+    normalGenerator->Update();
+    smoothmapper->SetInputConnection(normalGenerator->GetOutputPort());
+    smoothactor->SetMapper(smoothmapper);
+
+    SmoothModel->getRenderer()->AddActor(smoothactor);
+    SmoothModel->getRenderWindow()->Render();
+}
+
+void filter::smoothadd(ModelRender *SmoothModel){
+
+    //SmoothModel->getRenderer()->RemoveAllViewProps();
 
     smoothdelaunay->SetInputData(SmoothModel->getPolyData());
     smoothdelaunay->Update();

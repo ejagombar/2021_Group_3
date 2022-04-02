@@ -41,6 +41,7 @@ public:
     void outLine(ModelRender* OutlineModel);
     void curvature(ModelRender* curvatureModel);
     void smooth(ModelRender*SmoothModel);
+    void smoothadd(ModelRender*SmoothModel);
     void reflect(ModelRender* ReflectModel);
     void RemoveFilter(ModelRender* removeModel);
 

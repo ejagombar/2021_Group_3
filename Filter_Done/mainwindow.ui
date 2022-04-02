@@ -34,7 +34,14 @@
       <item>
        <widget class="QPushButton" name="smooth">
         <property name="text">
-         <string>smooth</string>
+         <string>smooth Indv</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="smoothadd">
+        <property name="text">
+         <string>smooth +</string>
         </property>
        </widget>
       </item>
@@ -49,6 +56,20 @@
        <widget class="QPushButton" name="Remove">
         <property name="text">
          <string>Remove All</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="CalcA">
+        <property name="text">
+         <string>Area</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="CalcV">
+        <property name="text">
+         <string>Volume</string>
         </property>
        </widget>
       </item>

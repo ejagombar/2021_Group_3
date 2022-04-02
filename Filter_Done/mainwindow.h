@@ -6,9 +6,9 @@
 #include <vtkDataSetMapper.h>
 #include <vtkActor.h>
 #include <vtkLight.h>
-#include<vtkProperty.h>
-#include<ModelRender.h>
-#include<filter.h>
+#include <vtkProperty.h>
+#include <ModelRender.h>
+#include <filter.h>
 
 namespace Ui {
 class MainWindow;
@@ -34,7 +34,10 @@ public slots:
     void LaunchSmoothFilter();
     void handlCam();
     void LaunchReflectFilter();
+    void LaunchSmoothFilteradd();
     void RemoveFilter();
+    void CalcA();
+    void CalcV();
 
 private:
 

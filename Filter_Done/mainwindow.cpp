@@ -31,6 +31,12 @@
 #include <QLineEdit>
 #include <QLine>
 #include <ModelRender.h>
+#include <QMessageBox>
+
+#include "vtkAutoInit.h"
+
+VTK_MODULE_INIT(vtkRenderingOpenGL2);
+VTK_MODULE_INIT(vtkInteractionStyle);
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -38,6 +44,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
    this->InitOpenGLWindow();
    this->filterFunctionConnect();
    connect(ui->actionFileOpen, &QAction::triggered, this, &MainWindow::readSTL);
+   connect(ui->CalcA,&QPushButton::clicked,this,&MainWindow::CalcA);
+   connect(ui->CalcV,&QPushButton::clicked,this,&MainWindow::CalcV);
 }
 
 MainWindow::~MainWindow()
@@ -60,6 +68,7 @@ void MainWindow::InitOpenGLWindow()
 void MainWindow::filterFunctionConnect()
 {
     connect(ui->smooth,&QPushButton::clicked,this,&MainWindow::LaunchSmoothFilter);
+    connect(ui->smoothadd,&QPushButton::clicked,this,&MainWindow::LaunchSmoothFilteradd);
     connect(ui->Cam,&QPushButton::released,this,&::MainWindow::handlCam);
     connect(ui->outline,&QPushButton::clicked,this,&MainWindow::LaunchOutLineFilter);
     connect(ui->reflection,&QPushButton::clicked,this,&MainWindow::LaunchReflectFilter);
@@ -81,7 +90,13 @@ void MainWindow::LaunchOutLineFilter()
 void MainWindow::LaunchSmoothFilter()
 {
     vtkFilter->smooth(Model);
-    ui->statusbar->showMessage(tr("Launch Smooth Filter"),2000);
+    ui->statusbar->showMessage(tr("Launch Smooth Filter independent"),2000);
+}
+
+void MainWindow::LaunchSmoothFilteradd()
+{
+    vtkFilter->smoothadd(Model);
+    ui->statusbar->showMessage(tr("Launch Smooth Filter add on"),2000);
 }
 
 void MainWindow::RemoveFilter()
@@ -105,4 +120,29 @@ void MainWindow::readSTL()
     Model->STLfileReader(file);
     Model->RenderingStarts();
 }
+
+void MainWindow::CalcA()
+{
+    double area = Model->Getarea();
+    Model->AreaAndVol();
+    QMessageBox msgBox;
+    msgBox.setText(tr("The area is:%1").arg(area));
+    msgBox.exec();
+}
+
+void MainWindow::CalcV()
+{
+    double vol = Model->Getvol();
+    Model->AreaAndVol();
+    QMessageBox msgBox;
+    msgBox.setText(tr("The volume is:%1").arg(vol));
+    msgBox.exec();
+}
+
+
+
+
+
+
+
 

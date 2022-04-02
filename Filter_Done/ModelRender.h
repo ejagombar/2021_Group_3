@@ -21,6 +21,7 @@
 #include <vtkNew.h>
 #include <vtkCellArray.h>
 #include <vtkDataSetSurfaceFilter.h>
+#include <vtkTriangleFilter.h>
 
 #include<vtkSTLReader.h>
 #include<vtkCamera.h>
@@ -51,10 +52,15 @@ public:
     void STLfileReader(QString fileName);
     void RenderingStarts();
 
+    double Getarea();
+    double Getvol();
+    void AreaAndVol();
+
     vtkSmartPointer<vtkRenderer> renderer ;
     vtkSmartPointer<vtkGenericOpenGLRenderWindow> renderWindow;
     vtkSmartPointer<vtkPolyData> polydata;
     vtkSmartPointer<vtkDataSetSurfaceFilter> surfacefilter;
+    vtkSmartPointer<vtkTriangleFilter> trianglefilter;
     vtkSmartPointer<vtkProperty> prop ;
     vtkSmartPointer<vtkSTLReader> reader;
     vtkSmartPointer<vtkDataSetMapper> mapper;
@@ -63,6 +69,9 @@ public:
 private:
 
     QString file;
+
+    double area;
+    double vol;
 
 };
 
