@@ -6,6 +6,9 @@ cmake_minimum_required (VERSION 3.8)
 project (ModelLibrary)
 include(CTest)
 
+file(COPY_FILE
+	${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod
+	${CMAKE_SOURCE_DIR}/build/src/Debug/ExampleModel1.mod)
 
 include_directories(include)
 
