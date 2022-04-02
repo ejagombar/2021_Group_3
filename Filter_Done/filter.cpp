@@ -1,4 +1,5 @@
 #include "filter.h"
+#include<vtkMassProperties.h>
 
 filter::filter(){
 
@@ -47,6 +48,33 @@ void filter::reflect(ModelRender *ReflectModel){
     ReflectModel->getRenderWindow()->Render();
 }
 
+double filter::calcA(ModelRender* calcModel)
+{
+    trianglefilter->SetInputData(calcModel->getPolyData());
+    trianglefilter->Update();
+
+    vtkSmartPointer<vtkMassProperties> calc = vtkSmartPointer< vtkMassProperties >::New();
+
+    calc->SetInputData(trianglefilter->GetOutput());
+    //calc->Update();
+
+    area = calc->GetVolume();
+    return area;
+}
+
+double filter::calcV(ModelRender* calcModel)
+{
+    trianglefilter->SetInputData(calcModel->getPolyData());
+    trianglefilter->Update();
+
+    vtkSmartPointer<vtkMassProperties> calc = vtkSmartPointer< vtkMassProperties >::New();
+
+    calc->SetInputData(trianglefilter->GetOutput());
+    //calc->Update();
+
+    vol = calc->GetSurfaceArea();
+    return vol;
+}
 
 void filter::outLine(ModelRender* OutlineModel){
     outlinepolydata=OutlineModel->getPolyData();

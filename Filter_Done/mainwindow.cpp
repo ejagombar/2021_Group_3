@@ -123,8 +123,7 @@ void MainWindow::readSTL()
 
 void MainWindow::CalcA()
 {
-    double area = Model->Getarea();
-    Model->AreaAndVol();
+    double area = vtkFilter->calcA(Model);
     QMessageBox msgBox;
     msgBox.setText(tr("The area is:%1").arg(area));
     msgBox.exec();
@@ -132,8 +131,7 @@ void MainWindow::CalcA()
 
 void MainWindow::CalcV()
 {
-    double vol = Model->Getvol();
-    Model->AreaAndVol();
+    double vol = vtkFilter->calcV(Model);
     QMessageBox msgBox;
     msgBox.setText(tr("The volume is:%1").arg(vol));
     msgBox.exec();

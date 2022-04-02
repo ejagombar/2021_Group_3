@@ -1,5 +1,4 @@
 #include "ModelRender.h"
-#include<vtkMassProperties.h>
 #include "vtkAutoInit.h"
 
 VTK_MODULE_INIT(vtkRenderingOpenGL2);
@@ -35,24 +34,6 @@ void ModelRender::RenderingStarts()
     renderer->AddActor(actor);
     renderer->GetRenderWindow()->Render();
 }
-
-void ModelRender::AreaAndVol()
-{
-    trianglefilter->SetInputData(getPolyData());
-    trianglefilter->Update();
-
-    vtkSmartPointer<vtkMassProperties> calc = vtkSmartPointer< vtkMassProperties >::New();
-
-    calc->SetInputData(trianglefilter->GetOutput());
-    //calc->Update();
-
-    area = calc->GetVolume();
-    vol = calc->GetSurfaceArea();
-}
-
-double ModelRender::Getarea(){return area;}
-
-double ModelRender::Getvol(){return vol;}
 
 void ModelRender::setFileName(QString Name){this->file= Name;}
 

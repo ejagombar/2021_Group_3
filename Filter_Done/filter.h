@@ -28,6 +28,7 @@
 #include<QDebug>
 #include<QString>
 #include<QFileDialog>
+#include <vtkTriangleFilter.h>
 
 #include<ModelRender.h>
 
@@ -41,6 +42,8 @@ public:
     void outLine(ModelRender* OutlineModel);
     void curvature(ModelRender* curvatureModel);
     void smooth(ModelRender*SmoothModel);
+    double calcA(ModelRender*calcModel);
+    double calcV(ModelRender*calcModel);
     void smoothadd(ModelRender*SmoothModel);
     void reflect(ModelRender* ReflectModel);
     void RemoveFilter(ModelRender* removeModel);
@@ -71,6 +74,11 @@ private:
         vtkSmartPointer<vtkActor> removeactor;
         vtkSmartPointer<vtkPolyDataMapper> removemapper;
         vtkSmartPointer<vtkPolyData> removepolydata;
+
+        vtkSmartPointer<vtkTriangleFilter> trianglefilter;
+
+        double area;
+        double vol;
 
 };
 
