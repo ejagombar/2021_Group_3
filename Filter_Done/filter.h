@@ -31,6 +31,7 @@
 #include <vtkTriangleFilter.h>
 
 #include<ModelRender.h>
+#include<vtkMassProperties.h>
 
 
 
@@ -76,6 +77,8 @@ private:
         vtkSmartPointer<vtkPolyData> removepolydata;
 
         vtkSmartPointer<vtkTriangleFilter> trianglefilter;
+        vtkSmartPointer<vtkMassProperties> calcFA;
+        vtkSmartPointer<vtkMassProperties> calcFV;
 
         double area;
         double vol;

@@ -1,5 +1,5 @@
 #include "filter.h"
-#include<vtkMassProperties.h>
+
 
 filter::filter(){
 
@@ -23,6 +23,10 @@ filter::filter(){
     removeactor = vtkSmartPointer<vtkActor>::New();
     removemapper = vtkSmartPointer<vtkPolyDataMapper>::New();
     removepolydata=vtkSmartPointer<vtkPolyData>::New();
+
+    trianglefilter = vtkSmartPointer<vtkTriangleFilter>::New();
+    calcFA = vtkSmartPointer< vtkMassProperties >::New();
+    calcFV = vtkSmartPointer< vtkMassProperties >::New();
 
 }
 
@@ -53,12 +57,10 @@ double filter::calcA(ModelRender* calcModel)
     trianglefilter->SetInputData(calcModel->getPolyData());
     trianglefilter->Update();
 
-    vtkSmartPointer<vtkMassProperties> calc = vtkSmartPointer< vtkMassProperties >::New();
+    calcFA->SetInputData(trianglefilter->GetOutput());
+    calcFA->Update();
 
-    calc->SetInputData(trianglefilter->GetOutput());
-    //calc->Update();
-
-    area = calc->GetVolume();
+    area = calcFA->GetVolume();
     return area;
 }
 
@@ -67,12 +69,10 @@ double filter::calcV(ModelRender* calcModel)
     trianglefilter->SetInputData(calcModel->getPolyData());
     trianglefilter->Update();
 
-    vtkSmartPointer<vtkMassProperties> calc = vtkSmartPointer< vtkMassProperties >::New();
+    calcFV->SetInputData(trianglefilter->GetOutput());
+    calcFV->Update();
 
-    calc->SetInputData(trianglefilter->GetOutput());
-    //calc->Update();
-
-    vol = calc->GetSurfaceArea();
+    vol = calcFV->GetSurfaceArea();
     return vol;
 }
 
@@ -80,6 +80,7 @@ void filter::outLine(ModelRender* OutlineModel){
     outlinepolydata=OutlineModel->getPolyData();
     outlinefilter->SetInputData(outlinepolydata);
     outlinefilter->Update();
+
     outlinemapper->SetInputConnection(outlinefilter->GetOutputPort());
     outlineactor->SetMapper(outlinemapper);
     outlineactor->GetProperty()->SetColor(0,0,1);
