@@ -12,7 +12,7 @@ else()
 	message("Not found")
 endif()
 
-if(EXISTS ${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod)
+if(EXISTS ${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod AND NOT IS_DIRECTORY ${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod)
 	message("FOund file")
 else()
 	message("Not found")
