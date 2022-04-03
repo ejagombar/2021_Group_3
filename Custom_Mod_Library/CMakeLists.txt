@@ -42,7 +42,7 @@ target_link_libraries(testCell PRIVATE LibsModule)
 
 add_test(testModel testModel)
 add_test(test3D_Vector test3D_Vector)
-add_test(testCell testCell)]
+add_test(testCell testCell)
 
 if(EXISTS ${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod AND NOT IS_DIRECTORY ${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod)
 	message("Found file to copy")
