@@ -6,11 +6,6 @@ cmake_minimum_required (VERSION 3.8)
 project (ModelLibrary)
 include(CTest)
 
-if(EXISTS ${CMAKE_SOURCE_DIR}/tests/testFiles/)
-	message("FOund")
-else()
-	message("Not found")
-endif()
 
 if(EXISTS ${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod AND NOT IS_DIRECTORY ${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod)
 	message("FOund file")
@@ -55,7 +50,7 @@ add_test(testCell testCell)
 
 file(COPY_FILE
 	${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod
-	${CMAKE_SOURCE_DIR}/build/src/Debug/ExampleModel1.mod)
+	${CMAKE_SOURCE_DIR}/build/src/Debug/)
 
 
 
