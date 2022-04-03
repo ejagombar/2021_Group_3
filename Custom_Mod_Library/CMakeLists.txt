@@ -50,15 +50,17 @@ else()
 	message("Not found file")
 endif()
 
-if(EXISTS ${CMAKE_SOURCE_DIR}/build/src/Debug/)
+if(EXISTS ${CMAKE_SOURCE_DIR}/build/src/)
 	message("Found destination location")
+	
+	file(COPY_FILE
+		${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod
+		${CMAKE_SOURCE_DIR}/build/src/)
 else()
 	message("Not found destination")
 endif()
 
-file(COPY_FILE
-	${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod
-	${CMAKE_SOURCE_DIR}/build/src/Debug/)
+
 
 
 
