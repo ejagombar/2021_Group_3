@@ -19,6 +19,7 @@ var class_model_render =
     [ "getRenderWindow", "class_model_render.html#ad83b8bdbc34482186bd1f5bd8dfff35c", null ],
     [ "getSTLReader", "class_model_render.html#acda6134ada7a30db2b174db01598708d", null ],
     [ "getSurfaceFilter", "class_model_render.html#a6a4888c921a40a7938e5b280d04588ce", null ],
+    [ "OneRender", "class_model_render.html#a922b412a27db080e241a13b673247427", null ],
     [ "RenderingStarts", "class_model_render.html#af996133f8bfa725e6bf6e35f8bf9fe0a", null ],
     [ "setActorColor", "class_model_render.html#a463e474d612b657540a19a5813666e02", null ],
     [ "setBackgroundColor", "class_model_render.html#aa171f7427c303bcf003da2c85d2dbc94", null ],
