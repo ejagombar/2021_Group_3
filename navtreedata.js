@@ -22,30 +22,12 @@ for the JavaScript code in this file
 */
 var NAVTREE =
 [
-  [ "3D Model Viewer", "index.html", [
-    [ "2021_Group_3", "md__home_runner_work_2021__group_3_2021__group_3__r_e_a_d_m_e.html", [
-      [ "Task", "md__home_runner_work_2021__group_3_2021__group_3__r_e_a_d_m_e.html#autotoc_md4", null ]
-    ] ],
-    [ "TEAM", "md__home_runner_work_2021__group_3_2021__group_3__t_e_a_m.html", null ],
-    [ "Classes", "annotated.html", [
-      [ "Class List", "annotated.html", "annotated_dup" ],
-      [ "Class Index", "classes.html", null ],
-      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
-      [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ]
-      ] ]
-    ] ],
-    [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ]
-    ] ]
-  ] ]
+  [ "3D Model Viewer", "index.html", ]
 ];
 
 var NAVTREEINDEX =
 [
-"3_d___vector_8h_source.html",
-"md__home_runner_work_2021__group_3_2021__group_3__r_e_a_d_m_e.html#autotoc_md2"
+"index.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
