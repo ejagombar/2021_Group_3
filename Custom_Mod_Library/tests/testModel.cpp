@@ -7,11 +7,20 @@ int main()
 
     myModel.LoadModelFile("ExampleModel1.mod");
 
-    cout << myModel.GetNumOfVertices() << "\n" << myModel.GetNumOfCells() << "\n" << myModel.GetNumOfMaterials();
+    //Data for ExampleModel1 file.
 
-    cout << "\nNum of Tetrahedron: " << myModel.GetCellTypeCount(0)
-        << " Num of Hexahedron: " << myModel.GetCellTypeCount(1)
-        << " Num of Pyramid: " << myModel.GetCellTypeCount(2);
+    uint16_t val = 12;
+    if (myModel.GetNumOfVertices() != val) { return 1; }
+    val = 2;
+    if (myModel.GetNumOfCells() != val) { return 1; }
+    val = 2;
+    if (myModel.GetNumOfMaterials() != val) { return 1; }
+
+    if (myModel.GetCellTypeCount(0) != 1) { return 1; }
+    if (myModel.GetCellTypeCount(1) != 1) { return 1; }
+    if (myModel.GetCellTypeCount(2) != 0) { return 1; }
+
+    cout << "passed";
 
     return 0;
 }
