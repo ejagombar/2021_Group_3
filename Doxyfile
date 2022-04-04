@@ -214,7 +214,7 @@ QT_AUTOBRIEF           = NO
 # a brief description. This used to be the default behavior. The new default is
 # to treat a multi-line C++ comment block as a detailed description. Set this
 # tag to YES if you prefer the old behavior instead.
-#
+# c]   
 # Note that setting this tag to YES also means that rational rose comments are
 # not recognized any more.
 # The default value is: NO.
