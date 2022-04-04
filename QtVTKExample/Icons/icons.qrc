@@ -1,0 +1,18 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource prefix="/Icons">
+    <!-- Typical file operations. -->
+    <file>fileopen.png</file>
+    <file>filesave.png</file>
+    <file>print.png</file>
+    <file>dark.png</file>
+    <file>file.png</file>
+    <file>save.png</file>
+    <file>arrow.png</file>
+    <file>slz.png</file>
+    <file>disk.png</file>
+
+    <!-- Help -->
+    <file>help.png</file>
+  </qresource>
+</RCC>
