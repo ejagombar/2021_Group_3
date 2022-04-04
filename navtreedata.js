@@ -22,16 +22,12 @@ for the JavaScript code in this file
 */
 var NAVTREE =
 [
-  [ "3D Model Viewer", "index.html", [
-    [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ]
-    ] ]
-  ] ]
+  [ "3D Model Viewer", "index.html", ]
 ];
 
 var NAVTREEINDEX =
 [
-"_cell_8cpp.html"
+"index.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
