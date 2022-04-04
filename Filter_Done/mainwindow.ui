@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>904</width>
-    <height>818</height>
+    <width>996</width>
+    <height>758</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,8 +15,8 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="14" column="1">
-     <widget class="QPushButton" name="CalcV">
+    <item row="0" column="1">
+     <widget class="QPushButton" name="smooth">
       <property name="maximumSize">
        <size>
         <width>100</width>
@@ -24,24 +24,11 @@
        </size>
       </property>
       <property name="text">
-       <string>Volume</string>
+       <string>Smooth Indv</string>
       </property>
      </widget>
     </item>
-    <item row="12" column="1">
-     <widget class="QPushButton" name="Remove">
-      <property name="maximumSize">
-       <size>
-        <width>100</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Remove All</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0" rowspan="15">
+    <item row="0" column="0" rowspan="18">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
        <number>0</number>
@@ -52,7 +39,7 @@
       <property name="movable">
        <bool>true</bool>
       </property>
-      <widget class="QWidget" name="tab_3">
+      <widget class="QWidget" name="tab1">
        <attribute name="title">
         <string>Tab 1</string>
        </attribute>
@@ -69,28 +56,24 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_4">
+      <widget class="QWidget" name="tab2">
        <attribute name="title">
         <string>Tab 2</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0" rowspan="2">
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QVTKOpenGLWidget" name="qvtkWidget_2" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>700</width>
-              <height>500</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
+        <item row="0" column="0">
+         <widget class="QVTKOpenGLWidget" name="qvtkWidget_2" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>700</width>
+            <height>500</height>
+           </size>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_5">
+      <widget class="QWidget" name="tab3">
        <attribute name="title">
         <string>Tab 3</string>
        </attribute>
@@ -118,7 +101,20 @@
        </size>
       </property>
       <property name="text">
-       <string>smooth +</string>
+       <string>Smooth +</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QPushButton" name="shrink">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Shrink</string>
       </property>
      </widget>
     </item>
@@ -131,7 +127,20 @@
        </size>
       </property>
       <property name="text">
-       <string>reflection</string>
+       <string>Reflection</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="1">
+     <widget class="QPushButton" name="axes">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Show Axes</string>
       </property>
      </widget>
     </item>
@@ -144,11 +153,11 @@
        </size>
       </property>
       <property name="text">
-       <string>outline</string>
+       <string>Outline</string>
       </property>
      </widget>
     </item>
-    <item row="13" column="1">
+    <item row="16" column="1">
      <widget class="QPushButton" name="CalcA">
       <property name="maximumSize">
        <size>
@@ -161,8 +170,8 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="smooth">
+    <item row="15" column="1">
+     <widget class="QPushButton" name="Remove">
       <property name="maximumSize">
        <size>
         <width>100</width>
@@ -170,11 +179,24 @@
        </size>
       </property>
       <property name="text">
-       <string>smooth Indv</string>
+       <string>Remove All</string>
       </property>
      </widget>
     </item>
-    <item row="11" column="1">
+    <item row="5" column="1">
+     <widget class="QPushButton" name="clip">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Clip</string>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="1">
      <widget class="QPushButton" name="Cam">
       <property name="maximumSize">
        <size>
@@ -187,6 +209,179 @@
       </property>
      </widget>
     </item>
+    <item row="17" column="1">
+     <widget class="QPushButton" name="CalcV">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Volume</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Change model position: </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>X</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="changeX">
+        <property name="minimum">
+         <number>-100</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="singleStep">
+         <number>1</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Y</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="changeY">
+        <property name="minimum">
+         <number>-100</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="singleStep">
+         <number>1</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Z</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="changeZ">
+        <property name="minimum">
+         <number>-100</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="singleStep">
+         <number>1</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="7" column="1">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>Rotate: </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>X</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="RX">
+        <property name="minimum">
+         <number>-360</number>
+        </property>
+        <property name="maximum">
+         <number>360</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Y</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="RY">
+        <property name="minimum">
+         <number>-360</number>
+        </property>
+        <property name="maximum">
+         <number>360</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Z</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="RZ">
+        <property name="minimum">
+         <number>-360</number>
+        </property>
+        <property name="maximum">
+         <number>360</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -194,7 +389,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>904</width>
+     <width>996</width>
      <height>21</height>
     </rect>
    </property>
@@ -204,7 +399,24 @@
     </property>
     <addaction name="actionFileOpen"/>
    </widget>
+   <widget class="QMenu" name="menuPreLoad">
+    <property name="title">
+     <string>PreLoad</string>
+    </property>
+    <addaction name="ball"/>
+    <addaction name="cone"/>
+    <addaction name="arrow"/>
+   </widget>
+   <widget class="QMenu" name="menuColor">
+    <property name="title">
+     <string>Color</string>
+    </property>
+    <addaction name="AColor"/>
+    <addaction name="BColor"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuPreLoad"/>
+   <addaction name="menuColor"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -218,14 +430,64 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionFileOpen"/>
+   <addaction name="ball"/>
+   <addaction name="arrow"/>
+   <addaction name="cone"/>
+   <addaction name="BColor"/>
+   <addaction name="AColor"/>
   </widget>
   <action name="actionFileOpen">
    <property name="icon">
     <iconset resource="Icons/icons.qrc">
-     <normaloff>:/Icons/fileopen.png</normaloff>:/Icons/fileopen.png</iconset>
+     <normaloff>:/Icons/file.png</normaloff>:/Icons/file.png</iconset>
    </property>
    <property name="text">
     <string>Open</string>
+   </property>
+  </action>
+  <action name="ball">
+   <property name="icon">
+    <iconset resource="Icons/icons.qrc">
+     <normaloff>:/Icons/disk.png</normaloff>:/Icons/disk.png</iconset>
+   </property>
+   <property name="text">
+    <string>Disk Item</string>
+   </property>
+  </action>
+  <action name="arrow">
+   <property name="icon">
+    <iconset resource="Icons/icons.qrc">
+     <normaloff>:/Icons/arrow.png</normaloff>:/Icons/arrow.png</iconset>
+   </property>
+   <property name="text">
+    <string>Arrow Item</string>
+   </property>
+  </action>
+  <action name="cone">
+   <property name="icon">
+    <iconset resource="Icons/icons.qrc">
+     <normaloff>:/Icons/slz.png</normaloff>:/Icons/slz.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cone Item</string>
+   </property>
+  </action>
+  <action name="BColor">
+   <property name="icon">
+    <iconset resource="Icons/icons.qrc">
+     <normaloff>:/Icons/dark.png</normaloff>:/Icons/dark.png</iconset>
+   </property>
+   <property name="text">
+    <string>BaackGround Color</string>
+   </property>
+  </action>
+  <action name="AColor">
+   <property name="icon">
+    <iconset resource="Icons/icons.qrc">
+     <normaloff>:/Icons/color.png</normaloff>:/Icons/color.png</iconset>
+   </property>
+   <property name="text">
+    <string>Actor Color</string>
    </property>
   </action>
  </widget>

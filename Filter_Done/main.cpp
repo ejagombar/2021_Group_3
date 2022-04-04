@@ -2,7 +2,8 @@
 #include <QApplication>
 #include <QSurfaceFormat>
 #include <QVTKOpenGLWidget.h>
-#include<QFile>
+#include <QSplashScreen>
+#include <QFile>
 #include "mainwindow.h"
 
 int main( int argc, char** argv )
@@ -12,6 +13,11 @@ int main( int argc, char** argv )
 
   QApplication a( argc, argv );
 
+  QScreen *screen = QGuiApplication::screens().at(1);
+  QPixmap pixmap("B.jpg");
+  QSplashScreen splash(screen, pixmap);
+  splash.show();
+
   // set the app style sheet
   QFile styleSheetFile(":/Adaptic.qss");
   styleSheetFile.open(QFile::ReadOnly);
@@ -20,7 +26,7 @@ int main( int argc, char** argv )
 
   MainWindow window;
   window.show();
-
+  splash.finish(&window);
   return a.exec();
 
 }

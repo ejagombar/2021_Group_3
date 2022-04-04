@@ -4,6 +4,14 @@
         <file>filesave.png</file>
         <file>print.png</file>
         <file>help.png</file>
+        <file>dark.png</file>
+        <file>file.png</file>
+        <file>save.png</file>
+        <file>color.png</file>
+        <file>arrow.png</file>
+        <file>slz.png</file>
+        <file>B.jpg</file>
+        <file>disk.png</file>
     </qresource>
     <qresource prefix="/">
         <file>Adaptic.qss</file>
