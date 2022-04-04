@@ -6,7 +6,7 @@ on:
 
 jobs:
   # The job that will build worksheet 7
-  deploy-worksheet7:
+  deploy-doxygen:
   # Defines the operating system for the virtual computer
     runs-on: ubuntu-latest
     # A list of steps to follow to complete the build (a list of commands to execute on the virtual comput
@@ -27,3 +27,8 @@ jobs:
       with:
         branch: gh-pages # The branch the action should deploy to.
         folder: ${{github.workspace}}/html # The folder the action should deploy.
+    - name: DeployLatex
+      uses: JamesIves/github-pages-deploy-action@v4.2.5
+      with:
+        branch: gh-pages # The branch the action should deploy to.
+        folder: ${{github.workspace}}/latex # The folder the action should deploy.
