@@ -205,6 +205,10 @@ void ModelRender::showaxes()
     renderer->GetRenderWindow()->Render();
 }
 
+void ModelRender::OneRender(vtkRenderer *render)
+{
+    renderer = render;
+}
 
 
 

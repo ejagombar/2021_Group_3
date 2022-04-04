@@ -67,6 +67,8 @@ public:
     vtkSmartPointer<vtkActor> actor;
     vtkSmartPointer<vtkAxesActor> axesActor;
 
+    void OneRender(vtkRenderer *render);
+
     void changeX(float x);
     void changeY(float y);
     void changeZ(float z);

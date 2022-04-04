@@ -226,6 +226,12 @@
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QLabel" name="label">
+        <property name="maximumSize">
+         <size>
+          <width>140</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
          <string>Change model position: </string>
         </property>
@@ -233,6 +239,12 @@
       </item>
       <item>
        <widget class="QLabel" name="label_2">
+        <property name="maximumSize">
+         <size>
+          <width>140</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
          <string>X</string>
         </property>
@@ -240,6 +252,12 @@
       </item>
       <item>
        <widget class="QSlider" name="changeX">
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="minimum">
          <number>-100</number>
         </property>
@@ -259,6 +277,12 @@
       </item>
       <item>
        <widget class="QLabel" name="label_3">
+        <property name="maximumSize">
+         <size>
+          <width>140</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
          <string>Y</string>
         </property>
@@ -266,6 +290,12 @@
       </item>
       <item>
        <widget class="QSlider" name="changeY">
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="minimum">
          <number>-100</number>
         </property>
@@ -285,6 +315,12 @@
       </item>
       <item>
        <widget class="QLabel" name="label_4">
+        <property name="maximumSize">
+         <size>
+          <width>140</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
          <string>Z</string>
         </property>
@@ -292,6 +328,12 @@
       </item>
       <item>
        <widget class="QSlider" name="changeZ">
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="minimum">
          <number>-100</number>
         </property>
@@ -315,6 +357,12 @@
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QLabel" name="label_8">
+        <property name="maximumSize">
+         <size>
+          <width>140</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
          <string>Rotate: </string>
         </property>
@@ -322,6 +370,12 @@
       </item>
       <item>
        <widget class="QLabel" name="label_7">
+        <property name="maximumSize">
+         <size>
+          <width>140</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
          <string>X</string>
         </property>
@@ -329,6 +383,12 @@
       </item>
       <item>
        <widget class="QSlider" name="RX">
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="minimum">
          <number>-360</number>
         </property>
@@ -342,6 +402,12 @@
       </item>
       <item>
        <widget class="QLabel" name="label_6">
+        <property name="maximumSize">
+         <size>
+          <width>140</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
          <string>Y</string>
         </property>
@@ -349,6 +415,12 @@
       </item>
       <item>
        <widget class="QSlider" name="RY">
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="minimum">
          <number>-360</number>
         </property>
@@ -362,6 +434,12 @@
       </item>
       <item>
        <widget class="QLabel" name="label_5">
+        <property name="maximumSize">
+         <size>
+          <width>140</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
          <string>Z</string>
         </property>
@@ -369,6 +447,12 @@
       </item>
       <item>
        <widget class="QSlider" name="RZ">
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="minimum">
          <number>-360</number>
         </property>
