@@ -7,6 +7,11 @@ project (ModelLibrary)
 include(CTest)
 
 
+
+
+
+
+
 include_directories(include)
 
 
@@ -38,6 +43,24 @@ target_link_libraries(testCell PRIVATE LibsModule)
 add_test(testModel testModel)
 add_test(test3D_Vector test3D_Vector)
 add_test(testCell testCell)
+
+if(EXISTS ${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod AND NOT IS_DIRECTORY ${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod)
+	message("Found file to copy")
+else()
+	message("Not found file")
+endif()
+
+if(EXISTS ${CMAKE_SOURCE_DIR}/build/src/)
+	message("Found destination location")
+	
+	file(COPY_FILE
+		${CMAKE_SOURCE_DIR}/tests/testFiles/ExampleModel1.mod
+		${CMAKE_SOURCE_DIR}/build/src/)
+else()
+	message("Not found destination")
+endif()
+
+
 
 
 

@@ -33,6 +33,7 @@ build-Filter-Desktop_Qt_6_2_3_MSVC2019_64bit-Debug/*
 
 # Fortran module files
 *.mod
+!ExampleModel1.mod
 *.smod
 
 # Compiled Static libraries
@@ -476,3 +477,6 @@ Custom Model Library/Material/out/build/x64-Debug/.cmake/api/v1/query/client-Mic
 Custom Model Library/Material/out/build/x64-Debug/.cmake/api/v1/reply/
 
 Custom_Mod_Library/build/
+
+html/
+latex/
