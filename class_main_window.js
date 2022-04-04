@@ -28,6 +28,7 @@ var class_main_window =
     [ "handlCam", "class_main_window.html#a0d35c514be5aa64e97591e9d74cf7e49", null ],
     [ "handleBtn_Camera_Reset", "class_main_window.html#a06b9eddf9174a67e9ce80dd6c99066f6", null ],
     [ "handleBtn_Change_Background", "class_main_window.html#aab543412a763c8d55dc2bad82122f4ab", null ],
+    [ "handleBtn_Change_Position", "class_main_window.html#ac5bcde48b6d497ba34d157f0661c1ef4", null ],
     [ "handleBtn_Clear", "class_main_window.html#a50d984ac01227f565f78fc3406c15aff", null ],
     [ "handleBtn_Cube", "class_main_window.html#a27448f4e60abdc4c893cb56e64ed7bf2", null ],
     [ "handleBtn_Model_Colour", "class_main_window.html#a01b2260cd12d295e4e1b16122650c699", null ],
@@ -52,6 +53,8 @@ var class_main_window =
     [ "LaunchSmoothFilter", "class_main_window.html#ab5e2197272d33022d342aca26841e294", null ],
     [ "LaunchSmoothFilter", "class_main_window.html#ab5e2197272d33022d342aca26841e294", null ],
     [ "LaunchSmoothFilteradd", "class_main_window.html#acaa29466e4a9c9d99d2cfd9a7117bba1", null ],
+    [ "New_Actor_Selected", "class_main_window.html#a197ca0f60c4a15fb34f7737b9f28e4eb", null ],
+    [ "NewSource", "class_main_window.html#a6b31097dcfd59533c801cbc79c0d98b3", null ],
     [ "on_arrow_triggered", "class_main_window.html#ad82a5847d80a77367891dbb22d804c37", null ],
     [ "on_arrow_triggered", "class_main_window.html#ad82a5847d80a77367891dbb22d804c37", null ],
     [ "on_checkBox_stateChanged", "class_main_window.html#ae3e46da1365322bb46c19dae1f71fde4", null ],
@@ -81,5 +84,6 @@ var class_main_window =
     [ "setBackgndColor", "class_main_window.html#ace95bfaca2582dcc78f1c4fac73f7d74", null ],
     [ "setModelColor", "class_main_window.html#ac954f8adcdfbb46ffa92113d2c53c2a0", null ],
     [ "setModelColor", "class_main_window.html#ac954f8adcdfbb46ffa92113d2c53c2a0", null ],
-    [ "signal_loadStl", "class_main_window.html#ad4231f492e9e9904ede9695de18e9e14", null ]
+    [ "signal_loadStl", "class_main_window.html#ad4231f492e9e9904ede9695de18e9e14", null ],
+    [ "statusUpdateMessage", "class_main_window.html#a86443ea744fda3e9bad328c2fd1c3d6b", null ]
 ];
