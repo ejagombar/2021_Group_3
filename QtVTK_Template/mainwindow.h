@@ -35,6 +35,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+signals:
+    void statusUpdateMessage( const QString & message, int timeout );
+
 public slots:
     //Functions to change colour
     void handleBtn_Change_Background();
@@ -44,12 +47,14 @@ public slots:
     void handlactionFileOpen();
     void handleBtn_Cube();
     void handleBtn_Sphere();
+    void NewSource(QString);
 
     //Functions to manage the program
     void handleBtn_Camera_Reset();
     void handleCheckBox_Shrink_Change();
     void doubleSpinBox_value_changed();
     void handleBtn_Clear();
+    void handleBtn_Change_Position();
 
     void reset_function();
     void handleBtn_Test();
@@ -57,6 +62,7 @@ public slots:
 
     vtkSmartPointer<vtkActor> FindActor();
     void Add_Rendered_Actors_To_Combo();
+    void New_Actor_Selected();
 
     //Filter pipeline function
     void Filter();
@@ -73,18 +79,22 @@ private:
     vtkNew<vtkSTLReader> reader;
     vtkSmartPointer<vtkCubeSource> CubeSource;
     vtkSmartPointer<vtkSphereSource> sphereSource;
+    QString fileName;
+    QByteArray ba;
 
     //Actors
     vtkSmartPointer<vtkActor> STL_actor;
     vtkSmartPointer<vtkActor> Cube_actor;
     vtkSmartPointer<vtkActor> sphere_actor;
     vtkSmartPointer<vtkActor> Current_actor;
+    vtkSmartPointer<vtkActor> Source_actor = vtkSmartPointer<vtkActor>::New();
 
     //Mappers
     vtkSmartPointer<vtkDataSetMapper> STL_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
     vtkSmartPointer<vtkDataSetMapper> Cube_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
     vtkSmartPointer<vtkDataSetMapper> sphere_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
     vtkSmartPointer<vtkDataSetMapper> Current_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+    vtkSmartPointer<vtkDataSetMapper> Source_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 
     //Filters
     vtkSmartPointer<vtkShrinkFilter>  STL_shrinkFilter;
@@ -96,6 +106,8 @@ private:
     std::vector<vtkSmartPointer<vtkActor>> Rendered_Cube_Actor_Array;
     std::vector<vtkSmartPointer<vtkActor>> Rendered_Sphere_Actor_Array;
     std::vector<vtkSmartPointer<vtkActor>> Rendered_STL_Actor_Array;
+
+    std::vector<QString> File_Name_Array;
 
     //Colour pointer
     vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();
