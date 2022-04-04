@@ -45,6 +45,11 @@ add_executable( QtVTKExample MACOSX_BUNDLE
                                                                     filter.h
                                                                     ModelRender.cpp
                                                                     ModelRender.h
+                                                                    form.h
+                                                                    form.ui
+                                                                    form.cpp
+                                                                    listview.h
+                                                                    listview.cpp
 				${UI_Srcs}
 				${QRC_Srcs}
 				)
