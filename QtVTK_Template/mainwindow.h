@@ -22,7 +22,6 @@
 #include <vtkClipDataSet.h>
 #include <vtkSTLReader.h>
 
-#include <ModelRender.h>
 
 namespace Ui {
 class MainWindow;
@@ -131,7 +130,6 @@ private:
 
 
     vtkSmartPointer<vtkAlgorithm> ModelData;
-    std::vector<ModelRender> Model_List;
 
 };
 
