@@ -120,20 +120,20 @@ $(document).ready(function(){initNavTree('_material_8h_source.html',''); initRes
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="structcolour.html">colour</a> get_Colour();</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">float</span> get_Density();</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_material.html#a8aa0493906bb67da66c4ae727535cc01">set_ID</a>(<span class="keywordtype">int</span> IDIn);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> set_ID(<span class="keywordtype">int</span> IDIn);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> set_Name(std::string nameIn);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> set_Colour(<a class="code" href="structcolour.html">colour</a> colourIn);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> set_Density(<span class="keywordtype">float</span> densityIn);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="class_material.html#a137e987401b63eb7c6c27c3e38bc74b5">Material</a>();                                                                  <span class="comment">//Default Constructor</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="class_material.html#a137e987401b63eb7c6c27c3e38bc74b5">Material</a>(<span class="keywordtype">int</span> IDIn, std::string nameIn, <a class="code" href="structcolour.html">colour</a> colourIn, <span class="keywordtype">float</span> densityIn);    <span class="comment">//Populated Constructor</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="class_material.html">Material</a>();                                                                  <span class="comment">//Default Constructor</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="class_material.html">Material</a>(<span class="keywordtype">int</span> IDIn, std::string nameIn, <a class="code" href="structcolour.html">colour</a> colourIn, <span class="keywordtype">float</span> densityIn);    <span class="comment">//Populated Constructor</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    ~<a class="code" href="class_material.html">Material</a>() {};                                                              <span class="comment">//Destructor</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="class_material.html#a137e987401b63eb7c6c27c3e38bc74b5">Material</a>(<span class="keyword">const</span> <a class="code" href="class_material.html">Material</a>&amp; MaterialCopy);                                      <span class="comment">//Copy constructor</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="class_material.html">Material</a>(<span class="keyword">const</span> <a class="code" href="class_material.html">Material</a>&amp; MaterialCopy);                                      <span class="comment">//Copy constructor</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_material.html">Material</a>&amp; <a class="code" href="class_material.html#a977dbde401c722d810dea523bd2a53c0">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_material.html">Material</a>&amp; MaterialCopy);                     <span class="comment">//Assignment operator</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_material.html">Material</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="class_material.html">Material</a>&amp; MaterialCopy);                     <span class="comment">//Assignment operator</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;   </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
@@ -151,11 +151,8 @@ $(document).ready(function(){initNavTree('_material_8h_source.html',''); initRes
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_material_html_a137e987401b63eb7c6c27c3e38bc74b5"><div class="ttname"><a href="class_material.html#a137e987401b63eb7c6c27c3e38bc74b5">Material::Material</a></div><div class="ttdeci">Material()</div><div class="ttdoc">Default declaration for a material. Initilizes all values to 0</div><div class="ttdef"><b>Definition:</b> Material.cpp:19</div></div>
-<div class="ttc" id="aclass_material_html_a8aa0493906bb67da66c4ae727535cc01"><div class="ttname"><a href="class_material.html#a8aa0493906bb67da66c4ae727535cc01">Material::set_ID</a></div><div class="ttdeci">void set_ID(int IDIn)</div><div class="ttdoc">test other set id as int</div><div class="ttdef"><b>Definition:</b> Material.cpp:109</div></div>
 <div class="ttc" id="astructcolour_html"><div class="ttname"><a href="structcolour.html">colour</a></div><div class="ttdoc">A structure used to store colour.</div><div class="ttdef"><b>Definition:</b> Material.h:25</div></div>
 <div class="ttc" id="aclass_material_html"><div class="ttname"><a href="class_material.html">Material</a></div><div class="ttdoc">Used to store material data used in MOD files.</div><div class="ttdef"><b>Definition:</b> Material.h:32</div></div>
-<div class="ttc" id="aclass_material_html_a977dbde401c722d810dea523bd2a53c0"><div class="ttname"><a href="class_material.html#a977dbde401c722d810dea523bd2a53c0">Material::operator=</a></div><div class="ttdeci">const Material &amp; operator=(const Material &amp;MaterialCopy)</div><div class="ttdoc">Copy the data from one object to another Sytanx to copy data from b to a a = b;</div><div class="ttdef"><b>Definition:</b> Material.cpp:66</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
