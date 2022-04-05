@@ -21,25 +21,25 @@ add_subdirectory(tests)
 link_directories(${CMAKE_SOURCE_DIR}/src)
 #link_directories(${CMAKE_SOURCE_DIR}/tests)
 
+
+
+
+
+
 add_executable(testMaterial "tests/testMaterial.cpp")
-
-target_link_libraries(testMaterial PRIVATE LibsModule)
-
-add_test(testMaterial testMaterial)
-
 add_executable(testModel "tests/testModel.cpp")
 add_executable(test3D_Vector "tests/test3D_Vector.cpp")
 add_executable(testCell "tests/testCell.cpp")
 
 
-
+target_link_libraries(testMaterial PRIVATE LibsModule)
 target_link_libraries(testModel PRIVATE LibsModule)
 target_link_libraries(test3D_Vector PRIVATE LibsModule)
 target_link_libraries(testCell PRIVATE LibsModule)
 
 
 
-
+add_test(testMaterial testMaterial)
 add_test(testModel testModel)
 add_test(test3D_Vector test3D_Vector)
 add_test(testCell testCell)
