@@ -118,7 +118,7 @@ public:
 
 private:
 
-    std::vector <cell> cellArray;
+    std::vector <Cell> cellArray;
     std::vector <Vector3D> verticeArray;
 
     Vector3D ModelCentre;
