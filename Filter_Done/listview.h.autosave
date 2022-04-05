@@ -1,0 +1,16 @@
+#ifndef LISTVIEW_H
+#define LISTVIEW_H
+
+#include "ModelRender.h"
+
+class ListView
+{
+public:
+    ListView();
+    void addModel( ModelRender &addModel );
+	void insertModel( Mod &s, const QModelIndex &index );
+	//void setModel( const StockItem &s, const QModelIndex &index );
+	void removeModel( const QModelIndex &index );
+};
+
+#endif // LISTVIEW_H

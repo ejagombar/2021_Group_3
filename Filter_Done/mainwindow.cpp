@@ -34,6 +34,7 @@
 #include <QMessageBox>
 
 #include "vtkAutoInit.h"
+#include "form.h"
 
 VTK_MODULE_INIT(vtkRenderingOpenGL2);
 VTK_MODULE_INIT(vtkInteractionStyle);
@@ -45,10 +46,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->filterFunctionConnect();
     this->BuildPreLoad();
     this->PositionChange();
+    this->ListViewSetup();
     connect(ui->actionFileOpen, &QAction::triggered, this, &MainWindow::readSTL);
     connect(ui->CalcA,&QPushButton::clicked,this,&MainWindow::CalcA);
     connect(ui->CalcV,&QPushButton::clicked,this,&MainWindow::CalcV);
     connect(ui->axes,&QPushButton::clicked,this,&MainWindow::axes);
+
+    for (int i=0;i<100;i++){
+        Models[i] = new ModelRender();
+    }
 }
 
 MainWindow::~MainWindow()
@@ -60,6 +66,12 @@ void MainWindow::UiSetup()
 {
     ui->setupUi(this);
     this->setWindowTitle("Group3_Filter_Test");
+}
+
+void MainWindow::ListViewSetup()
+{
+    ui->listView->setModel( &stockList );
+    ui->listView->setSelectionBehavior( QAbstractItemView::SelectItems );
 }
 
 void MainWindow::InitOpenGLWindow()
@@ -254,36 +266,16 @@ void MainWindow::changeRZ()
     ui->statusbar->showMessage(tr("Angle Change Z"),2000);
 }
 
+void MainWindow::on_tabWidget_tabCloseRequested(int index)
+{
+    ui->tabWidget->removeTab(index);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void MainWindow::on_actionAdd_triggered()
+{
+    ui->tabWidget->addTab(new Form() , QString("Tab %0").arg(ui->tabWidget->count() + 1));
+    ui->tabWidget->setCurrentIndex(ui->tabWidget->count() - 1);
+}
 
 
 

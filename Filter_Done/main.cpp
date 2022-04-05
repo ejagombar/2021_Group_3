@@ -13,9 +13,8 @@ int main( int argc, char** argv )
 
   QApplication a( argc, argv );
 
-  QScreen *screen = QGuiApplication::screens().at(1);
   QPixmap pixmap("B.jpg");
-  QSplashScreen splash(screen, pixmap);
+  QSplashScreen splash(pixmap);
   splash.show();
 
   // set the app style sheet
@@ -28,6 +27,5 @@ int main( int argc, char** argv )
   window.show();
   splash.finish(&window);
   return a.exec();
-
 }
 // /main.cpp------------------------------------------------------------------

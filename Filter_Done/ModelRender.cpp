@@ -139,6 +139,7 @@ vtkSmartPointer<vtkActor> ModelRender::getActor(){return this->actor;}
 void ModelRender::buildSphere()
 {
     which = 1;
+    file = "Sphere";
     qDebug()<<"build a sphere";
     polydata=sphere->GetOutput();
     sphere->Update();
@@ -160,6 +161,7 @@ void ModelRender::buildSphere()
 void ModelRender::buildCone()
 {
     which = 2;
+    file = "Cone";
     qDebug()<<"build a Cone";
     polydata=cone->GetOutput();
     cone->Update();
@@ -181,6 +183,7 @@ void ModelRender::buildCone()
 void ModelRender::buildArrow()
 {
     which = 3;
+    file = "Arrow";
     qDebug()<<"build a Arrow";
     polydata=arrow->GetOutput();
     arrow->Update();
