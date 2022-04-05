@@ -3,12 +3,7 @@
 ### A 3D model viewer designed to run on Windows, MacOS and Linux.
 Able to render and perform basic manipulation to .stl files and custom .mod files.
 
-#### Documentation: [GitHub Pages](https://ejagombar.github.io/2021_Group_3/)
-
-#### Project Status [![Testing Status](https://img.shields.io/github/workflow/status/ejagombar/2021_Group_3/cmake-test)](https://github.com/ejagombar/2021_Group_3/actions/workflows/makes-test.yml/badge.svg)
-
-[![Testing Status(latest by date)](https://img.shields.io/github/workflow/status/ejagombar/2021_Group_3/cmake-test)](https://github.com/ejagombar/2021_Group_3/actions/workflows/makes-test.yml/badge.svg)
-
+#### Project Status :
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/jothepro/doxygen-awesome-css)](https://github.com/jothepro/doxygen-awesome-css/releases/latest)
 
 
