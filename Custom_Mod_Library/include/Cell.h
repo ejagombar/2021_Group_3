@@ -1,3 +1,9 @@
+///
+/// @file
+/// @brief Cell class used to store cell shapes that make up a model
+/// 
+
+
 #ifndef Cell_H
 #define Cell_H
 
@@ -9,6 +15,9 @@ using namespace std;
 
 class cell;
 
+/// @brief Cell class used to store shapes as an vector array of Vector3Ds
+///
+/// Stores data about the cell such as the location of the points, density, centre of mass, volume and weight.
 class cell{
 
 public:

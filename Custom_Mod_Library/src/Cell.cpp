@@ -1,14 +1,5 @@
 #include "../include/Cell.h"
 
-
-/** @file
-* This file contains the definition of the cell class
-*/
-
-/**Breif description
-* A Cell is a collection of vectors that make up a shape.
-*/
-
 cell::cell() //Default constructor
 {
     Number_Of_Vertices = 0;

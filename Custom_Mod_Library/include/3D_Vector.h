@@ -1,9 +1,19 @@
+///
+/// @file
+/// @brief Vector class used to store the vectors that make up a cell
+/// 
+
+
 #ifndef Vector_H
 #define Vector_H
 
 #include <iostream>
 using namespace std;
 
+
+/// @brief Used to coordinates of the vectors that make up the cells models
+///
+/// Stores data about the the vector: its x,y,z position
 class Vector3D
 {
 public:
