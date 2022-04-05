@@ -7,6 +7,8 @@ Able to render and perform basic manipulation to .stl files and custom .mod file
 
 #### Project Status ![Testing Status](https://github.com/ejagombar/2021_Group_3/actions/workflows/makes-test.yml/badge.svg)
 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/jothepro/doxygen-awesome-css)](https://github.com/jothepro/doxygen-awesome-css/releases/latest)
+
 
 ## Task
 The aim of this project is described below. As stated in the task sheet.

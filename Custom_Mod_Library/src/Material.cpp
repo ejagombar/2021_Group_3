@@ -1,5 +1,7 @@
-﻿// Material.cpp : Defines the entry point for the application.
-//
+﻿///
+/// @file
+/// @brief This file contains the source code for colour class and Material class
+/// 
 
 #include "../include/Material.h"
 #include <iostream>
@@ -10,6 +12,10 @@
 //------------------------------Constructors-------------------------------
 //-------------------------------------------------------------------------
 
+/// <summary>
+/// Default declaration for a material.
+/// Initilizes all values to 0
+/// </summary>
 Material::Material()
 {
 	ID = 0;
@@ -77,6 +83,10 @@ float Material::get_Density()
 //--------------------------------Setters----------------------------------
 //-------------------------------------------------------------------------
 
+/// <summary>
+/// test other set id as int
+/// </summary>
+/// <param name="IDIn"></param>
 void Material::set_ID(int IDIn)
 {
 	ID = IDIn;
@@ -87,7 +97,7 @@ void Material::set_Name(std::string nameIn)
 	name = nameIn;
 }
 
-void Material::set_Coluour(colour colourIn)
+void Material::set_Colour(colour colourIn)
 {
 	materialColour = colourIn;
 }

@@ -1,4 +1,8 @@
-﻿//-----------------------------//
+﻿///
+/// @file
+/// @brief Header file that contains the declaration for colour class and Material class
+/// 
+//-----------------------------//
 //        Edward Agombar       //
 //           20240645          //
 //-----------------------------//
@@ -11,14 +15,20 @@
 
 
 
+
 //-------------------------------Material Class-------------------------------
 //-------------------------------------------------------------------------
 
+/// @brief A structure used to store colour
+///
+/// Each value is stored as a float between 0 and 1.0
 struct colour {
     float r, g, b;
 };
 
-
+/// @brief Used to store material data used in MOD files
+///
+/// Stores data about the material including ID, Name, Colour and Density
 class Material
 {
 
@@ -32,19 +42,19 @@ public:
 
     void set_ID(int IDIn);
     void set_Name(std::string nameIn);
-    void set_Coluour(colour colourIn);
+    void set_Colour(colour colourIn);
     void set_Density(float densityIn);
 
 
-    Material();                                              //Constructor
-    Material(int IDIn, std::string nameIn, colour colourIn, float densityIn);
+    Material();                                                                  //Default Constructor
+    Material(int IDIn, std::string nameIn, colour colourIn, float densityIn);    //Populated Constructor
 
-    ~Material() {};
+    ~Material() {};                                                              //Destructor
+            
+    Material(const Material& MaterialCopy);                                      //Copy constructor
 
-    Material(const Material& MaterialCopy);                        //Copy constructor
-
-    const Material& operator=(const Material& MaterialCopy);       //Assignment operator
-    //Destructor
+    const Material& operator=(const Material& MaterialCopy);                     //Assignment operator
+   
 
 
 
