@@ -8,7 +8,7 @@ jobs:
   # The job that will build worksheet 7
 
 
-  build-worksheet7:
+  build-library:
 
 
   
