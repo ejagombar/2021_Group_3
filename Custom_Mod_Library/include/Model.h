@@ -1,4 +1,5 @@
 ﻿///
+/// @file
 /// @class Model
 /// @brief Class used to open, save and store .mod files
 /// 

@@ -1,4 +1,5 @@
 ﻿///
+/// @file
 /// @class Material
 /// @brief Class used to store Materials for the Model class
 /// 
