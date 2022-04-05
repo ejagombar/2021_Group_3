@@ -23,8 +23,7 @@
 //-------------------------------------------------------------------------
 
 /// 
-/// @struct colour
-/// A structure used to store colour
+/// @brief A structure used to store colour
 /// Each value is stored as a float between 0 and 1.0
 /// 
 struct colour
@@ -33,6 +32,7 @@ struct colour
 };
 
 ///
+/// @struct Material
 /// @brief Used to store material data used in MOD files
 /// Stores data about the material including ID, Name, Colour and Density
 /// 
