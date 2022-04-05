@@ -24,7 +24,8 @@ var NAVTREE =
 [
   [ "3D Model Viewer", "index.html", [
     [ "2021_Group_3", "index.html", [
-      [ "Task", "index.html#autotoc_md1", null ]
+      [ "Task", "index.html#autotoc_md1", null ],
+      [ "Group Members", "index.html#autotoc_md2", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
