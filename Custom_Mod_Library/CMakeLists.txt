@@ -15,7 +15,7 @@ include(CTest)
 include_directories(include)
 
 
-add_subdirectory(src)
+#add_subdirectory(src)
 add_subdirectory(tests)
 
 link_directories(${CMAKE_SOURCE_DIR}/src)
