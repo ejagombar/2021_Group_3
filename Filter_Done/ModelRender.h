@@ -42,6 +42,7 @@ class ModelRender :public QObject
 public:
 
     ModelRender();
+    ModelRender(const ModelRender & ModelCopy);
 
     vtkSmartPointer<vtkRenderer> getRenderer();
     vtkSmartPointer<vtkActor> getActor();

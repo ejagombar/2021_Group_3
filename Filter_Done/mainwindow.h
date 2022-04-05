@@ -5,6 +5,7 @@
 #include "vtkSTLReader.h"
 #include <vtkDataSetMapper.h>
 #include <vtkActor.h>
+#include <QVector>
 #include <vtkLight.h>
 #include <vtkProperty.h>
 #include <ModelRender.h>
@@ -57,16 +58,20 @@ public slots:
     void changeRY();
     void changeRZ();
 
+    void upDateList();
+
 private slots:
     void on_tabWidget_tabCloseRequested(int index);
     void on_actionAdd_triggered();
+
+    void on_clear_clicked();
 
 private:
 
     Ui::MainWindow *ui;
 
     ModelRender* Model = new ModelRender();
-    QVector<ModelRender> ModelList;
+    std::vector<ModelRender> ModelList;
     filter * vtkFilter = new filter();
 
     void UiSetup();
@@ -75,6 +80,8 @@ private:
     void filterFunctionConnect();
     void PositionChange();
     void BuildPreLoad();
+
+    int file = 0;
 
 };
 #endif // MAINWINDOW_H

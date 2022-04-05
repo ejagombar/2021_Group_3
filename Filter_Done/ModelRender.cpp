@@ -1,6 +1,6 @@
 #include "ModelRender.h"
 #include "vtkAutoInit.h"
-#include "mainwindow.h"
+//#include "mainwindow.h"
 
 VTK_MODULE_INIT(vtkRenderingOpenGL2);
 VTK_MODULE_INIT(vtkInteractionStyle);
@@ -118,7 +118,7 @@ void ModelRender::changeRZ(float z)
 
 void ModelRender::setFileName(QString Name){this->file= Name;}
 
-QString ModelRender::getFileName(){return this->file;}
+QString ModelRender::getFileName(){return file;}
 
 vtkSmartPointer<vtkDataSetMapper> ModelRender::getMapper(){return this->mapper;}
 
@@ -157,6 +157,8 @@ void ModelRender::buildSphere()
     renderer->GetRenderWindow()->Render();
 }
 
+ModelRender::ModelRender(const ModelRender & ModelCopy)
+{}
 
 void ModelRender::buildCone()
 {
