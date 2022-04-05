@@ -34,7 +34,6 @@
 #include <string.h>
 
 #include "filter.h"
-#include "ModelRender.h"
 #include <vtkDelaunay3D.h>
 #include <vtkAppendFilter.h>
 #include <vtkConnectivityFilter.h>
@@ -196,7 +195,7 @@ void MainWindow::NewSource(QString Source_Type) //General source function - need
 
 void MainWindow::handleBtn_Test()
 {
-    /*
+
       vtkNew<vtkSphereSource> sphereSource1;
       sphereSource1->Update();
       vtkNew<vtkDelaunay3D> delaunay1;
@@ -236,7 +235,7 @@ void MainWindow::handleBtn_Test()
       Rendered_Sphere_Actor_Array.push_back(actor);
       renderWindow->Render();
       Add_Rendered_Actors_To_Combo();
-      */
+
 }
 
 void MainWindow::handlactionFileOpen()
