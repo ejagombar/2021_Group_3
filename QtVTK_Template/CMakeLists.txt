@@ -20,7 +20,6 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        Render_Object.h
 )
 
 set( UIS mainwindow.ui )
