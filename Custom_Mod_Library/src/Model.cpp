@@ -1,5 +1,8 @@
-﻿// Model.cpp : Defines the entry point for the application.
-//
+﻿///
+/// @file
+/// @brief Model class used to store .MOD file 3d models.
+/// 
+
 
 #include "../include/Model.h"
 
@@ -10,14 +13,24 @@ using namespace std;
 //------------------------------Constructors-------------------------------
 //-------------------------------------------------------------------------
 
+/// <summary>
+/// Empty Constructor
+/// </summary>
 Model::Model()                                        //Constructor
 {
 }
 
-
+/// <summary>
+/// Destructor
+/// </summary>
 Model::~Model() {}                                    //Destructor
 
-
+/// <summary>
+/// Declare the data of an object with the data of another object
+/// Syntax:
+/// a(b);
+/// </summary>
+/// <param name="ModelCopy"></param>
 Model::Model(const Model& ModelCopy)                  //Copy Constructor
     :numOfVertices(ModelCopy.numOfVertices),
     numOfCells(ModelCopy.numOfCells),
@@ -26,7 +39,13 @@ Model::Model(const Model& ModelCopy)                  //Copy Constructor
     memmove(cellTypeCount, ModelCopy.cellTypeCount, sizeof(cellTypeCount));
 }
 
-
+/// <summary>
+/// Assign the data of one object to another
+/// Syntax:
+/// a=b;
+/// </summary>
+/// <param name="ModelCopy"></param>
+/// <returns></returns>
 const Model& Model::operator=(const Model& ModelCopy) //Assignment
 { 
     if (this == &ModelCopy) return(*this);
@@ -60,11 +79,18 @@ uint16_t Model::GetNumOfMaterials()
     return numOfMaterials;
 }
 
-uint16_t Model::GetCellTypeCount(uint16_t cellType) //returns number of cells in file of type 'cellType'
-{                                                  // 0 - Tetrahedron, 1 - Hexahedron, 2 - Pyramid
+/// <summary>
+/// Returns numer of cell in file of type 'cellType'
+/// 
+///  It will return a value as long as cellType is in range else an error will be output and -1 will be returned.
+/// </summary>
+/// <param name="cellType"></param>
+/// <returns>0 - Tetrahedron, 1 - Hexahedron, 2 - Pyramid</returns>
+uint16_t Model::GetCellTypeCount(uint16_t cellType) 
+{                                                
     if ((cellType < sizeof(cellTypeCount)) && (cellType >= 0))
     {
-        return cellTypeCount[(int)cellType]; //returns value as long as cellType is in range 
+        return cellTypeCount[(int)cellType];
     }
     else
     {
@@ -85,9 +111,15 @@ Vector3D Model::GetModelCentre()
 
 
 //---------------------LoadModelFile-----------------------
-//Takes the name of the file as a string in input.
-//fileName needs to include relative path to the model.exe file
-//returns 0 if an error occurs or else returns 1
+
+/// <summary>
+/// Takes the name of the file as a string in input.
+/// 
+/// fileName needs to include relative path to the model.exe file.
+/// Returns 0 if an error occurs or else returns 1.
+/// </summary>
+/// <param name="fileName"></param>
+/// <returns></returns>
 bool Model::LoadModelFile(const string fileName)
 {
     ifstream fileIn;
@@ -153,8 +185,13 @@ void Model::SaveModelFile()
 
 
 //----------------GetObjectCountsAndType-------------------
-//Must be called while the file is open
-//The file is passed into the fucntion via reference
+
+/// <summary>
+/// Must be called while the file is open
+/// The file is passed into the fucntion via reference
+/// </summary>
+/// <param name="fileIn"></param>
+/// <returns></returns>
 bool Model::GetObjectCountsAndType(ifstream& fileIn)
 {
     string line{};
@@ -206,6 +243,13 @@ bool Model::GetObjectCountsAndType(ifstream& fileIn)
 
 
 //-------------------ReadCellFromFile----------------------
+
+/// <summary>
+/// Reads data from .mod file
+/// 
+/// Stores all the data in the model object 
+/// </summary>
+/// <param name="line"></param>
 void Model::ReadCellFromFile(string& line)
 {
     uint8_t searchState = 0;
@@ -265,6 +309,11 @@ void Model::ReadCellFromFile(string& line)
 
 
 //-------------------ReadVectorFromFile--------------------
+
+/// <summary>
+/// Used to read a vector line from the .MOD file and store it in a vector object
+/// </summary>
+/// <param name="line"></param>
 void Model::ReadVectorFromFile(string& line)
 {
     uint8_t searchState = 0;
@@ -306,6 +355,11 @@ void Model::ReadVectorFromFile(string& line)
 
 
 //-----------------ReadMaterialFromFile--------------------
+
+/// <summary>
+/// Used to read a material from a line in the .MOD file and convert it to a material object to be stored in the model object
+/// </summary>
+/// <param name="line"></param>
 void Model::ReadMaterialFromFile(string& line)
 {
     uint8_t searchState = 0;
