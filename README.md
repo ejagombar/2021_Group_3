@@ -5,7 +5,7 @@ Able to render and perform basic manipulation to .stl files and custom .mod file
 
 #### Documentation: [GitHub Pages](https://ejagombar.github.io/2021_Group_3/)
 
-#### Project Status ![Testing Status](https://github.com/ejagombar/2021_Group_3/actions/workflows/makes-test.yml/badge.svg)
+#### Project Status [![Testing Status](https://img.shields.io/github/workflow/status/ejagombar/2021_Group_3/cmake-test)](https://github.com/ejagombar/2021_Group_3/actions/workflows/makes-test.yml/badge.svg)
 
 
 ## Task
