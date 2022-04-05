@@ -8,11 +8,11 @@ digraph "/home/runner/work/2021_Group_3/2021_Group_3/Custom_Mod_Library/src/main
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="iostream",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="../include/Material.h",height=0.2,width=0.4,color="black",URL="$_material_8h_source.html",tooltip=" "];
+  Node3 [label="../include/Material.h",height=0.2,width=0.4,color="black",URL="$_material_8h.html",tooltip=" "];
   Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node4 [label="string",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="../include/Model.h",height=0.2,width=0.4,color="black",URL="$_model_8h_source.html",tooltip=" "];
+  Node5 [label="../include/Model.h",height=0.2,width=0.4,color="black",URL="$_model_8h.html",tooltip=" "];
   Node5 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node6 [label="fstream",height=0.2,width=0.4,color="grey75",tooltip=" "];
@@ -22,12 +22,12 @@ digraph "/home/runner/work/2021_Group_3/2021_Group_3/Custom_Mod_Library/src/main
   Node5 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node8 [label="vector",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node5 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node9 [label="Cell.h",height=0.2,width=0.4,color="black",URL="$_cell_8h.html",tooltip="Cell class used to store Cell shapes that make up a model."];
+  Node9 [label="Cell.h",height=0.2,width=0.4,color="black",URL="$_cell_8h.html",tooltip=" "];
   Node9 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node9 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node10 [label="math.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node9 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node11 [label="3D_Vector.h",height=0.2,width=0.4,color="black",URL="$3_d___vector_8h_source.html",tooltip=" "];
+  Node11 [label="3D_Vector.h",height=0.2,width=0.4,color="black",URL="$3_d___vector_8h.html",tooltip=" "];
   Node11 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }
