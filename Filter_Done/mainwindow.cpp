@@ -46,7 +46,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->filterFunctionConnect();
     this->BuildPreLoad();
     this->PositionChange();
-    this->ListViewSetup();
     connect(ui->actionFileOpen, &QAction::triggered, this, &MainWindow::readSTL);
     connect(ui->CalcA,&QPushButton::clicked,this,&MainWindow::CalcA);
     connect(ui->CalcV,&QPushButton::clicked,this,&MainWindow::CalcV);
@@ -66,12 +65,6 @@ void MainWindow::UiSetup()
 {
     ui->setupUi(this);
     this->setWindowTitle("Group3_Filter_Test");
-}
-
-void MainWindow::ListViewSetup()
-{
-    ui->listView->setModel( &stockList );
-    ui->listView->setSelectionBehavior( QAbstractItemView::SelectItems );
 }
 
 void MainWindow::InitOpenGLWindow()
