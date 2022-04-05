@@ -38,8 +38,40 @@ class Model
 public:
 
     ///
+    /// Blank Model constructor with no parameters
+    /// 
+    Model();                                              //Constructor
+
+    ///
+    /// Model destructor
+    /// 
+    ~Model();                                             //Destructor
+
+    ///
+    /// Copy constructor
+    /// @param(Model) Model object
+    /// 
+    Model(const Model& ModelCopy);                        //Copy constructor
+
+    ///
+    /// Copy operator
+    /// Assign the contents of one Model object to another.
+    /// 
+    /// Syntax: 
+    /// a = b;
+    /// 
+    /// @param(Model) Model to be copied
+    /// @return(Model) Model to be copied to
+    /// 
+    const Model& operator=(const Model& ModelCopy);       //Assignment operator
+
+
+
+
+
+    ///
     /// Loads a model from a .mod file and stores it in the object.
-    /// @param fileName The full path of the file being opened
+    /// @param(string) fileName The full path of the file being opened
     /// @return Returns 0 for pass and 1 for error
     /// 
     bool LoadModelFile(const string fileName);
@@ -61,19 +93,19 @@ public:
 
     ///
     /// Returns the number of Cells in the Model.
-    /// @return Number of vertices
+    /// @return(uint16_t) Number of vertices
     /// 
     uint16_t GetNumOfCells();
 
     ///
     /// Returns the number of Materials in the Model.
-    /// @return Number of materials
+    /// @return(uint16_t) Number of materials
     uint16_t GetNumOfMaterials();
 
     ///
     /// Returns the number of cells of the inputted type
-    /// @param cellType Type that wants to be counted (0 - Tetrahedron, 1 - Hexahedron, 2 - Pyramid)
-    /// @return Cell count of either Tetrahedron, Hexahedron or Pyramid
+    /// @param(uint16_t) cellType Type that wants to be counted (0 - Tetrahedron, 1 - Hexahedron, 2 - Pyramid)
+    /// @return(uint16_t) Cell count of either Tetrahedron, Hexahedron or Pyramid
     /// 
     uint16_t GetCellTypeCount(uint16_t cellType);
 
@@ -83,32 +115,6 @@ public:
     /// 
     Vector3D GetModelCentre();
     
-    ///
-    /// Blank Model constructor with no parameters
-    /// 
-    Model();                                              //Constructor
-
-    ///
-    /// Model destructor
-    /// 
-    ~Model();                                             //Destructor
-
-    ///
-    /// Copy constructor
-    /// @param Model object
-    /// 
-    Model(const Model& ModelCopy);                        //Copy constructor
-
-    ///
-    /// Copy operator
-    /// Assign the contents of one Model object to another.
-    /// 
-    /// Syntax: 
-    /// a = b;
-    const Model& operator=(const Model& ModelCopy);       //Assignment operator
-    
-
-
 
 private:
 
@@ -126,25 +132,25 @@ private:
     /// 
     /// Scan the .mod file and counts the number of Cells, Vertices, and Materials.
     /// The type and counts of each cell type is also stored
-    /// @param the open .mod file
-    /// @return 0 for sucess and 1 for fail
+    /// @param(ifstream) the open .mod file
+    /// @return(bool) 0 for sucess and 1 for fail
     bool GetObjectCountsAndType(ifstream& fileIn);
 
     ///
     /// Used to read lines from a .mod file that contain Cell information.
-    /// @param a string of text that is a line from the .mod file
+    /// @param(string) a string of text that is a line from the .mod file
     /// 
     void ReadCellFromFile(string &line);
 
     ///
     /// Used to read lines from a .mod file that contain Vector information.
-    /// @param a string of text that is a line from the .mod file
+    /// @param(string) a string of text that is a line from the .mod file
     ///  
     void ReadVectorFromFile(string &line);
 
     ///
     /// Used to read lines from a .mod file that contain Material information.
-    /// @param a string of text that is a line from the .mod file
+    /// @param(string) a string of text that is a line from the .mod file
     /// 
     void ReadMaterialFromFile(string &line);
     

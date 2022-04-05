@@ -10,6 +10,11 @@ using namespace std;
 
 Model::Model()                                        //Constructor
 {
+    ModelCentre = 0;
+    numOfCells = 0;
+    numOfVertices = 0;
+    numOfMaterials = 0;
+
 }
 
 Model::~Model() {}                                    //Destructor
