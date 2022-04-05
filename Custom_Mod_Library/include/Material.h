@@ -1,6 +1,6 @@
 ﻿///
 /// @file
-/// @class Material
+///
 /// @brief Class used to store Materials for the Model class
 /// 
 /// This Class is responsible for storing data about a Material such as its ID, Name, density and colour. 

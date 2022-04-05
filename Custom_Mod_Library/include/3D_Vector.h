@@ -1,6 +1,6 @@
 ///
 /// @file
-/// @class Vector3D
+/// 
 /// @brief Class used to store 3D Vector points for the Model class
 /// 
 

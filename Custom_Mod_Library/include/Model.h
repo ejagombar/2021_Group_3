@@ -1,6 +1,5 @@
 ﻿///
 /// @file
-/// @class Model
 /// @brief Class used to open, save and store .mod files
 /// 
 /// This class is responsible for reading model entities from a .mod file.
