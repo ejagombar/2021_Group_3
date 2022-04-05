@@ -50,10 +50,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->CalcA,&QPushButton::clicked,this,&MainWindow::CalcA);
     connect(ui->CalcV,&QPushButton::clicked,this,&MainWindow::CalcV);
     connect(ui->axes,&QPushButton::clicked,this,&MainWindow::axes);
-
-    for (int i=0;i<100;i++){
-        Models[i] = new ModelRender();
-    }
 }
 
 MainWindow::~MainWindow()
@@ -111,14 +107,20 @@ void MainWindow::PositionChange()
 
 void MainWindow::BuildCone(){
     Model->buildCone();
+    ModelList.push_back(*Model);
+    upDateList();
 }
 
 void MainWindow::BuildSphere(){
     Model->buildSphere();
+    ModelList.push_back(*Model);
+    upDateList();
 }
 
 void MainWindow::BuildArrow(){
     Model->buildArrow();
+    ModelList.push_back(*Model);
+    upDateList();
 }
 
 void MainWindow::setActorColor(){
@@ -187,6 +189,8 @@ void MainWindow::readSTL()
     QString file = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
     Model->STLfileReader(file);
     Model->RenderingStarts();
+    ModelList.push_back(*Model);
+    upDateList();
 }
 
 void MainWindow::axes()
@@ -270,5 +274,26 @@ void MainWindow::on_actionAdd_triggered()
     ui->tabWidget->setCurrentIndex(ui->tabWidget->count() - 1);
 }
 
+void MainWindow::on_clear_clicked()
+{
+    //ModelList.clear();
+}
 
+void MainWindow::upDateList()
+{
+    ui->list->clear();
+    QString name;
+
+    for(int i=0; i<ModelList.size(); i++)
+    {
+        name = ModelList[i].getFileName();
+        //const char* Cstr = name.toUtf8().data();
+        //name = "Hello";
+        ui->list->addItem(name);
+        ui->list->addItem("ADD");
+    }
+    QMessageBox msgBox;
+    msgBox.setText(tr("The file is:%1").arg(name));
+    msgBox.exec();
+}
 

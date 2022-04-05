@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>944</width>
-    <height>883</height>
+    <width>1082</width>
+    <height>936</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,8 +15,8 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
-     <widget class="QPushButton" name="smooth">
+    <item row="14" column="1">
+     <widget class="QPushButton" name="Cam">
       <property name="maximumSize">
        <size>
         <width>100</width>
@@ -24,7 +24,92 @@
        </size>
       </property>
       <property name="text">
-       <string>Smooth Indv</string>
+       <string>Camera</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QPushButton" name="smoothadd">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Smooth +</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" rowspan="18">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="tab1">
+       <attribute name="title">
+        <string>Tab 1</string>
+       </attribute>
+       <attribute name="toolTip">
+        <string>Tab 1</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QVTKOpenGLWidget" name="qvtkWidget" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>700</width>
+            <height>500</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="15" column="1">
+     <widget class="QPushButton" name="Remove">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Remove All</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QPushButton" name="clip">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Clip</string>
+      </property>
+     </widget>
+    </item>
+    <item row="17" column="1">
+     <widget class="QPushButton" name="CalcV">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Volume</string>
       </property>
      </widget>
     </item>
@@ -159,6 +244,45 @@
       </item>
      </layout>
     </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="smooth">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Smooth Indv</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="1">
+     <widget class="QPushButton" name="axes">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Show Axes</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QPushButton" name="outline">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Outline</string>
+      </property>
+     </widget>
+    </item>
     <item row="12" column="1">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
@@ -272,8 +396,8 @@
       </item>
      </layout>
     </item>
-    <item row="3" column="1">
-     <widget class="QPushButton" name="smoothadd">
+    <item row="1" column="1">
+     <widget class="QPushButton" name="reflection">
       <property name="maximumSize">
        <size>
         <width>100</width>
@@ -281,7 +405,7 @@
        </size>
       </property>
       <property name="text">
-       <string>Smooth +</string>
+       <string>Reflection</string>
       </property>
      </widget>
     </item>
@@ -298,45 +422,6 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="reflection">
-      <property name="maximumSize">
-       <size>
-        <width>100</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Reflection</string>
-      </property>
-     </widget>
-    </item>
-    <item row="13" column="1">
-     <widget class="QPushButton" name="axes">
-      <property name="maximumSize">
-       <size>
-        <width>100</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Show Axes</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QPushButton" name="outline">
-      <property name="maximumSize">
-       <size>
-        <width>100</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Outline</string>
-      </property>
-     </widget>
-    </item>
     <item row="16" column="1">
      <widget class="QPushButton" name="CalcA">
       <property name="maximumSize">
@@ -350,22 +435,9 @@
       </property>
      </widget>
     </item>
-    <item row="15" column="1">
-     <widget class="QPushButton" name="Remove">
-      <property name="maximumSize">
-       <size>
-        <width>100</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Remove All</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="1">
-     <layout class="QFormLayout" name="formLayout">
-      <item row="0" column="0">
+    <item row="8" column="1">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
        <widget class="QLabel" name="label_9">
         <property name="maximumSize">
          <size>
@@ -378,20 +450,17 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="delete_2">
+      <item>
+       <widget class="QListWidget" name="list">
         <property name="maximumSize">
          <size>
-          <width>75</width>
+          <width>150</width>
           <height>16777215</height>
          </size>
         </property>
-        <property name="text">
-         <string>Delete</string>
-        </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item>
        <widget class="QPushButton" name="clear">
         <property name="maximumSize">
          <size>
@@ -404,89 +473,20 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0" colspan="2">
-       <widget class="QListWidget" name="list">
+      <item>
+       <widget class="QPushButton" name="delete_2">
         <property name="maximumSize">
          <size>
-          <width>150</width>
+          <width>75</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="text">
+         <string>Delete</string>
         </property>
        </widget>
       </item>
      </layout>
-    </item>
-    <item row="5" column="1">
-     <widget class="QPushButton" name="clip">
-      <property name="maximumSize">
-       <size>
-        <width>100</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Clip</string>
-      </property>
-     </widget>
-    </item>
-    <item row="14" column="1">
-     <widget class="QPushButton" name="Cam">
-      <property name="maximumSize">
-       <size>
-        <width>100</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Camera</string>
-      </property>
-     </widget>
-    </item>
-    <item row="17" column="1">
-     <widget class="QPushButton" name="CalcV">
-      <property name="maximumSize">
-       <size>
-        <width>100</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Volume</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0" rowspan="18">
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <property name="tabsClosable">
-       <bool>true</bool>
-      </property>
-      <property name="movable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="tab1">
-       <attribute name="title">
-        <string>Tab 1</string>
-       </attribute>
-       <attribute name="toolTip">
-        <string>Tab 1</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <widget class="QVTKOpenGLWidget" name="qvtkWidget" native="true">
-          <property name="minimumSize">
-           <size>
-            <width>700</width>
-            <height>500</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
     </item>
    </layout>
   </widget>
@@ -495,7 +495,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>944</width>
+     <width>1082</width>
      <height>21</height>
     </rect>
    </property>
