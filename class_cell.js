@@ -7,7 +7,7 @@ var class_cell =
     [ "COG_Of_Cell", "class_cell.html#ab4c8c03469538dd9e34859d7be222e4c", null ],
     [ "Get_Number_Of_Vertices", "class_cell.html#a7ba5d68129bee8ea6b59be22d6acda04", null ],
     [ "Get_VecPtrs", "class_cell.html#abc9ee08b14a8e735a01c3183c49e51bc", null ],
-    [ "operator=", "class_cell.html#a5a318cdc51c0aa9bd2a997c0ce0d6636", null ],
+    [ "operator=", "class_cell.html#a0f4e9f1c843bf9589712bb2c6fc07457", null ],
     [ "Set_density", "class_cell.html#ac6df9e88d8a9e2eb780d9a83462bbb85", null ],
     [ "Set_VecPtrs", "class_cell.html#ad0cb08c0e996c8a32d80ba5c95b59830", null ],
     [ "Volume_Of_Cell", "class_cell.html#ad099eb0a09604a22571daada9171fc3d", null ],
