@@ -53,13 +53,7 @@ uint16_t Model::GetNumOfMaterials()
     return numOfMaterials;
 }
 
-/// <summary>
-/// Returns numer of cell in file of type 'cellType'
-/// 
-///  It will return a value as long as cellType is in range else an error will be output and -1 will be returned.
-/// </summary>
-/// <param name="cellType"></param>
-/// <returns>0 - Tetrahedron, 1 - Hexahedron, 2 - Pyramid</returns>
+
 uint16_t Model::GetCellTypeCount(uint16_t cellType) 
 {                                                
     if ((cellType < sizeof(cellTypeCount)) && (cellType >= 0))

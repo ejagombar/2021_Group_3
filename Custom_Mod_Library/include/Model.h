@@ -39,7 +39,7 @@ public:
 
     ///
     /// Loads a model from a .mod file and stores it in the object.
-    /// @param[in] fileName The full path of the file being opened
+    /// @param fileName The full path of the file being opened
     /// @return Returns 0 for pass and 1 for error
     /// 
     bool LoadModelFile(const string fileName);
@@ -72,7 +72,7 @@ public:
 
     ///
     /// Returns the number of cells of the inputted type
-    /// @param[in] cellType Type that wants to be counted (0 - Tetrahedron, 1 - Hexahedron, 2 - Pyramid)
+    /// @param cellType Type that wants to be counted (0 - Tetrahedron, 1 - Hexahedron, 2 - Pyramid)
     /// @return Cell count of either Tetrahedron, Hexahedron or Pyramid
     /// 
     uint16_t GetCellTypeCount(uint16_t cellType);
@@ -95,7 +95,7 @@ public:
 
     ///
     /// Copy constructor
-    /// @param[in] Model object
+    /// @param Model object
     /// 
     Model(const Model& ModelCopy);                        //Copy constructor
 
@@ -126,7 +126,7 @@ private:
     /// 
     /// Scan the .mod file and counts the number of Cells, Vertices, and Materials.
     /// The type and counts of each cell type is also stored
-    /// @param[in] the open .mod file
+    /// @param the open .mod file
     /// @return 0 for sucess and 1 for fail
     bool GetObjectCountsAndType(ifstream& fileIn);
 
