@@ -21,14 +21,13 @@ int main()
     Test_Vector_Array[3] = Test_Three;
     Test_Vector_Array[4] = Test_Four;
     Test_Vector_Array[5] = Test_Five;
-    Test_Vector_Array[5] = Test_Six;
-    Test_Vector_Array[6] = Test_Seven;
+    Test_Vector_Array[6] = Test_Six;
+    Test_Vector_Array[7] = Test_Seven;
 
     cout << "attempting to create cell...";
     cell Test_Cell(8, Test_Vector_Array, 100);
     cout << "done";
 
-    //cout << "Test_Cell Vertice " << 3 << " X: " << Test_Cell.Get_VecPtrs(3).Get_x() << ", Y: " << Test_Cell.Get_VecPtrs(3).Get_y() << ", Z: " << Test_Cell.Get_VecPtrs(3).Get_z() << endl;
 
     for (int i = 0; i < 8; i++)
     {
@@ -45,7 +44,10 @@ int main()
     {
         cout << "Copy_Test_Cell Vertice " << i << " X: " << Copy_Test.Get_VecPtrs(i).Get_x() << ", Y: " << Copy_Test.Get_VecPtrs(i).Get_y() << ", Z: " << Copy_Test.Get_VecPtrs(i).Get_z() << endl;
     }
-    
-    cout << "now leave";
+
+    if (!(Copy_Test.Get_VecPtrs(1).Get_x() == 1)) { return 1; }
+    if (!(Copy_Test.Get_VecPtrs(4).Get_y() == 1)) { return 1; }
+    if (!(Copy_Test.Get_VecPtrs(6).Get_z() == 6)) { return 1; }
+
     return 0;
 }
