@@ -1,8 +1,6 @@
 var annotated_dup =
 [
-    [ "A 3D model viewer designed to run on Windows, MacOS and Linux.", "index.html#autotoc_md1", [
-      [ "Project Status :", "index.html#autotoc_md2", null ]
-    ] ],
+    [ "A 3D model viewer designed to run on Windows, MacOS and Linux.", "index.html#autotoc_md1", null ],
     [ "cell", "classcell.html", "classcell" ],
     [ "colour", "structcolour.html", "structcolour" ],
     [ "Material", "class_material.html", "class_material" ],
