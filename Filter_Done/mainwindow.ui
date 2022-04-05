@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>928</width>
-    <height>896</height>
+    <width>944</width>
+    <height>883</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -364,16 +364,48 @@
      </widget>
     </item>
     <item row="7" column="1">
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
        <widget class="QLabel" name="label_9">
+        <property name="maximumSize">
+         <size>
+          <width>75</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
          <string>Model List:</string>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QListView" name="listView">
+      <item row="2" column="0">
+       <widget class="QPushButton" name="delete_2">
+        <property name="maximumSize">
+         <size>
+          <width>75</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Delete</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="clear">
+        <property name="maximumSize">
+         <size>
+          <width>75</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Clear all</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QListWidget" name="list">
         <property name="maximumSize">
          <size>
           <width>150</width>
@@ -463,7 +495,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>928</width>
+     <width>944</width>
      <height>21</height>
     </rect>
    </property>

@@ -57,8 +57,6 @@ public slots:
     void changeRY();
     void changeRZ();
 
-    //ModelRender* Model = new ModelRender();
-
 private slots:
     void on_tabWidget_tabCloseRequested(int index);
     void on_actionAdd_triggered();
@@ -68,14 +66,13 @@ private:
     Ui::MainWindow *ui;
 
     ModelRender* Model = new ModelRender();
-    ModelRender* Models[100];
+    QVector<ModelRender> ModelList;
     filter * vtkFilter = new filter();
 
     void UiSetup();
     void InitOpenGLWindow();
 
     void filterFunctionConnect();
-    void ListViewSetup();
     void PositionChange();
     void BuildPreLoad();
 
