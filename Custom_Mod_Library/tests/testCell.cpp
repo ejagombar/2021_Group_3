@@ -45,9 +45,9 @@ int main()
         cout << "Copy_Test_Cell Vertice " << i << " X: " << Copy_Test.Get_VecPtrs(i).Get_x() << ", Y: " << Copy_Test.Get_VecPtrs(i).Get_y() << ", Z: " << Copy_Test.Get_VecPtrs(i).Get_z() << endl;
     }
 
-    if (!(Copy_Test.Get_VecPtrs(1).Get_x() = Test_Cell.Get_VecPtrs(1).Get_x() = 1)) { return 1; }
-    if (!(Copy_Test.Get_VecPtrs(4).Get_y() = Test_Cell.Get_VecPtrs(4).Get_y() = 1)) { return 1; }
-    if (!(Copy_Test.Get_VecPtrs(6).Get_z() = Test_Cell.Get_VecPtrs(6).Get_z() = 6)) { return 1; }
+    if (!(Copy_Test.Get_VecPtrs(1).Get_x() == Test_Cell.Get_VecPtrs(1).Get_x() == 1)) { return 1; }
+    if (!(Copy_Test.Get_VecPtrs(4).Get_y() == Test_Cell.Get_VecPtrs(4).Get_y() == 1)) { return 1; }
+    if (!(Copy_Test.Get_VecPtrs(6).Get_z() == Test_Cell.Get_VecPtrs(6).Get_z() == 6)) { return 1; }
 
     return 0;
 }
