@@ -1,6 +1,6 @@
 var annotated_dup =
 [
-    [ "cell", "classcell.html", "classcell" ],
+    [ "Cell", "class_cell.html", "class_cell" ],
     [ "colour", "structcolour.html", "structcolour" ],
     [ "Material", "class_material.html", "class_material" ],
     [ "Model", "class_model.html", "class_model" ],

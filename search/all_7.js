@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['savemodelfile_20',['SaveModelFile',['../class_model.html#a1db49a5b1656d96b2dd7b40a28719c6a',1,'Model']]],
-  ['set_5fcolour_21',['set_Colour',['../class_material.html#a258a039384d354485d46ef174840fd29',1,'Material']]],
-  ['set_5fdensity_22',['set_Density',['../class_material.html#a1dec0b7306fe536c1c33a94debecd5a0',1,'Material']]],
-  ['set_5fid_23',['set_ID',['../class_material.html#a8aa0493906bb67da66c4ae727535cc01',1,'Material']]],
-  ['set_5fname_24',['set_Name',['../class_material.html#a110dd67646e03aa3384962e46a987403',1,'Material']]]
+  ['vector3d_37',['Vector3D',['../class_vector3_d.html',1,'Vector3D'],['../class_vector3_d.html#a7b0f18fa43c7a90588dedcd814122359',1,'Vector3D::Vector3D(float a, float b, float c)'],['../class_vector3_d.html#ac129e91094e18dbb6a6aafee13525da6',1,'Vector3D::Vector3D(float a, float b)'],['../class_vector3_d.html#aa165e9331818ec53cf7be5c290ba2bde',1,'Vector3D::Vector3D(float a)'],['../class_vector3_d.html#a0b11a8d75da427b27443d8a94d0d296c',1,'Vector3D::Vector3D()'],['../class_vector3_d.html#af23612d2420473a494bd93d8128c38e8',1,'Vector3D::Vector3D(const Vector3D &amp;a)']]]
 ];

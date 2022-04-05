@@ -1,10 +1,11 @@
 var indexSectionsWithContent =
 {
-  0: "23cglmosv~",
+  0: "2cglmosv~",
   1: "cmv",
-  2: "3cm",
-  3: "cglmos~",
-  4: "2"
+  2: "cm",
+  3: "cglmosv~",
+  4: "o",
+  5: "2"
 };
 
 var indexSectionNames =
@@ -13,7 +14,8 @@ var indexSectionNames =
   1: "classes",
   2: "files",
   3: "functions",
-  4: "pages"
+  4: "related",
+  5: "pages"
 };
 
 var indexSectionLabels =
@@ -22,6 +24,7 @@ var indexSectionLabels =
   1: "Classes",
   2: "Files",
   3: "Functions",
-  4: "Pages"
+  4: "Friends",
+  5: "Pages"
 };
 

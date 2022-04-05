@@ -1,6 +1,11 @@
 var searchData=
 [
-  ['main_2ecpp_16',['main.cpp',['../main_8cpp.html',1,'']]],
-  ['material_17',['Material',['../class_material.html',1,'Material'],['../class_material.html#a137e987401b63eb7c6c27c3e38bc74b5',1,'Material::Material()'],['../class_material.html#a681de64e9326ff2eb4f3fd00b170943f',1,'Material::Material(int IDIn, std::string nameIn, colour colourIn, float densityIn)'],['../class_material.html#a2e740cef6cfe822e0dcb425935b9b1d9',1,'Material::Material(const Material &amp;MaterialCopy)']]],
-  ['model_18',['Model',['../class_model.html',1,'Model'],['../class_model.html#ae3b375de5f6df4faf74a95d64748e048',1,'Model::Model()'],['../class_model.html#aa7478990880cbfc866558f148cb89cd2',1,'Model::Model(const Model &amp;ModelCopy)']]]
+  ['operator_2a_21',['operator*',['../class_vector3_d.html#a4c04315a8a29a4f1a4aefe3b2bab7f93',1,'Vector3D::operator*(const Vector3D &amp;a)'],['../class_vector3_d.html#a6542bc0afb9f60b2a01e51d22ceb39e9',1,'Vector3D::operator*(float a)']]],
+  ['operator_2b_22',['operator+',['../class_vector3_d.html#ae27958a0405a562b653bd91816783568',1,'Vector3D']]],
+  ['operator_2b_3d_23',['operator+=',['../class_vector3_d.html#a914e5eab8704fb688a130506d9eb6bec',1,'Vector3D']]],
+  ['operator_2d_24',['operator-',['../class_vector3_d.html#a9a8759026a0233c6f33e6da94b585f88',1,'Vector3D']]],
+  ['operator_3c_3c_25',['operator&lt;&lt;',['../class_vector3_d.html#a78b228879cfe95694349a55423c45b3c',1,'Vector3D']]],
+  ['operator_3d_26',['operator=',['../class_vector3_d.html#a337d7b0b6da5f676c233cd33c51c56dc',1,'Vector3D::operator=()'],['../class_material.html#a977dbde401c722d810dea523bd2a53c0',1,'Material::operator=()'],['../class_model.html#ad9ba2c36c13420dcfc2df3aa9a317537',1,'Model::operator=()']]],
+  ['operator_3e_3e_27',['operator&gt;&gt;',['../class_vector3_d.html#afd49bba1a322c3ad55c66e94f591e9df',1,'Vector3D']]],
+  ['operator_5e_28',['operator^',['../class_vector3_d.html#a5e6614e43bb6917c30cddf39211a3c6f',1,'Vector3D']]]
 ];
