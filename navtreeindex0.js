@@ -5,7 +5,6 @@ var NAVTREEINDEX0 =
 "3_d___vector_8h_source.html":[2,0,0,0,0],
 "_cell_8h.html":[2,0,0,0,1],
 "_cell_8h_source.html":[2,0,0,0,1],
-"_material_8h.html":[2,0,0,0,2],
 "_material_8h_source.html":[2,0,0,0,2],
 "_model_8h_source.html":[2,0,0,0,3],
 "annotated.html":[1,0],

@@ -112,7 +112,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9e3323d674c4965365489fff72f79ad5"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_model.html#a9e3323d674c4965365489fff72f79ad5">GetNumOfMaterials</a> ()</td></tr>
 <tr class="separator:a9e3323d674c4965365489fff72f79ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a551e71d8860e52408ec0368b930d1f20"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_model.html#a551e71d8860e52408ec0368b930d1f20">GetCellTypeCount</a> (uint16_t cellType)</td></tr>
-<tr class="memdesc:a551e71d8860e52408ec0368b930d1f20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns numer of cell in file of type 'cellType'  <a href="class_model.html#a551e71d8860e52408ec0368b930d1f20">More...</a><br /></td></tr>
 <tr class="separator:a551e71d8860e52408ec0368b930d1f20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f48e6572f3aa295d08e3b2d963158a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_vector3_d.html">Vector3D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_model.html#a4f48e6572f3aa295d08e3b2d963158a0">GetModelCentre</a> ()</td></tr>
 <tr class="separator:a4f48e6572f3aa295d08e3b2d963158a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,7 +127,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A model class used to load, store and save .MOD files. </p>
 <p>Class used to open, save and store .mod files.</p>
-<p>This class is responsible for reading model entities from a .mod file. The class stores the data for the model entites using the Cell 3D_Vector and <a class="el" href="class_material.html" title="Used to store material data used in MOD files.">Material</a> Class. </p>
+<p>This class is responsible for reading model entities from a .mod file. The class stores the data for the model entites using the Cell 3D_Vector and <a class="el" href="class_material.html" title="Used to store material data used in MOD files Stores data about the material including ID,...">Material</a> Class. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae3b375de5f6df4faf74a95d64748e048"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae3b375de5f6df4faf74a95d64748e048">&#9670;&nbsp;</a></span>Model() <span class="overload">[1/2]</span></h2>
@@ -183,7 +182,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Copy constructor </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="class_model.html" title="A model class used to load, store and save .MOD files.">Model</a></td><td>object </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_model.html" title="A model class used to load, store and save .MOD files.">Model</a></td><td>object </td></tr>
   </table>
   </dd>
 </dl>
@@ -224,23 +223,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Returns numer of cell in file of type 'cellType' </p>
 <p>Returns the number of cells of the inputted type </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">cellType</td><td>Type that wants to be counted (0 - Tetrahedron, 1 - Hexahedron, 2 - Pyramid) </td></tr>
+    <tr><td class="paramname">cellType</td><td>Type that wants to be counted (0 - Tetrahedron, 1 - Hexahedron, 2 - Pyramid) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Cell count of either Tetrahedron, Hexahedron or Pyramid</dd></dl>
-<p>It will return a value as long as cellType is in range else an error will be output and -1 will be returned.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cellType</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 - Tetrahedron, 1 - Hexahedron, 2 - Pyramid</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Cell count of either Tetrahedron, Hexahedron or Pyramid </dd></dl>
 
 </div>
 </div>
@@ -333,7 +322,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Loads a model from a .mod file and stores it in the object. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>The full path of the file being opened </td></tr>
+    <tr><td class="paramname">fileName</td><td>The full path of the file being opened </td></tr>
   </table>
   </dd>
 </dl>

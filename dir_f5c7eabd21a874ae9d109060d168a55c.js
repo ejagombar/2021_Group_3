@@ -4,9 +4,6 @@ var dir_f5c7eabd21a874ae9d109060d168a55c =
     [ "Cell.h", "_cell_8h.html", [
       [ "cell", "classcell.html", "classcell" ]
     ] ],
-    [ "Material.h", "_material_8h.html", [
-      [ "colour", "structcolour.html", "structcolour" ],
-      [ "Material", "class_material.html", "class_material" ]
-    ] ],
+    [ "Material.h", "_material_8h_source.html", null ],
     [ "Model.h", "_model_8h_source.html", null ]
 ];
