@@ -15,14 +15,21 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Get Updates
-      run: sudo apt update -y 
+   # - name: Install doxygen
+    #  run: sudo apt-get install -y doxygen
 
-    - name: Install doxygen
-      run: sudo apt-get install -y doxygen
+    - name: download doxygen from git
+      run: git clone https://github.com/doxygen/doxygen.git
+      run: cd doxygen
 
-    - name: update doxygen
-      run: sudo apt-get --only-upgrade install -y doxygen 
+    - name: build doxygen
+      run: mkdir build
+      run: cd build
+      run: cmake -G "Unix Makefiles" ..
+      run: make
+    
+    - name: install doxygen
+      run: make install
 
 
     # Run Doxygen on Worksheet7 folder
