@@ -15,17 +15,22 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-   # - name: Install doxygen
-    #  run: sudo apt-get install -y doxygen
+    ##- name: Install doxygen
+      ##run: sudo apt-get install -y doxygen
 
     - name: download doxygen from git
       run: git clone https://github.com/doxygen/doxygen.git
+    
+    - name: run
       run: cd doxygen
 
     - name: build doxygen
       run: mkdir build
+    - name: cd
       run: cd build
+    - name: cmake
       run: cmake -G "Unix Makefiles" ..
+    - name: make
       run: make
     
     - name: install doxygen
