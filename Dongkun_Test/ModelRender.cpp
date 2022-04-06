@@ -127,8 +127,8 @@ void ModelRender::buildSphere(vtkSmartPointer<vtkRenderer> renderer)
     qDebug()<<"build a sphere";
     polydata=sphere->GetOutput();
     sphere->Update();
-    //mapper->SetInputConnection(sphere->GetOutputPort());
-    mapper->SetInputData(polydata);
+    mapper->SetInputConnection(sphere->GetOutputPort());
+    //mapper->SetInputData(polydata);
     actor->SetMapper(mapper);
     prop->SetColor(AR,AG,AB);
     actor->SetProperty(prop);
