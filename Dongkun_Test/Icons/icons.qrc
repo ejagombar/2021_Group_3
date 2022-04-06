@@ -15,6 +15,7 @@
         <file>logo.jpg</file>
         <file>disk.png</file>
         <file>Logo.ico</file>
+        <file>Start0.5.2.png</file>
     </qresource>
     <qresource prefix="/">
         <file>Adaptic.qss</file>
