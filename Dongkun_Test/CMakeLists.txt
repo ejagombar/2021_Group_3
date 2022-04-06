@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
 foreach(p
     CMP0071 # 3.10: Let AUTOMOC and AUTOUIC process GENERATED files
@@ -41,8 +41,15 @@ add_executable( QtVTKExample MACOSX_BUNDLE
 				main.cpp mainwindow.cpp 
 				mainwindow.h 
 				mainwindow.ui
-				filter.cpp filter.h
-				mediator.cpp mediator.h
+                                                                    filter.cpp
+                                                                    filter.h
+                                                                    ModelRender.cpp
+                                                                    ModelRender.h
+                                                                    form.h
+                                                                    form.ui
+                                                                    form.cpp
+                                                                    listview.h
+                                                                    listview.cpp
 				${UI_Srcs}
 				${QRC_Srcs}
 				)
