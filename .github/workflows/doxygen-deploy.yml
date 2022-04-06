@@ -16,10 +16,15 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Get Updates
-      run: sudo apt update  
+      run: sudo apt update -y 
+
+    - name: update doxygen
+      run: sudo apt-get --only-upgrade install -y doxygen 
 
     - name: Install doxygen
       run: sudo apt-get install -y doxygen
+
+
     # Run Doxygen on Worksheet7 folder
     - name: Run Doxygen
       working-directory: ${{github.workspace}}/Doxygen

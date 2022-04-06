@@ -61,11 +61,3 @@ endif()
 file(COPY_FILE
 	${CMAKE_SOURCE_DIR}/tests/ExampleModel1.mod 
 	${CMAKE_BINARY_DIR}/ExampleModel1.mod)
-
-file(COPY_FILE
-	${CMAKE_SOURCE_DIR}/tests/ExampleModel1.mod 
-	${CMAKE_BINARY_DIR}/Debug/ExampleModel1.mod)
-
-file(COPY_FILE
-	${CMAKE_SOURCE_DIR}/tests/ExampleModel1.mod 
-	${CMAKE_BINARY_DIR}/src/Debug/ExampleModel1.mod)
