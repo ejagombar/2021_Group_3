@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['vector3d_44',['Vector3D',['../class_vector3_d.html',1,'Vector3D'],['../class_vector3_d.html#a7b0f18fa43c7a90588dedcd814122359',1,'Vector3D::Vector3D(float a, float b, float c)'],['../class_vector3_d.html#ac129e91094e18dbb6a6aafee13525da6',1,'Vector3D::Vector3D(float a, float b)'],['../class_vector3_d.html#aa165e9331818ec53cf7be5c290ba2bde',1,'Vector3D::Vector3D(float a)'],['../class_vector3_d.html#a0b11a8d75da427b27443d8a94d0d296c',1,'Vector3D::Vector3D()'],['../class_vector3_d.html#af23612d2420473a494bd93d8128c38e8',1,'Vector3D::Vector3D(const Vector3D &amp;a)']]]
+  ['_7ematerial_40',['~Material',['../class_material.html#a2c19452d71f54075df8f5405b03129f4',1,'Material']]],
+  ['_7emodel_41',['~Model',['../class_model.html#ad6ebd2062a0b823db841a0b88baac4c0',1,'Model']]],
+  ['_7evector3d_42',['~Vector3D',['../class_vector3_d.html#ae4fde5759270bf5bcf615f12f0823a8c',1,'Vector3D']]]
 ];
