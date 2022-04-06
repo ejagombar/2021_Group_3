@@ -18,11 +18,11 @@ jobs:
     - name: Get Updates
       run: sudo apt update -y 
 
-    - name: update doxygen
-      run: sudo apt-get --only-upgrade install -y doxygen 
-
     - name: Install doxygen
       run: sudo apt-get install -y doxygen
+
+    - name: update doxygen
+      run: sudo apt-get --only-upgrade install -y doxygen 
 
 
     # Run Doxygen on Worksheet7 folder
