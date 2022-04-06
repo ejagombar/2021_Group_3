@@ -88,5 +88,9 @@ private:
     std::vector<QString> FileName;
     int file = 0;
 
+    float x = 0;
+    float y = 0;
+    float z = 0;
+
 };
 #endif // MAINWINDOW_H

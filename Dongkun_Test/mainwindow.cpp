@@ -107,24 +107,24 @@ void MainWindow::PositionChange()
 }
 
 void MainWindow::BuildCone(){
-    Model->SetRender(renderWindow, renderer);
-    Model->buildCone();
+    Model->buildCone(renderer);
+    renderWindow->Render();
     ModelList.push_back(*Model);
     FileName.push_back("Cone");
     upDateList();
 }
 
 void MainWindow::BuildSphere(){
-    Model->SetRender(renderWindow, renderer);
-    Model->buildSphere();
+    Model->buildSphere(renderer);
+    renderWindow->Render();
     ModelList.push_back(*Model);
     FileName.push_back("Sphere");
     upDateList();
 }
 
 void MainWindow::BuildArrow(){
-    Model->SetRender(renderWindow, renderer);
-    Model->buildArrow();
+    Model->buildArrow(renderer);
+    renderWindow->Render();
     ModelList.push_back(*Model);
     FileName.push_back("Arrow");
     upDateList();
@@ -132,71 +132,77 @@ void MainWindow::BuildArrow(){
 
 void MainWindow::setActorColor(){
     Model->setActorColor();
-    Model->RenderingStarts();
+    Model->RenderingStarts(renderer);
 }
 
 void MainWindow::setBackgndColor(){
     Model->setBackgroundColor();
-    Model->RenderingStarts();
+    Model->RenderingStarts(renderer);
 }
 
 void MainWindow::LaunchReflectFilter()
 {
-   vtkFilter->reflect(Model);
+   vtkFilter->reflect(Model,renderer);
+   renderWindow->Render();
    ui->statusbar->showMessage(tr("Launch Reflect Filter"),2000);
 }
 
 void MainWindow::LaunchOutLineFilter()
 {
-   vtkFilter->outLine(Model);
+   vtkFilter->outLine(Model,renderer,x,y,z);
+   renderWindow->Render();
    ui->statusbar->showMessage(tr("Launch OutLine Filter"),2000);
 }
 
 void MainWindow::LaunchSmoothFilter()
 {
-    vtkFilter->smooth(Model);
+    vtkFilter->smooth(Model,renderer);
+    renderWindow->Render();
     ui->statusbar->showMessage(tr("Launch Smooth Filter independent"),2000);
 }
 
 void MainWindow::LaunchSmoothFilteradd()
 {
-    vtkFilter->smoothadd(Model);
+    vtkFilter->smoothadd(Model,renderer);
+    renderWindow->Render();
     ui->statusbar->showMessage(tr("Launch Smooth Filter add on"),2000);
 }
 
 void MainWindow::LaunchShrinkFilter()
 {
-    vtkFilter->shrinkFilter(Model);
+    vtkFilter->shrinkFilter(Model,renderer);
+    renderWindow->Render();
     ui->statusbar->showMessage(tr("Launch Shrink Filter"),2000);
 }
 
 void MainWindow::LaunchClipFilter()
 {
-    vtkFilter->clipFilter(Model);
+    vtkFilter->clipFilter(Model,renderer);
+    renderWindow->Render();
     ui->statusbar->showMessage(tr("Launch Cliip Filter"),2000);
 }
 
 void MainWindow::RemoveFilter()
 {
-    vtkFilter->RemoveFilter(Model);
+    vtkFilter->RemoveFilter(Model,renderer);
+    renderWindow->Render();
     ui->statusbar->showMessage(tr("Remove Filter"),2000);
 }
 
 void MainWindow::handlCam()
 {
-    Model->renderer->ResetCamera();
-    Model->renderer->GetActiveCamera()->Azimuth(30);
-    Model->renderer->GetActiveCamera()->Elevation(30);
-    Model->renderer->ResetCameraClippingRange();
-    Model->renderWindow->Render();
+    renderer->ResetCamera();
+    renderer->GetActiveCamera()->Azimuth(30);
+    renderer->GetActiveCamera()->Elevation(30);
+    renderer->ResetCameraClippingRange();
+    renderWindow->Render();
 }
 
 void MainWindow::readSTL()
 {
     QString file = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
-    Model->SetRender(renderWindow, renderer);
     Model->STLfileReader(file);
-    Model->RenderingStarts();
+    Model->RenderingStarts(renderer);
     ModelList.push_back(*Model);
     FileName.push_back(file);
     upDateList();
@@ -204,7 +210,7 @@ void MainWindow::readSTL()
 
 void MainWindow::axes()
 {
-    Model->showaxes();
+    Model->showaxes(renderer);
     ui->statusbar->showMessage(tr("Show Axes"),2000);
 }
 
@@ -226,25 +232,25 @@ void MainWindow::CalcV()
 
 void MainWindow::changeX()
 {
-    float x;
     x = ui->changeX->value();
-    Model->changeX(x);
+    Model->changeX(x,renderer);
+    renderWindow->Render();
     ui->statusbar->showMessage(tr("Position Change X"),2000);
 }
 
 void MainWindow::changeY()
 {
-    float y;
     y = ui->changeY->value();
-    Model->changeY(y);
+    Model->changeY(y,renderer);
+    renderWindow->Render();
     ui->statusbar->showMessage(tr("Position Change Y"),2000);
 }
 
 void MainWindow::changeZ()
 {
-    float z;
     z = ui->changeZ->value();
-    Model->changeZ(z);
+    Model->changeZ(z,renderer);
+    renderWindow->Render();
     ui->statusbar->showMessage(tr("Position Change Z"),2000);
 }
 
@@ -252,7 +258,8 @@ void MainWindow::changeRX()
 {
     float x;
     x = ui->RX->value()/60;
-    Model->changeRX(x);
+    Model->changeRX(x,renderer);
+    renderWindow->Render();
     ui->statusbar->showMessage(tr("Angle Change X"),2000);
 }
 
@@ -260,7 +267,8 @@ void MainWindow::changeRY()
 {
     float y;
     y = ui->RY->value()/60;
-    Model->changeRY(y);
+    Model->changeRY(y,renderer);
+    renderWindow->Render();
     ui->statusbar->showMessage(tr("Angle Change Y"),2000);
 }
 
@@ -268,7 +276,8 @@ void MainWindow::changeRZ()
 {
     float z;
     z = ui->RZ->value()/60;
-    Model->changeRZ(z);
+    Model->changeRZ(z,renderer);
+    renderWindow->Render();
     ui->statusbar->showMessage(tr("Angle Change Z"),2000);
 }
 
@@ -295,8 +304,6 @@ void MainWindow::upDateList()
     for(int i=0; i<ModelList.size(); i++)
     {
         name = FileName[i];
-        //const char* Cstr = name.toUtf8().data();
-        //name = "Hello";
         ui->list->addItem(name);
     }
 }

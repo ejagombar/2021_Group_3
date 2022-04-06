@@ -44,18 +44,15 @@ class filter : public QObject
 public:
     explicit filter();
 
-    void shrinkFilter(ModelRender* ShrinkModel);
-    void clipFilter(ModelRender* ClipModel);
-
-    void outLine(ModelRender* OutlineModel);
-    void curvature(ModelRender* curvatureModel);
-    void smooth(ModelRender*SmoothModel);
+    void shrinkFilter(ModelRender* ShrinkModel,vtkSmartPointer<vtkRenderer> renderer);
+    void clipFilter(ModelRender* ClipModel,vtkSmartPointer<vtkRenderer> renderer);
+    void outLine(ModelRender* OutlineModel,vtkSmartPointer<vtkRenderer> renderer,float x,float y,float z);
+    void smooth(ModelRender*SmoothModel,vtkSmartPointer<vtkRenderer> renderer);
     double calcA(ModelRender*calcModel);
     double calcV(ModelRender*calcModel);
-    void smoothadd(ModelRender*SmoothModel);
-    void reflect(ModelRender* ReflectModel);
-    void RemoveFilter(ModelRender* removeModel);
-    //void trans(ModelRender* transModel,int x,int y,int z);
+    void smoothadd(ModelRender*SmoothModel,vtkSmartPointer<vtkRenderer> renderer);
+    void reflect(ModelRender* ReflectModel,vtkSmartPointer<vtkRenderer> renderer);
+    void RemoveFilter(ModelRender* removeModel,vtkSmartPointer<vtkRenderer> renderer);
 
 signals:
 
@@ -94,10 +91,6 @@ private:
 
         vtkSmartPointer<vtkClipDataSet> clipfilter;
         vtkSmartPointer<vtkDataSetMapper> clipdataset;
-
-        //vtkSmartPointer<vtkTransform> transform;
-        //vtkSmartPointer<vtkPolyData> transpolydata;
-
 
         double area;
         double vol;

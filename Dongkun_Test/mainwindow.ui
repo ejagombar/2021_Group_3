@@ -461,19 +461,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="clear">
-        <property name="maximumSize">
-         <size>
-          <width>75</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Clear all</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="delete_2">
         <property name="maximumSize">
          <size>
@@ -483,6 +470,19 @@
         </property>
         <property name="text">
          <string>Delete</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="clear">
+        <property name="maximumSize">
+         <size>
+          <width>75</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Clear all</string>
         </property>
        </widget>
       </item>

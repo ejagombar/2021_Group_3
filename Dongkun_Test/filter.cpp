@@ -39,7 +39,7 @@ filter::filter(){
     //transpolydata=vtkSmartPointer<vtkPolyData>::New();
 }
 
-void filter::reflect(ModelRender *ReflectModel){
+void filter::reflect(ModelRender *ReflectModel,vtkSmartPointer<vtkRenderer> renderer){
 
     reflectpolydata= ReflectModel->getPolyData();
     reflectfilter->SetInputData(reflectpolydata);
@@ -56,9 +56,7 @@ void filter::reflect(ModelRender *ReflectModel){
     vtkSmartPointer<vtkNamedColors> colors =vtkSmartPointer<vtkNamedColors>::New();
     reflectactor->GetProperty()->SetColor(colors->GetColor3d("Gray").GetData());
 
-    ReflectModel->getRenderer()->AddActor(reflectactor);
-    //ReflectModel->getRenderer()->AddActor(ReflectModel->getActor());
-    ReflectModel->getRenderWindow()->Render();
+    renderer->AddActor(reflectactor);
 }
 
 double filter::calcA(ModelRender* calcModel)
@@ -85,29 +83,26 @@ double filter::calcV(ModelRender* calcModel)
     return vol;
 }
 
-void filter::outLine(ModelRender* OutlineModel){
+void filter::outLine(ModelRender* OutlineModel, vtkSmartPointer<vtkRenderer> renderer, float x, float y, float z){
     outlinepolydata=OutlineModel->getPolyData();
     outlinefilter->SetInputData(outlinepolydata);
     outlinefilter->Update();
-
     outlinemapper->SetInputConnection(outlinefilter->GetOutputPort());
     outlineactor->SetMapper(outlinemapper);
     outlineactor->GetProperty()->SetColor(0,0,1);
     outlineactor->GetProperty()->SetLineWidth(1.5);
-    OutlineModel->getRenderer()->AddActor(outlineactor);
-    OutlineModel->getRenderWindow()->Render();
+    outlineactor->SetPosition(x,y,z);
+    renderer->AddActor(outlineactor);
 }
 
 
-void filter::smooth(ModelRender *SmoothModel){
+void filter::smooth(ModelRender *SmoothModel,vtkSmartPointer<vtkRenderer> renderer){
 
-    SmoothModel->getRenderer()->RemoveAllViewProps();
-
+    renderer->RemoveAllViewProps();
     smoothdelaunay->SetInputData(SmoothModel->getPolyData());
     smoothdelaunay->Update();
     smoothfilter->SetInputConnection(smoothdelaunay->GetOutputPort());
     smoothfilter->SetNumberOfIterations(20);
-
     smoothfilter->SetRelaxationFactor(0.5);
     smoothfilter->Update();
 
@@ -119,11 +114,10 @@ void filter::smooth(ModelRender *SmoothModel){
     smoothmapper->SetInputConnection(normalGenerator->GetOutputPort());
     smoothactor->SetMapper(smoothmapper);
 
-    SmoothModel->getRenderer()->AddActor(smoothactor);
-    SmoothModel->getRenderWindow()->Render();
+    renderer->AddActor(smoothactor);
 }
 
-void filter::smoothadd(ModelRender *SmoothModel){
+void filter::smoothadd(ModelRender *SmoothModel,vtkSmartPointer<vtkRenderer> renderer){
 
     smoothdelaunay->SetInputData(SmoothModel->getPolyData());
     smoothdelaunay->Update();
@@ -132,7 +126,6 @@ void filter::smoothadd(ModelRender *SmoothModel){
 
     smoothfilter->SetRelaxationFactor(0.5);
     smoothfilter->Update();
-
     vtkSmartPointer<vtkPolyDataNormals> normalGenerator = vtkSmartPointer<vtkPolyDataNormals>::New();
     normalGenerator->SetInputConnection(smoothfilter->GetOutputPort());
     normalGenerator->ComputePointNormalsOn();
@@ -141,11 +134,10 @@ void filter::smoothadd(ModelRender *SmoothModel){
     smoothmapper->SetInputConnection(normalGenerator->GetOutputPort());
     smoothactor->SetMapper(smoothmapper);
 
-    SmoothModel->getRenderer()->AddActor(smoothactor);
-    SmoothModel->getRenderWindow()->Render();
+    renderer->AddActor(smoothactor);
 }
 
-void filter::shrinkFilter(ModelRender *ShrinkModel){
+void filter::shrinkFilter(ModelRender *ShrinkModel,vtkSmartPointer<vtkRenderer> renderer){
    shrinkpolydata=ShrinkModel->getPolyData();
    shrinkfilter->SetInputData(shrinkpolydata);
 
@@ -155,11 +147,10 @@ void filter::shrinkFilter(ModelRender *ShrinkModel){
    shrinkdataset->SetInputConnection(shrinkfilter->GetOutputPort());
    ShrinkModel->getActor()->SetMapper(shrinkdataset);
 
-   ShrinkModel->getRenderer()->AddActor(ShrinkModel->getActor());
-   ShrinkModel->getRenderWindow()->Render();
+   renderer->AddActor(ShrinkModel->getActor());
 }
 
-void filter::clipFilter(ModelRender *ClipModel){
+void filter::clipFilter(ModelRender *ClipModel,vtkSmartPointer<vtkRenderer> renderer){
     vtkSmartPointer<vtkPlane>plane=vtkSmartPointer<vtkPlane>::New();
     plane ->SetOrigin(ClipModel->getPolyData()->GetCenter());
     plane->SetNormal(0.0,-1.0,0.0);
@@ -168,28 +159,11 @@ void filter::clipFilter(ModelRender *ClipModel){
     clipfilter->Update();
     clipdataset->SetInputConnection(clipfilter->GetOutputPort());
     ClipModel->getActor()->SetMapper(clipdataset);
-    ClipModel->getRenderer()->AddActor(ClipModel->getActor());
-    ClipModel->getRenderWindow()->Render();
+    renderer->AddActor(ClipModel->getActor());
 }
 
-/*void filter::trans(ModelRender *transModel,int x,int y,int z){
-    transpolydata=transModel->getPolyData();
-    transform->RotateX(x);
-    transform->RotateY(y);
-    transform->RotateZ(z);
-
-    transModel->SetTransform(transform);
-
-    shrinkdataset->SetInputConnection(shrinkfilter->GetOutputPort());
-    ShrinkModel->getActor()->SetMapper(shrinkdataset);
-
-    ShrinkModel->getRenderer()->AddActor(ShrinkModel->getActor());
-    ShrinkModel->getRenderWindow()->Render();
-}*/
-
-void filter::RemoveFilter(ModelRender *removeModel){
-    removeModel->getRenderer()->RemoveAllViewProps();
-    removeModel->RenderingStarts();
+void filter::RemoveFilter(ModelRender *removeModel,vtkSmartPointer<vtkRenderer> renderer){
+    renderer->RemoveAllViewProps();
 }
 
 

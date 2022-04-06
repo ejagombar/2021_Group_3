@@ -11,8 +11,8 @@ Form::Form(QWidget *parent) :
 
 void Form::OpenGLWindow()
 {
-    ui->qvtkWidgetS->SetRenderWindow(ModelS->getRenderWindow());
-    ui->qvtkWidgetS->GetRenderWindow()->AddRenderer(ModelS->getRenderer());
+    //ui->qvtkWidgetS->SetRenderWindow(ModelS->getRenderWindow());
+    //ui->qvtkWidgetS->GetRenderWindow()->AddRenderer(ModelS->getRenderer());
 }
 
 Form::~Form()
