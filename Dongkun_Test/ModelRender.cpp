@@ -39,9 +39,6 @@ void ModelRender::RenderingStarts(vtkSmartPointer<vtkRenderer> renderer)
     actor->RotateX(RX);
     actor->RotateY(RY);
     actor->RotateZ(RZ);
-    renderer->SetBackground(BR,BG,BB);
-    renderer->AddActor(actor);
-    renderer->GetRenderWindow()->Render();
 }
 
 void ModelRender::setActorColor()
@@ -50,14 +47,6 @@ void ModelRender::setActorColor()
     AR=ColourDialog.redF();
     AG=ColourDialog.greenF();
     AB=ColourDialog.blueF();
-}
-
-void ModelRender::setBackgroundColor()
-{
-    QColor ColourDialog = QColorDialog::getColor();
-    BR=ColourDialog.redF();
-    BG=ColourDialog.greenF();
-    BB=ColourDialog.blueF();
 }
 
 void ModelRender::changeX(float x,vtkSmartPointer<vtkRenderer> renderer)
@@ -147,7 +136,6 @@ void ModelRender::buildSphere(vtkSmartPointer<vtkRenderer> renderer)
     actor->RotateY(RY);
     actor->RotateZ(RZ);
     renderer->AddActor(actor);
-    renderer->SetBackground(BR,BG,BB);
 }
 
 ModelRender::ModelRender(const ModelRender & ModelCopy)
@@ -160,17 +148,15 @@ void ModelRender::buildCone(vtkSmartPointer<vtkRenderer> renderer)
     qDebug()<<"build a Cone";
     polydata=cone->GetOutput();
     cone->Update();
-    //mapper->SetInputConnection(cone->GetOutputPort());
     mapper->SetInputData(polydata);
     actor->SetMapper(mapper);
     prop->SetColor(AR,AG,AB);
     actor->SetProperty(prop);
-    renderer->AddActor(actor);
     actor->SetPosition(X,Y,Z);
     actor->RotateX(RX);
     actor->RotateY(RY);
     actor->RotateZ(RZ);
-    renderer->SetBackground(BR,BG,BB);
+    renderer->AddActor(actor);
 }
 
 
@@ -181,18 +167,16 @@ void ModelRender::buildArrow(vtkSmartPointer<vtkRenderer> renderer)
     qDebug()<<"build a Arrow";
     polydata=arrow->GetOutput();
     arrow->Update();
-    //mapper->SetInputConnection(arrow->GetOutputPort());
     mapper->SetInputData(polydata);
     actor->SetMapper(mapper);
     prop->SetColor(AR,AG,AB);
     actor->SetProperty(prop);
-    //renderer->RemoveAllViewProps();
     renderer->AddActor(actor);
     actor->SetPosition(X,Y,Z);
     actor->RotateX(RX);
     actor->RotateY(RY);
     actor->RotateZ(RZ);
-    renderer->SetBackground( BR,BG,BB );
+    renderer->AddActor(actor);
 }
 
 

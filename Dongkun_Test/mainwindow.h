@@ -69,6 +69,8 @@ private slots:
 
     void on_clear_clicked();
 
+    void on_Test_clicked();
+
 private:
 
     Ui::MainWindow *ui;
@@ -91,6 +93,10 @@ private:
     float x = 0;
     float y = 0;
     float z = 0;
+
+    float BR = 0.6;
+    float BG = 0.6;
+    float BB = 0.6;
 
 };
 #endif // MAINWINDOW_H

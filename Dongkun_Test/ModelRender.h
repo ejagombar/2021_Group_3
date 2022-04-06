@@ -76,11 +76,8 @@ public:
     void buildSphere(vtkSmartPointer<vtkRenderer> renderer);
     void buildArrow(vtkSmartPointer<vtkRenderer> renderer);
     void buildCone(vtkSmartPointer<vtkRenderer> renderer);
-
     void showaxes(vtkSmartPointer<vtkRenderer> renderer);
-
     void setActorColor();
-    void setBackgroundColor();
 
 
 private:
@@ -92,10 +89,6 @@ private:
     float AR=1;
     float AG=1;
     float AB=1;
-
-    float BR=0;
-    float BG=0;
-    float BB=0;
 
     float X=0;
     float Y=0;

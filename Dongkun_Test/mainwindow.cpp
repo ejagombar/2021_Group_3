@@ -32,7 +32,7 @@
 #include <QLine>
 #include <ModelRender.h>
 #include <QMessageBox>
-
+#include <QGraphicsBlurEffect>
 #include "vtkAutoInit.h"
 #include "form.h"
 
@@ -41,11 +41,23 @@ VTK_MODULE_INIT(vtkInteractionStyle);
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
+
+    setWindowOpacity(1);
+    QGraphicsBlurEffect* ef = new QGraphicsBlurEffect;
+    ef->setBlurRadius(0);
+    ef->setBlurHints(QGraphicsBlurEffect::AnimationHint);
+    this->setGraphicsEffect(ef);
+
     this->UiSetup();
     this->InitOpenGLWindow();
     this->filterFunctionConnect();
     this->BuildPreLoad();
     this->PositionChange();
+
+    //this->setStyleSheet(":/Icons/B.jpg");
+
+    renderer->SetBackground(BR,BG,BB);
+    renderWindow->Render();
 
     connect(ui->actionFileOpen, &QAction::triggered, this, &MainWindow::readSTL);
     connect(ui->CalcA,&QPushButton::clicked,this,&MainWindow::CalcA);
@@ -61,7 +73,7 @@ MainWindow::~MainWindow()
 void MainWindow::UiSetup()
 {
     ui->setupUi(this);
-    this->setWindowTitle("Group3_Filter_Test");
+    this->setWindowTitle("Group 3 D Viewer");
 }
 
 void MainWindow::InitOpenGLWindow()
@@ -108,6 +120,7 @@ void MainWindow::PositionChange()
 
 void MainWindow::BuildCone(){
     Model->buildCone(renderer);
+    renderer->SetBackground(BR,BG,BB);
     renderWindow->Render();
     ModelList.push_back(*Model);
     FileName.push_back("Cone");
@@ -132,12 +145,18 @@ void MainWindow::BuildArrow(){
 
 void MainWindow::setActorColor(){
     Model->setActorColor();
-    Model->RenderingStarts(renderer);
+    renderWindow->Render();
+    //Model->RenderingStarts(renderer);
 }
 
 void MainWindow::setBackgndColor(){
-    Model->setBackgroundColor();
-    Model->RenderingStarts(renderer);
+    QColor ColourDialog = QColorDialog::getColor();
+    BR=ColourDialog.redF();
+    BG=ColourDialog.greenF();
+    BB=ColourDialog.blueF();
+    renderer->SetBackground(BR,BG,BB);
+    renderWindow->Render();
+    //Model->RenderingStarts(renderer);
 }
 
 void MainWindow::LaunchReflectFilter()
@@ -211,6 +230,7 @@ void MainWindow::readSTL()
 void MainWindow::axes()
 {
     Model->showaxes(renderer);
+    renderWindow->Render();
     ui->statusbar->showMessage(tr("Show Axes"),2000);
 }
 
@@ -307,4 +327,61 @@ void MainWindow::upDateList()
         ui->list->addItem(name);
     }
 }
+
+void MainWindow::on_Test_clicked()
+{
+    vtkSmartPointer<vtkCubeSource> cubeSource = vtkSmartPointer<vtkCubeSource>::New();
+
+    vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+
+    mapper->SetInputConnection(cubeSource->GetOutputPort());
+
+    vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
+    actor->SetMapper(mapper);
+
+    actor->GetProperty()->EdgeVisibilityOn();
+    vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();
+    actor->GetProperty()->SetColor( colors->GetColor3d("Red").GetData() );
+    actor->SetPosition(2,2,2);
+
+    renderer->AddActor(actor);
+
+    vtkSmartPointer<vtkCubeSource> cubeSourcea = vtkSmartPointer<vtkCubeSource>::New();
+
+    vtkSmartPointer<vtkDataSetMapper> mappera = vtkSmartPointer<vtkDataSetMapper>::New();
+
+    mappera->SetInputConnection(cubeSourcea->GetOutputPort());
+
+    vtkSmartPointer<vtkActor> actora = vtkSmartPointer<vtkActor>::New();
+    actora->SetMapper(mappera);
+
+    actora->GetProperty()->EdgeVisibilityOn();
+
+    actora->GetProperty()->SetColor( colors->GetColor3d("Blue").GetData() );
+    actora->SetPosition(0,0,0);
+
+    renderer->AddActor(actora);
+
+    renderer->SetBackground( colors->GetColor3d("Silver").GetData() );
+
+    renderWindow->Render();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

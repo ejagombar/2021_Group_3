@@ -11,7 +11,10 @@
         <file>arrow.png</file>
         <file>slz.png</file>
         <file>B.jpg</file>
+        <file>A.gif</file>
+        <file>logo.jpg</file>
         <file>disk.png</file>
+        <file>Logo.ico</file>
     </qresource>
     <qresource prefix="/">
         <file>Adaptic.qss</file>
