@@ -47,6 +47,7 @@ void ModelRender::setActorColor()
     AR=ColourDialog.redF();
     AG=ColourDialog.greenF();
     AB=ColourDialog.blueF();
+    actor->GetProperty()->SetColor(AR,AG,AB);
 }
 
 void ModelRender::changeX(float x,vtkSmartPointer<vtkRenderer> renderer)
