@@ -15,6 +15,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Get Updates
+      run: sudo apt update  
+
     - name: Install doxygen
       run: sudo apt-get install -y doxygen
     # Run Doxygen on Worksheet7 folder
