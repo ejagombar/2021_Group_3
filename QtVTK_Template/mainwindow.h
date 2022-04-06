@@ -66,6 +66,10 @@ public slots:
 
     //Filter pipeline function
     void Filter();
+    vtkSmartPointer<vtkAlgorithm> Shrink_Filter(vtkSmartPointer<vtkAlgorithm>);
+    vtkSmartPointer<vtkAlgorithm> Clip_Filter(vtkSmartPointer<vtkAlgorithm>);
+
+    //vtkSmartPointer<vtkShrinkFilter> Shrink(QString);
 
     //void Object_Rendered();
 
@@ -100,6 +104,7 @@ private:
     vtkSmartPointer<vtkShrinkFilter>  STL_shrinkFilter;
     vtkSmartPointer<vtkShrinkFilter>  Cube_shrinkFilter;
     vtkSmartPointer<vtkShrinkFilter>  Sphere_shrinkFilter;
+    vtkSmartPointer<vtkShrinkFilter>  Current_shrinkFilter;
 
     vtkSmartPointer<vtkClipDataSet> Current_clipFilter;
 
@@ -122,6 +127,9 @@ private:
     float Background_Green=0;
 
     int Tracker=0;
+
+
+    vtkSmartPointer<vtkAlgorithm> ModelData;
 
 };
 
