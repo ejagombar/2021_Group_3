@@ -119,26 +119,29 @@ void MainWindow::PositionChange()
 }
 
 void MainWindow::BuildCone(){
-    Model->buildCone(renderer);
+    ModelRender* ModelNew = new ModelRender();
+    ModelNew->buildCone(renderer);
     renderer->SetBackground(BR,BG,BB);
     renderWindow->Render();
-    ModelList.push_back(*Model);
+    ModelList->push_back(*ModelNew);
     FileName.push_back("Cone");
     upDateList();
 }
 
 void MainWindow::BuildSphere(){
-    Model->buildSphere(renderer);
+    ModelRender* ModelNew = new ModelRender();
+    ModelNew->buildSphere(renderer);
     renderWindow->Render();
-    ModelList.push_back(*Model);
+    ModelList->push_back(*ModelNew);
     FileName.push_back("Sphere");
     upDateList();
 }
 
 void MainWindow::BuildArrow(){
-    Model->buildArrow(renderer);
+    ModelRender* ModelNew = new ModelRender();
+    ModelNew->buildArrow(renderer);
     renderWindow->Render();
-    ModelList.push_back(*Model);
+    ModelList->push_back(*ModelNew);
     FileName.push_back("Arrow");
     upDateList();
 }
@@ -222,7 +225,7 @@ void MainWindow::readSTL()
     QString file = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
     Model->STLfileReader(file);
     Model->RenderingStarts(renderer);
-    ModelList.push_back(*Model);
+    ModelList->push_back(*Model);
     FileName.push_back(file);
     upDateList();
 }
@@ -314,14 +317,15 @@ void MainWindow::on_actionAdd_triggered()
 
 void MainWindow::on_clear_clicked()
 {
-    //ModelList.clear();
+    ui->list->clear();
+    ModelList->clear();
 }
 
 void MainWindow::upDateList()
 {
     ui->list->clear();
     QString name;
-    for(int i=0; i<ModelList.size(); i++)
+    for(int i=0; i<ModelList->size(); i++)
     {
         name = FileName[i];
         ui->list->addItem(name);
@@ -330,46 +334,19 @@ void MainWindow::upDateList()
 
 void MainWindow::on_Test_clicked()
 {
-    vtkSmartPointer<vtkCubeSource> cubeSource = vtkSmartPointer<vtkCubeSource>::New();
-
-    vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-
-    mapper->SetInputConnection(cubeSource->GetOutputPort());
-
-    vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
-    actor->SetMapper(mapper);
-
-    actor->GetProperty()->EdgeVisibilityOn();
-    vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();
-    actor->GetProperty()->SetColor( colors->GetColor3d("Red").GetData() );
-    actor->SetPosition(2,2,2);
-
-    renderer->AddActor(actor);
-
-    vtkSmartPointer<vtkCubeSource> cubeSourcea = vtkSmartPointer<vtkCubeSource>::New();
-
-    vtkSmartPointer<vtkDataSetMapper> mappera = vtkSmartPointer<vtkDataSetMapper>::New();
-
-    mappera->SetInputConnection(cubeSourcea->GetOutputPort());
-
-    vtkSmartPointer<vtkActor> actora = vtkSmartPointer<vtkActor>::New();
-    actora->SetMapper(mappera);
-
-    actora->GetProperty()->EdgeVisibilityOn();
-
-    actora->GetProperty()->SetColor( colors->GetColor3d("Blue").GetData() );
-    actora->SetPosition(0,0,0);
-
-    renderer->AddActor(actora);
-
-    renderer->SetBackground( colors->GetColor3d("Silver").GetData() );
-
     renderWindow->Render();
-
 }
 
+void MainWindow::on_list_itemSelectionChanged()
+{
+    int row;
+    row = ui->list->currentRow();
 
+    ModelList->at(0).setActorColor();
 
+    renderWindow->Render();
+    ui->statusbar->showMessage(tr("Selection Changed"),2000);
+}
 
 
 

@@ -66,17 +66,16 @@ public slots:
 private slots:
     void on_tabWidget_tabCloseRequested(int index);
     void on_actionAdd_triggered();
-
     void on_clear_clicked();
-
     void on_Test_clicked();
+    void on_list_itemSelectionChanged();
 
 private:
 
     Ui::MainWindow *ui;
 
     ModelRender* Model = new ModelRender();
-    std::vector<ModelRender> ModelList;
+    std::vector<ModelRender>* ModelList = new std::vector<ModelRender>;
     filter * vtkFilter = new filter();
 
     void UiSetup();

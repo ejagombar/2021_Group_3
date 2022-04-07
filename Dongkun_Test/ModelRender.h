@@ -44,6 +44,8 @@ public:
 
     ModelRender();
     ModelRender(const ModelRender & ModelCopy);
+    //void SetModel(const ModelRender ModelCopy);
+    //void SetModel(const ModelRender * ModelCopy);
 
     vtkSmartPointer<vtkActor> getActor();
     vtkSmartPointer<vtkProperty> getProp();

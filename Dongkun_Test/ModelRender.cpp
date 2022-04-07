@@ -47,6 +47,7 @@ void ModelRender::setActorColor()
     AR=ColourDialog.redF();
     AG=ColourDialog.greenF();
     AB=ColourDialog.blueF();
+    actor->GetProperty()->SetColor(AR,AG,AB);
 }
 
 void ModelRender::changeX(float x,vtkSmartPointer<vtkRenderer> renderer)
@@ -126,8 +127,8 @@ void ModelRender::buildSphere(vtkSmartPointer<vtkRenderer> renderer)
     qDebug()<<"build a sphere";
     polydata=sphere->GetOutput();
     sphere->Update();
-    //mapper->SetInputConnection(sphere->GetOutputPort());
-    mapper->SetInputData(polydata);
+    mapper->SetInputConnection(sphere->GetOutputPort());
+    //mapper->SetInputData(polydata);
     actor->SetMapper(mapper);
     prop->SetColor(AR,AG,AB);
     actor->SetProperty(prop);
