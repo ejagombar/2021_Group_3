@@ -479,6 +479,9 @@ Custom Model Library/Material/out/build/x64-Debug/.cmake/api/v1/reply/
 
 Custom_Mod_Library/build/
 
+build-Current_Working_Program-Desktop_x86_windows_msvc2019_pe_64bit-Release/
+
+
 html/
 latex/
 build-QtVTK_Template-Desktop_x86_windows_msvc2019_pe_64bit-Debug/.cmake/api/v1/query/
@@ -488,3 +491,5 @@ build-QtVTK_Template-Desktop_x86_windows_msvc2019_pe_64bit-Debug/.cmake/api/v1/r
 build-QtVTK_Template-Desktop_x86_windows_msvc2019_pe_64bit-Debug/
 
 doxygen-awesome-css
+
+build-Current_Working_Program-Desktop_x86_windows_msvc2019_pe_64bit-Debug/
