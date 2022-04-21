@@ -38,7 +38,10 @@
 #include <vtkAppendFilter.h>
 #include <vtkConnectivityFilter.h>
 
-
+#include <vtkCutter.h>
+#include <vtkElevationFilter.h>
+#include <vtkTransformFilter.h>
+#include <vtkTransform.h>
 
 #include <vector>
 
@@ -55,12 +58,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->qvtkWidget->SetRenderWindow( renderWindow );// note that vtkWidget is the name I gave to my QtVTKOpenGLWidget in Qt creator
 
     //Disable filter options until a source is loaded
-    //ui->checkBox_Clip->setEnabled(0);
-    //ui->checkBox_Shrink->setEnabled(0);
-    //ui->Btn_Model_Colour->setEnabled(0);
-    //ui->Btn_Position->setEnabled(0);
+    ui->Btn_Filter->setEnabled(0);
+    ui->checkBox_Clip->setEnabled(0);
+    ui->checkBox_Shrink->setEnabled(0);
+    ui->checkBox_Elevation->setEnabled(0);
+    ui->checkBox_Transform->setEnabled(0);
+
+    ui->Btn_Model_Colour->setEnabled(0);
+    ui->Btn_Position->setEnabled(0);
+    ui->Btn_Remove->setEnabled(0);
+    ui->Btn_Reset->setEnabled(0);
+
     ui->doubleSpinBox->hide(); //Hide uneccesary spin box used for filters
     ui->Lbl_Shrink_Filter->hide();
+
+    ui->verticalWidget_Transform->hide();
 
     // Create a renderer, and render window
     renderer = vtkSmartPointer<vtkRenderer>::New();
@@ -81,24 +93,28 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     //Connecting slots
     connect( ui->Btn_Change_Background, &QPushButton::released, this, &MainWindow::handleBtn_Change_Background );
     connect( ui->Btn_Model_Colour, &QPushButton::released, this, &MainWindow::handleBtn_Model_Colour );
+
     connect( ui->Btn_Clear, &QPushButton::released, this, &MainWindow::handleBtn_Clear );
+    connect( ui->Btn_Reset, &QPushButton::released, this, &MainWindow::handleBtn_Reset_Actor );
+    connect( ui->Btn_Remove, &QPushButton::released, this, &MainWindow::handleBtn_Remove );
 
     connect( ui->Btn_Cube, &QPushButton::released, this, &MainWindow::handleBtn_Cube );
     connect( ui->Btn_Sphere, &QPushButton::released, this, &MainWindow::handleBtn_Sphere );
+    connect( ui->actionFileOpen, &QAction::triggered, this, &MainWindow::handlactionFileOpen );
+
     connect( ui->Btn_Camera_Reset, &QPushButton::released, this, &MainWindow::handleBtn_Camera_Reset );
     connect( ui->Btn_Position, &QPushButton::released, this, &MainWindow::handleBtn_Change_Position );
 
-    connect( ui->checkBox_Shrink, &QCheckBox::stateChanged, this, &MainWindow::handleCheckBox_Shrink_Change );
-    connect( ui->checkBox_Shrink, &QCheckBox::stateChanged, this, &MainWindow::Filter );
-    connect( ui->checkBox_Clip, &QCheckBox::stateChanged, this, &MainWindow::Filter );
+    connect( ui->Btn_Filter, &QPushButton::released, this, &MainWindow::handleBtn_Filter );
+    connect( ui->doubleSpinBox, &QDoubleSpinBox::valueChanged,this,&MainWindow::handleBtn_Filter );
 
     connect( ui->Btn_Test, &QPushButton::released, this, &MainWindow::handleBtn_Test );
     connect( ui->Btn_Test2, &QPushButton::released, this, &MainWindow::handleBtn_Test2 );
 
-    connect( ui->doubleSpinBox, &QDoubleSpinBox::valueChanged,this,&MainWindow::doubleSpinBox_value_changed );
+
     connect( ui->comboBox_Actors, &QComboBox::currentTextChanged,this,&MainWindow::New_Actor_Selected );
 
-    connect( ui->actionFileOpen, &QAction::triggered, this, &MainWindow::handlactionFileOpen );
+
 
     //connecting statusUpdateMessage()
     connect( this, &MainWindow::statusUpdateMessage, ui->statusbar, &QStatusBar::showMessage );
@@ -107,6 +123,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     CubeSource = vtkSmartPointer<vtkCubeSource>::New();
     // Create a cube using a vtkCubeSource
     sphereSource = vtkSmartPointer<vtkSphereSource>::New();
+    sphereSource->SetThetaResolution(30);
+    sphereSource->SetPhiResolution(15);
+    sphereSource->Update();
 
 }
 
@@ -188,13 +207,16 @@ void MainWindow::NewSource(QString Source_Type) //General source function - need
     handleBtn_Camera_Reset();
     //Re-enable all appropriate things for currently selected actor
 
-    //reset_function();
+    reset_function();
     ui->Btn_Model_Colour->setEnabled(1);
     ui->Btn_Position->setEnabled(1);
+    ui->Btn_Filter->setEnabled(1);
 }
 
 void MainWindow::handleBtn_Test()
 {
+
+      //vtkSmartPointer<vtkAlgorithm> sphereSource1 = (vtkSmartPointer<vtkAlgorithm>) vtkSmartPointer<vtkSphereSource>::New();
 
       vtkNew<vtkSphereSource> sphereSource1;
       sphereSource1->Update();
@@ -221,11 +243,13 @@ void MainWindow::handleBtn_Test()
       connectivityFilter->ColorRegionsOn();
       connectivityFilter->Update();
 
+      ModelData = vtkSmartPointer<vtkAlgorithm>::New();
+      ModelData = (vtkSmartPointer<vtkAlgorithm>) connectivityFilter;
 
+      ModelData = Shrink_Filter(ModelData);
 
-      // Visualize
       vtkNew<vtkDataSetMapper> mapper;
-      mapper->SetInputConnection(connectivityFilter->GetOutputPort());
+      mapper->SetInputConnection(ModelData->GetOutputPort());
       mapper->Update();
 
       vtkNew<vtkActor> actor;
@@ -235,6 +259,42 @@ void MainWindow::handleBtn_Test()
       Rendered_Sphere_Actor_Array.push_back(actor);
       renderWindow->Render();
       Add_Rendered_Actors_To_Combo();
+
+}
+
+void MainWindow::handleBtn_Test2()
+{
+       vtkNew<vtkCubeSource> CubeSource;
+       //sphereSource->SetThetaResolution(30);
+       //sphereSource->SetPhiResolution(15);
+       //sphereSource->Update();
+
+       ModelData = vtkSmartPointer<vtkAlgorithm>::New();
+       ModelData = (vtkSmartPointer<vtkAlgorithm>) CubeSource;
+
+       /*
+       vtkTransform *aTransfrom = vtkTransform::New();
+       aTransfrom->Scale(1,1.5,2);
+
+       vtkTransformFilter *test = vtkTransformFilter::New();
+       test->SetInputConnection(ModelData->GetOutputPort());
+       test->SetTransform(aTransfrom);
+
+       ModelData = (vtkSmartPointer<vtkAlgorithm>) test;
+       */
+       ModelData = Clip_Filter(ModelData);
+       vtkNew<vtkDataSetMapper> mapper;
+       mapper->SetInputConnection(ModelData->GetOutputPort());
+       mapper->Update();
+
+       vtkNew<vtkActor> actor;
+       actor->SetMapper(mapper);
+       renderer->AddActor(actor); // display the sphere
+
+       renderWindow->Render();
+       Rendered_Sphere_Actor_Array.push_back(actor);
+       Add_Rendered_Actors_To_Combo();
+
 
 }
 
@@ -332,11 +392,6 @@ void MainWindow::handleBtn_Sphere()
     */
 }
 
-void MainWindow::doubleSpinBox_value_changed() //TO BE CHANGED TO JUST RE-RUN THE WHOLE FILTER CHAIN
-{
-    Filter();
-}
-
 void MainWindow::handleBtn_Model_Colour()
 {
 
@@ -377,23 +432,7 @@ void MainWindow::handleBtn_Camera_Reset()
     emit statusUpdateMessage( QString("Camera reset!"), 0 );
 }
 
-void MainWindow::handleCheckBox_Shrink_Change()
-{
-
-    if (ui->checkBox_Shrink->isChecked()==true)
-    {
-        ui->doubleSpinBox->show();
-        ui->Lbl_Shrink_Filter->show();
-    }
-    else
-    {
-        ui->doubleSpinBox->hide();
-        ui->Lbl_Shrink_Filter->hide();
-    }
-
-}
-
-void MainWindow::reset_function()
+void MainWindow::reset_function() //NEEDS UPDATING
 {
     if(ui->checkBox_Clip->isChecked()==true)
     {
@@ -401,21 +440,28 @@ void MainWindow::reset_function()
     }
     if (ui->checkBox_Shrink->isChecked()==true)
     {
-         ui->checkBox_Shrink->setChecked(false);
+        ui->doubleSpinBox->setValue(1);
+        ui->checkBox_Shrink->setChecked(false);
     }
-    if(ui->checkBox_Filter3->isChecked()==true)
+    if(ui->checkBox_Elevation->isChecked()==true)
     {
-         ui->checkBox_Filter3->setChecked(false);
+         ui->checkBox_Elevation->setChecked(false);
     }
-    if (ui->checkBox_2_Filter4->isChecked()==true)
+    if (ui->checkBox_Transform->isChecked()==true)
     {
-         ui->checkBox_2_Filter4->setChecked(false);
+         ui->checkBox_Transform->setChecked(false);
     }
 
     ui->checkBox_Clip->setEnabled(1);
     ui->checkBox_Shrink->setEnabled(1);
+    ui->checkBox_Elevation->setEnabled(1);
+    ui->checkBox_Transform->setEnabled(1);
+
     ui->Btn_Model_Colour->setEnabled(1);
     ui->Btn_Position->setEnabled(1);
+    ui->Btn_Remove->setEnabled(1);
+    ui->Btn_Reset->setEnabled(1);
+
 }
 
 void MainWindow::handleBtn_Clear() //Function to clear whole program
@@ -425,83 +471,29 @@ void MainWindow::handleBtn_Clear() //Function to clear whole program
     //Function should also clear drop down menue, and the values on all boxes where values can be entered, including
     //colour pickers
 
+    reset_function();
+    //Disable filter options until a source is loaded
+    ui->checkBox_Clip->setEnabled(0);
+    ui->checkBox_Shrink->setEnabled(0);
+    ui->checkBox_Elevation->setEnabled(0);
+    ui->checkBox_Transform->setEnabled(0);
+    ui->Btn_Model_Colour->setEnabled(0);
+    ui->Btn_Position->setEnabled(0);
+    ui->Btn_Remove->setEnabled(0);
+    ui->Btn_Reset->setEnabled(0);
+    ui->Btn_Filter->setEnabled(0);
+    ui->doubleSpinBox->hide(); //Hide uneccesary spin box used for filters
+    ui->Lbl_Shrink_Filter->hide();
+
     renderer->RemoveAllViewProps();
     renderWindow->Render();
 
     Rendered_Cube_Actor_Array.clear();
     Rendered_Sphere_Actor_Array.clear();
     Rendered_STL_Actor_Array.clear();
+    File_Name_Array.clear();
 
     ui->comboBox_Actors->clear();
-
-    //TO FINISH
-}
-
-void MainWindow::handleBtn_Test2()
-{
-
-    //Read file into Qstring object using QFileDialog::getOpenFileName
-    fileName.clear();
-    fileName = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
-
-    //Convert the filename from qstring to a char pointer (char array)
-    ba.clear();
-    ba = fileName.toLocal8Bit();
-    const char *c_str = "";
-    c_str = ba.data();
-
-    vtkNew<vtkSTLReader> reader; //Creates a new reader object for the new STL (prevents overwrite issues)
-    reader->SetFileName(c_str); //reader object to point to the filename
-    reader->Update();
-
-    // Have the vtk mapper point to the file using the vtk reader
-    Source_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-    Source_mapper->SetInputConnection(reader->GetOutputPort());
-
-    //Have the actor point to the mapper
-    Source_actor = vtkSmartPointer<vtkActor>::New();
-    Source_actor->SetMapper(Source_mapper);
-
-    //Have the renderer point to the actor
-    renderer->AddActor(Source_actor);
-
-    File_Name_Array.push_back(fileName); //Add source file name to array of names for use in filtering (as models are re-rendered)
-    Rendered_STL_Actor_Array.push_back(Source_actor); //Add the actor pointer of the STL object to the actor array.
-
-    emit statusUpdateMessage( QString("STL Added!"), 0 );
-
-    renderWindow->Render();
-    handleBtn_Camera_Reset();
-    Add_Rendered_Actors_To_Combo();
-
-    vtkSmartPointer<vtkOutlineFilter> Outline = vtkSmartPointer<vtkOutlineFilter>::New();
-    Outline->SetInputConnection(reader->GetOutputPort() );
-    Outline->Update();
-    Current_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-    Current_mapper->SetInputConnection( Outline->GetOutputPort() );
-    Current_actor = vtkSmartPointer<vtkActor>::New();
-    Current_actor->SetMapper(Current_mapper);
-    Current_actor->GetProperty()->SetColor(0,0,1);
-    Current_actor->GetProperty()->SetLineWidth(1.5);
-
-    renderer->AddActor(Current_actor);
-
-    ui->Btn_Model_Colour->setEnabled(1);
-    ui->Btn_Position->setEnabled(1);
-
-     /*
-
-    outlinepolydata=OutlineModel->getPolyData();
-    outlinefilter->SetInputData(outlinepolydata);
-    outlinefilter->Update();
-
-    Current_actor->SetInputConnection(outlinefilter->GetOutputPort());
-    Current_actor->SetMapper(outlinem\apper);
-    Current_actor->GetProperty()->SetColor(0,0,1);
-    Current_actor->GetProperty()->SetLineWidth(1.5);
-    Current_actor->getRenderer()->AddActor(outlineactor);
-    Current_actor->getRenderWindow()->Render();
-    */
 }
 
 void MainWindow::handleBtn_Change_Position() //Function to change the position of the currently selected actor from the drop down menue
@@ -602,6 +594,96 @@ void MainWindow::Add_Rendered_Actors_To_Combo() //Function to add the pointers t
        }
 }
 
+void MainWindow::handleBtn_Remove()
+{
+
+    renderer->RemoveActor(FindActor());
+    QString Combo_text = ui->comboBox_Actors->currentText();
+    QChar Num = Combo_text.back();
+    int Index = Num.digitValue();
+
+    if(ui->comboBox_Actors->currentText().contains("cube"))
+    {
+        Rendered_Cube_Actor_Array.erase(Rendered_Cube_Actor_Array.begin()+Index);
+    }
+    else if(ui->comboBox_Actors->currentText().contains("sphere"))
+    {
+        Rendered_Sphere_Actor_Array.erase(Rendered_Sphere_Actor_Array.begin()+Index);
+    }
+    else if(ui->comboBox_Actors->currentText().contains("STL"))
+    {
+        Rendered_STL_Actor_Array.erase(Rendered_STL_Actor_Array.begin()+Index);
+        File_Name_Array.erase(File_Name_Array.begin()+Index);
+    }
+    Add_Rendered_Actors_To_Combo();
+    renderWindow->Render();
+}
+
+void MainWindow::handleBtn_Reset_Actor() //Button to reset selected actor/model
+{
+    QString Combo_text = ui->comboBox_Actors->currentText();
+    QChar Num = Combo_text.back();
+    int Index = Num.digitValue();
+    renderer->RemoveActor(FindActor());
+
+    if (Combo_text.contains("cube"))
+    {
+        Source_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+        Source_mapper->SetInputConnection( CubeSource->GetOutputPort() );
+
+        // Create an actor that is used to set the cube's properties for rendering and place it in the window
+        Source_actor = vtkSmartPointer<vtkActor>::New();
+        Source_actor->SetMapper(Source_mapper);
+        Source_actor->GetProperty()->EdgeVisibilityOn();
+
+        renderer->AddActor(Source_actor);
+        Rendered_Cube_Actor_Array[Index] = Source_actor;
+    }
+    else if (Combo_text.contains("sphere"))
+    {
+        Source_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+        Source_mapper->SetInputConnection( sphereSource->GetOutputPort() );
+
+        // Create an actor that is used to set the cube's properties for rendering and place it in the window
+        Source_actor = vtkSmartPointer<vtkActor>::New();
+        Source_actor->SetMapper(Source_mapper);
+        Source_actor->GetProperty()->EdgeVisibilityOn();
+
+        renderer->AddActor(Source_actor);
+        Rendered_Sphere_Actor_Array[Index] = Source_actor;
+    }
+    else if (Combo_text.contains("STL"))
+    {
+        //Convert the filename from qstring to a char pointer (char array)
+        //The filename is stored in the File_Name_Array vector, with the same index as the pointer to the actor of that file.
+        //Therefore the index of the STL's actor can be used to find the index of the STL file.
+        fileName.clear();
+        fileName = File_Name_Array[Index];
+        ba.clear();
+        ba = fileName.toLocal8Bit();
+        const char *c_str = "";
+        c_str = ba.data();
+
+        vtkNew<vtkSTLReader> reader;
+        reader->SetFileName(c_str); //reader object to point to the filename
+        reader->Update();
+
+        Source_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+        Source_mapper->SetInputConnection( reader->GetOutputPort() );
+
+        // Create an actor that is used to set the cube's properties for rendering and place it in the window
+        Source_actor = vtkSmartPointer<vtkActor>::New();
+        Source_actor->SetMapper(Source_mapper);
+        Source_actor->GetProperty()->EdgeVisibilityOn();
+
+        renderer->AddActor(Source_actor);
+        Rendered_STL_Actor_Array[Index] = Source_actor;
+    }
+    renderWindow->Render();
+    New_Actor_Selected(); //Re-updates the position box
+    reset_function(); //Resets the UI
+}
+
 vtkSmartPointer<vtkActor> MainWindow::FindActor() //Function to find the currently selected actor from the drop down menue
 {
     //The function uses the Qstring in the combo box (drop down menue) to find the pointer to the currently selected actor
@@ -632,6 +714,7 @@ vtkSmartPointer<vtkActor> MainWindow::FindActor() //Function to find the current
     {
          return(Rendered_STL_Actor_Array[Index]);
     }
+    else return(nullptr);
 }
 
 vtkSmartPointer<vtkAlgorithm> MainWindow::Shrink_Filter(vtkSmartPointer<vtkAlgorithm> ModelData)
@@ -656,6 +739,28 @@ vtkSmartPointer<vtkAlgorithm> MainWindow::Clip_Filter(vtkSmartPointer<vtkAlgorit
     return ((vtkSmartPointer<vtkAlgorithm>) Current_clipFilter);
 }
 
+vtkSmartPointer<vtkAlgorithm> MainWindow::Elevation_Filter(vtkSmartPointer<vtkAlgorithm> ModelData)
+{
+    vtkElevationFilter *Elevation_Filter = vtkElevationFilter::New();
+    Elevation_Filter->SetInputConnection(ModelData->GetOutputPort());
+    Elevation_Filter->SetLowPoint(0,-1,0);
+    Elevation_Filter->SetHighPoint(0,1,0);
+
+    return ((vtkSmartPointer<vtkAlgorithm>) Elevation_Filter);
+}
+
+vtkSmartPointer<vtkAlgorithm> MainWindow::Transform_Filter(vtkSmartPointer<vtkAlgorithm> ModelData)
+{
+    vtkTransform *aTransfrom = vtkTransform::New();
+    aTransfrom->Scale(ui->doubleSpinBox_X_Transform->value(),ui->doubleSpinBox_Y_Transform->value(),ui->doubleSpinBox_Z_Transform->value());
+
+    vtkTransformFilter *test = vtkTransformFilter::New();
+    test->SetInputConnection(ModelData->GetOutputPort());
+    test->SetTransform(aTransfrom);
+
+    return ((vtkSmartPointer<vtkAlgorithm>) test);
+}
+
 void MainWindow::Filter() //Function which applies selected filter(s) to current rendered object
 {
 
@@ -663,13 +768,13 @@ void MainWindow::Filter() //Function which applies selected filter(s) to current
     QChar Num = Combo_text.back();
     int Index = Num.digitValue();
 
-    ModelData = vtkSmartPointer<vtkAlgorithm>::New();
-
     double *Colour;
     Colour = FindActor()->GetProperty()->GetColor();
 
     double *Position;
     Position = FindActor()->GetPosition();
+
+    ModelData = vtkSmartPointer<vtkAlgorithm>::New();
 
     if(ui->comboBox_Actors->currentText().contains("cube"))
     {
@@ -685,22 +790,104 @@ void MainWindow::Filter() //Function which applies selected filter(s) to current
         Current_actor = FindActor();
         renderer->RemoveActor(Current_actor);
     }
+    else if(ui->comboBox_Actors->currentText().contains("STL"))
+    {
+        //Convert the filename from qstring to a char pointer (char array)
+        //The filename is stored in the File_Name_Array vector, with the same index as the pointer to the actor of that file.
+        //Therefore the index of the STL's actor can be used to find the index of the STL file.
+        fileName.clear();
+        fileName = File_Name_Array[Index];
+        ba.clear();
+        ba = fileName.toLocal8Bit();
+        const char *c_str = "";
+        c_str = ba.data();
 
-    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==false)
-    {
+        vtkNew<vtkSTLReader> reader;
+        reader->SetFileName(c_str); //reader object to point to the filename
+        reader->Update();
+        ModelData = (vtkSmartPointer<vtkAlgorithm>) reader; //Creates a new pointer to avoid overwrite issues.
+        emit statusUpdateMessage(QString("Source is an STL"), 0 );
+        Current_actor = FindActor();
+        renderer->RemoveActor(Current_actor);
     }
-    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==false)
+
+    //Below are if statements for every combination of the four filter checkboxes. The combination of all four
+    //checkboxes not having been selected is not needed as in this case the ModelData should remain unchanged.
+
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==true)
     {
-        ModelData = Shrink_Filter(ModelData);
+        ModelData = Transform_Filter(ModelData);
     }
-    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==true)
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==false)
+    {
+        ModelData = Elevation_Filter(ModelData);
+    }
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Elevation_Filter(Transform_Filter(ModelData));
+    }
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==false)
     {
         ModelData = Clip_Filter(ModelData);
     }
-    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==true)
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Clip_Filter(Transform_Filter(ModelData));
+    }
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==false)
+    {
+        ModelData = Clip_Filter(Elevation_Filter(ModelData));
+    }
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Clip_Filter(Elevation_Filter(Transform_Filter(ModelData)));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==false)
     {
         ModelData = Shrink_Filter(ModelData);
-        ModelData = Clip_Filter(ModelData);
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Shrink_Filter(Transform_Filter(ModelData));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==false)
+    {
+        ModelData = Shrink_Filter(Elevation_Filter(ModelData));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Shrink_Filter(Elevation_Filter(Transform_Filter(ModelData)));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==false)
+    {
+        ModelData = Shrink_Filter(Clip_Filter(ModelData));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Shrink_Filter(Clip_Filter(Transform_Filter(ModelData)));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==false)
+    {
+        ModelData = Shrink_Filter(Clip_Filter(Elevation_Filter(ModelData)));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Shrink_Filter(Clip_Filter(Elevation_Filter(Transform_Filter(ModelData))));
     }
 
     Source_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
@@ -725,10 +912,188 @@ void MainWindow::Filter() //Function which applies selected filter(s) to current
     {
         Rendered_Sphere_Actor_Array[Index] = Source_actor;
     }
-
-
+    else if(ui->comboBox_Actors->currentText().contains("STL"))
+    {
+        Rendered_STL_Actor_Array[Index] = Source_actor;
+    }
 }
 
+void MainWindow::handleBtn_Filter()
+{
+
+    QString Combo_text = ui->comboBox_Actors->currentText();
+    QChar Num = Combo_text.back();
+    int Index = Num.digitValue();
+
+    double *Colour;
+    Colour = FindActor()->GetProperty()->GetColor();
+
+    double *Position;
+    Position = FindActor()->GetPosition();
+
+    ModelData = vtkSmartPointer<vtkAlgorithm>::New();
+
+    if(ui->comboBox_Actors->currentText().contains("cube"))
+    {
+        ModelData = (vtkSmartPointer<vtkAlgorithm>) CubeSource;
+        emit statusUpdateMessage(QString("Source is a cube"), 0 );
+        Current_actor = FindActor();
+        renderer->RemoveActor(Current_actor);
+    }
+    else if(ui->comboBox_Actors->currentText().contains("sphere"))
+    {
+        ModelData = (vtkSmartPointer<vtkAlgorithm>) sphereSource;
+        emit statusUpdateMessage(QString("Source is a sphere"), 0 );
+        Current_actor = FindActor();
+        renderer->RemoveActor(Current_actor);
+    }
+    else if(ui->comboBox_Actors->currentText().contains("STL"))
+    {
+        //Convert the filename from qstring to a char pointer (char array)
+        //The filename is stored in the File_Name_Array vector, with the same index as the pointer to the actor of that file.
+        //Therefore the index of the STL's actor can be used to find the index of the STL file.
+        fileName.clear();
+        fileName = File_Name_Array[Index];
+        ba.clear();
+        ba = fileName.toLocal8Bit();
+        const char *c_str = "";
+        c_str = ba.data();
+
+        vtkNew<vtkSTLReader> reader;
+        reader->SetFileName(c_str); //reader object to point to the filename
+        reader->Update();
+        ModelData = (vtkSmartPointer<vtkAlgorithm>) reader; //Creates a new pointer to avoid overwrite issues.
+        emit statusUpdateMessage(QString("Source is an STL"), 0 );
+        Current_actor = FindActor();
+        renderer->RemoveActor(Current_actor);
+    }
+
+    //Below are if statements for every combination of the four filter checkboxes. The combination of all four
+    //checkboxes not having been selected is not needed as in this case the ModelData should remain unchanged.
+
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Transform_Filter(ModelData);
+    }
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==false)
+    {
+        ModelData = Elevation_Filter(ModelData);
+    }
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Elevation_Filter(Transform_Filter(ModelData));
+    }
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==false)
+    {
+        ModelData = Clip_Filter(ModelData);
+    }
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Clip_Filter(Transform_Filter(ModelData));
+    }
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==false)
+    {
+        ModelData = Clip_Filter(Elevation_Filter(ModelData));
+    }
+    if (ui->checkBox_Shrink->isChecked()==false && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Clip_Filter(Elevation_Filter(Transform_Filter(ModelData)));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==false)
+    {
+        ModelData = Shrink_Filter(ModelData);
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Shrink_Filter(Transform_Filter(ModelData));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==false)
+    {
+        ModelData = Shrink_Filter(Elevation_Filter(ModelData));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==false &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Shrink_Filter(Elevation_Filter(Transform_Filter(ModelData)));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==false)
+    {
+        ModelData = Shrink_Filter(Clip_Filter(ModelData));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==false && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Shrink_Filter(Clip_Filter(Transform_Filter(ModelData)));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==false)
+    {
+        ModelData = Shrink_Filter(Clip_Filter(Elevation_Filter(ModelData)));
+    }
+    if (ui->checkBox_Shrink->isChecked()==true && ui->checkBox_Clip->isChecked()==true &&
+            ui->checkBox_Elevation->isChecked()==true && ui->checkBox_Transform->isChecked()==true)
+    {
+        ModelData = Shrink_Filter(Clip_Filter(Elevation_Filter(Transform_Filter(ModelData))));
+    }
+
+    Source_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+    Source_mapper->SetInputConnection( ModelData->GetOutputPort());
+
+    // Create an actor that is used to set the cube's properties for rendering and place it in the window
+    Source_actor = vtkSmartPointer<vtkActor>::New();
+    Source_actor->SetMapper(Source_mapper);
+    Source_actor->GetProperty()->EdgeVisibilityOn();
+
+    Source_actor->GetProperty()->SetColor(Colour);
+    Source_actor->SetPosition(Position[0],Position[1],Position[2]);
+
+    renderer->AddActor(Source_actor);
+    renderWindow->Render();
+
+    if(ui->comboBox_Actors->currentText().contains("cube"))
+    {
+        Rendered_Cube_Actor_Array[Index] = Source_actor;
+    }
+    else if(ui->comboBox_Actors->currentText().contains("sphere"))
+    {
+        Rendered_Sphere_Actor_Array[Index] = Source_actor;
+    }
+    else if(ui->comboBox_Actors->currentText().contains("STL"))
+    {
+        Rendered_STL_Actor_Array[Index] = Source_actor;
+    }
+
+    if (ui->checkBox_Shrink->isChecked()==true)
+    {
+        ui->doubleSpinBox->show();
+        ui->Lbl_Shrink_Filter->show();
+    }
+    else
+    {
+        ui->doubleSpinBox->hide();
+        ui->Lbl_Shrink_Filter->hide();
+    }
+
+    if (ui->checkBox_Transform->isChecked()==true)
+    {
+        ui->verticalWidget_Transform->show();
+    }
+    else
+    {
+        ui->verticalWidget_Transform->hide();
+    }
+}
 
 MainWindow::~MainWindow()
 {
@@ -739,9 +1104,8 @@ MainWindow::~MainWindow()
 
 //IDEA :  Roatate sliders for objects using actor->rotateX e.g. or rotateZXWY
 
-//NEEDED: Default should be all buttons needing actors to be disabled, then a function to enable all once a source is loaded
-//        (reset func in code). Also reverse function for the clear button
+//NEEDED: Limiter to 9 for each source type
+        //Scale thing for the elevation function
+//        Fix transform scale box
 
-//        NEED function that knows what filters had been applied to the current actor so they dont dissapear whenever we select new
 
-//        Filter function will need work to link sources to actors, and to implement the other two filters
