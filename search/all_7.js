@@ -1,12 +1,18 @@
 var searchData=
 [
-  ['savemodelfile_35',['SaveModelFile',['../class_model.html#a1db49a5b1656d96b2dd7b40a28719c6a',1,'Model']]],
-  ['set_5fcolour_36',['set_Colour',['../class_material.html#a258a039384d354485d46ef174840fd29',1,'Material']]],
-  ['set_5fdensity_37',['Set_density',['../class_cell.html#ac6df9e88d8a9e2eb780d9a83462bbb85',1,'Cell::Set_density()'],['../class_material.html#a1dec0b7306fe536c1c33a94debecd5a0',1,'Material::set_Density()']]],
-  ['set_5fid_38',['set_ID',['../class_material.html#a8aa0493906bb67da66c4ae727535cc01',1,'Material']]],
-  ['set_5fname_39',['set_Name',['../class_material.html#a110dd67646e03aa3384962e46a987403',1,'Material']]],
-  ['set_5fvecptrs_40',['Set_VecPtrs',['../class_cell.html#ad0cb08c0e996c8a32d80ba5c95b59830',1,'Cell']]],
-  ['set_5fx_41',['Set_x',['../class_vector3_d.html#a31020cbd43a957d4d8a2d4f44d4343eb',1,'Vector3D']]],
-  ['set_5fy_42',['Set_y',['../class_vector3_d.html#a9e44db30d0837b45bb6a299d570d10b8',1,'Vector3D']]],
-  ['set_5fz_43',['Set_z',['../class_vector3_d.html#a7582465c1e957cff4c932e29cd68d722',1,'Vector3D']]]
+  ['g_15',['g',['../structcolour.html#a15b0d2bb568b38317b4e48c72548a94d',1,'colour']]],
+  ['get_5fcolour_16',['get_Colour',['../class_material.html#a7519a563699e4a8074794be2236dd854',1,'Material']]],
+  ['get_5fdensity_17',['get_Density',['../class_material.html#a0784801c05a9f2a3efdc768c0d891dae',1,'Material']]],
+  ['get_5fid_18',['get_ID',['../class_material.html#a6ab6e0af298de65d1fadecc746222f0c',1,'Material']]],
+  ['get_5fname_19',['get_Name',['../class_material.html#aa300f994707768184465ffeea85061c1',1,'Material']]],
+  ['get_5fnumber_5fof_5fvertices_20',['Get_Number_Of_Vertices',['../class_cell.html#a7ba5d68129bee8ea6b59be22d6acda04',1,'Cell']]],
+  ['get_5fvecptrs_21',['Get_VecPtrs',['../class_cell.html#abc9ee08b14a8e735a01c3183c49e51bc',1,'Cell']]],
+  ['get_5fx_22',['Get_x',['../class_vector3_d.html#af74cdb5412e4c28b2ac4b42ab5d7877b',1,'Vector3D']]],
+  ['get_5fy_23',['Get_y',['../class_vector3_d.html#a2a9b0eea108ecd4f17cc6635a2409175',1,'Vector3D']]],
+  ['get_5fz_24',['Get_z',['../class_vector3_d.html#a9866d0954daca3b195c593a6e3e8999b',1,'Vector3D']]],
+  ['getcelltypecount_25',['GetCellTypeCount',['../class_model.html#a551e71d8860e52408ec0368b930d1f20',1,'Model']]],
+  ['getmodelcentre_26',['GetModelCentre',['../class_model.html#a4f48e6572f3aa295d08e3b2d963158a0',1,'Model']]],
+  ['getnumofcells_27',['GetNumOfCells',['../class_model.html#aa10a295bacf9fb4e5c2222cefa3d0e58',1,'Model']]],
+  ['getnumofmaterials_28',['GetNumOfMaterials',['../class_model.html#a9e3323d674c4965365489fff72f79ad5',1,'Model']]],
+  ['getnumofvertices_29',['GetNumOfVertices',['../class_model.html#a1ff6eab1e44c706fcd2e9af5348ffb3e',1,'Model']]]
 ];

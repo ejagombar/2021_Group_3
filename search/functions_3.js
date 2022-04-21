@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['material_79',['Material',['../class_material.html#a137e987401b63eb7c6c27c3e38bc74b5',1,'Material::Material()'],['../class_material.html#a681de64e9326ff2eb4f3fd00b170943f',1,'Material::Material(int IDIn, std::string nameIn, colour colourIn, float densityIn)'],['../class_material.html#a2e740cef6cfe822e0dcb425935b9b1d9',1,'Material::Material(const Material &amp;MaterialCopy)']]],
-  ['model_80',['Model',['../class_model.html#ae3b375de5f6df4faf74a95d64748e048',1,'Model::Model()'],['../class_model.html#aa7478990880cbfc866558f148cb89cd2',1,'Model::Model(const Model &amp;ModelCopy)']]]
+  ['filter_130',['Filter',['../class_main_window.html#af755e386a4205665f3e3c3eca9a2a000',1,'MainWindow']]],
+  ['findactor_131',['FindActor',['../class_main_window.html#ad381c65c6f577e2ea76912ab37900d5b',1,'MainWindow']]]
 ];

@@ -1,12 +1,16 @@
 var searchData=
 [
-  ['savemodelfile_87',['SaveModelFile',['../class_model.html#a1db49a5b1656d96b2dd7b40a28719c6a',1,'Model']]],
-  ['set_5fcolour_88',['set_Colour',['../class_material.html#a258a039384d354485d46ef174840fd29',1,'Material']]],
-  ['set_5fdensity_89',['Set_density',['../class_cell.html#ac6df9e88d8a9e2eb780d9a83462bbb85',1,'Cell::Set_density()'],['../class_material.html#a1dec0b7306fe536c1c33a94debecd5a0',1,'Material::set_Density()']]],
-  ['set_5fid_90',['set_ID',['../class_material.html#a8aa0493906bb67da66c4ae727535cc01',1,'Material']]],
-  ['set_5fname_91',['set_Name',['../class_material.html#a110dd67646e03aa3384962e46a987403',1,'Material']]],
-  ['set_5fvecptrs_92',['Set_VecPtrs',['../class_cell.html#ad0cb08c0e996c8a32d80ba5c95b59830',1,'Cell']]],
-  ['set_5fx_93',['Set_x',['../class_vector3_d.html#a31020cbd43a957d4d8a2d4f44d4343eb',1,'Vector3D']]],
-  ['set_5fy_94',['Set_y',['../class_vector3_d.html#a9e44db30d0837b45bb6a299d570d10b8',1,'Vector3D']]],
-  ['set_5fz_95',['Set_z',['../class_vector3_d.html#a7582465c1e957cff4c932e29cd68d722',1,'Vector3D']]]
+  ['handlactionfileopen_146',['handlactionFileOpen',['../class_main_window.html#ac90ddadf825a4db1def2d4bab8bf09cd',1,'MainWindow']]],
+  ['handlebtn_5fcamera_5freset_147',['handleBtn_Camera_Reset',['../class_main_window.html#a06b9eddf9174a67e9ce80dd6c99066f6',1,'MainWindow']]],
+  ['handlebtn_5fchange_5fbackground_148',['handleBtn_Change_Background',['../class_main_window.html#aab543412a763c8d55dc2bad82122f4ab',1,'MainWindow']]],
+  ['handlebtn_5fchange_5fposition_149',['handleBtn_Change_Position',['../class_main_window.html#ac5bcde48b6d497ba34d157f0661c1ef4',1,'MainWindow']]],
+  ['handlebtn_5fclear_150',['handleBtn_Clear',['../class_main_window.html#a50d984ac01227f565f78fc3406c15aff',1,'MainWindow']]],
+  ['handlebtn_5fcube_151',['handleBtn_Cube',['../class_main_window.html#a27448f4e60abdc4c893cb56e64ed7bf2',1,'MainWindow']]],
+  ['handlebtn_5ffilter_152',['handleBtn_Filter',['../class_main_window.html#a8c49230150aefcfad7a1c44e861aac21',1,'MainWindow']]],
+  ['handlebtn_5fmodel_5fcolour_153',['handleBtn_Model_Colour',['../class_main_window.html#a01b2260cd12d295e4e1b16122650c699',1,'MainWindow']]],
+  ['handlebtn_5fremove_154',['handleBtn_Remove',['../class_main_window.html#ae8de300fd86d088a9f896499591cc230',1,'MainWindow']]],
+  ['handlebtn_5freset_5factor_155',['handleBtn_Reset_Actor',['../class_main_window.html#aa98ac844e56992a3754fd45b4b3d736e',1,'MainWindow']]],
+  ['handlebtn_5fsphere_156',['handleBtn_Sphere',['../class_main_window.html#a2fa73ec654ed92e73dc7e526aec6eeaa',1,'MainWindow']]],
+  ['handlebtn_5ftest_157',['handleBtn_Test',['../class_main_window.html#a58d0347c0079916cdde1139782da94a9',1,'MainWindow']]],
+  ['handlebtn_5ftest2_158',['handleBtn_Test2',['../class_main_window.html#a93d2e478e77efcb6539c5f9eba2d570f',1,'MainWindow']]]
 ];

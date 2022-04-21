@@ -9,4 +9,19 @@ digraph "/home/runner/work/2021_Group_3/2021_Group_3/Custom_Mod_Library/include/
   Node2 [label="/home/runner/work/2021\l_Group_3/2021_Group_3\l/Custom_Mod_Library/include/Cell.h",height=0.2,width=0.4,color="black",URL="$_cell_8h.html",tooltip="Cell class used to store Cell shapes that make up a model."];
   Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="/home/runner/work/2021\l_Group_3/2021_Group_3\l/Custom_Mod_Library/include\l/Model.h",height=0.2,width=0.4,color="black",URL="$_model_8h.html",tooltip="Class used to open, save and store .mod files."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="/home/runner/work/2021\l_Group_3/2021_Group_3\l/Custom_Mod_Library/src\l/main.cpp",height=0.2,width=0.4,color="black",URL="$_custom___mod___library_2src_2main_8cpp.html",tooltip=" "];
+  Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="/home/runner/work/2021\l_Group_3/2021_Group_3\l/Custom_Mod_Library/src\l/Model.cpp",height=0.2,width=0.4,color="black",URL="$_model_8cpp.html",tooltip=" "];
+  Node3 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="/home/runner/work/2021\l_Group_3/2021_Group_3\l/Custom_Mod_Library/tests\l/testModel.cpp",height=0.2,width=0.4,color="black",URL="$test_model_8cpp.html",tooltip=" "];
+  Node2 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="/home/runner/work/2021\l_Group_3/2021_Group_3\l/Custom_Mod_Library/src\l/Cell.cpp",height=0.2,width=0.4,color="black",URL="$_cell_8cpp.html",tooltip=" "];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="/home/runner/work/2021\l_Group_3/2021_Group_3\l/Custom_Mod_Library/tests\l/testCell.cpp",height=0.2,width=0.4,color="black",URL="$test_cell_8cpp.html",tooltip=" "];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="/home/runner/work/2021\l_Group_3/2021_Group_3\l/Custom_Mod_Library/src\l/3D_Vector.cpp",height=0.2,width=0.4,color="black",URL="$3_d___vector_8cpp.html",tooltip=" "];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="/home/runner/work/2021\l_Group_3/2021_Group_3\l/Custom_Mod_Library/tests\l/test3D_Vector.cpp",height=0.2,width=0.4,color="black",URL="$test3_d___vector_8cpp.html",tooltip=" "];
 }
