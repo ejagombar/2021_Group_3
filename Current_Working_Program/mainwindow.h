@@ -39,39 +39,39 @@ signals:
     void statusUpdateMessage( const QString & message, int timeout );
 
 public slots:
-    //Functions to change colour
-    void handleBtn_Change_Background();
-    void handleBtn_Model_Colour();
 
-    //Functions to create objects
+    //Functions to render different objects
     void handlactionFileOpen();
     void handleBtn_Cube();
     void handleBtn_Sphere();
     void NewSource(QString);
 
+    //Functions to change colour of actors and background
+    void handleBtn_Change_Background();
+    void handleBtn_Model_Colour();
+
     //Functions to manage the program
-    void handleBtn_Camera_Reset();
-    void handleCheckBox_Shrink_Change();
-    void doubleSpinBox_value_changed();
-    void handleBtn_Clear();
+    void handleBtn_Camera_Reset(); //Resets camera to default position
+    void handleBtn_Clear(); //Resets program to default start with no models loaded + appropriate UI.
+    void reset_function(); //Resets the program UI to state after a model has been loaded + appropriate UI
+    void New_Actor_Selected(); //Runs ever time the user selects new actor from drop down menue to update UI (e.g. location box)
+
+    vtkSmartPointer<vtkActor> FindActor(); //
+    void Add_Rendered_Actors_To_Combo();
+    void handleBtn_Filter();
+    void handleBtn_Reset_Actor();
+    void handleBtn_Remove();
     void handleBtn_Change_Position();
 
-    void reset_function();
     void handleBtn_Test();
     void handleBtn_Test2();
 
-    vtkSmartPointer<vtkActor> FindActor();
-    void Add_Rendered_Actors_To_Combo();
-    void New_Actor_Selected();
-
-    //Filter pipeline function
+    //Filter pipeline functions
     void Filter();
     vtkSmartPointer<vtkAlgorithm> Shrink_Filter(vtkSmartPointer<vtkAlgorithm>);
     vtkSmartPointer<vtkAlgorithm> Clip_Filter(vtkSmartPointer<vtkAlgorithm>);
-
-    //vtkSmartPointer<vtkShrinkFilter> Shrink(QString);
-
-    //void Object_Rendered();
+    vtkSmartPointer<vtkAlgorithm> Elevation_Filter(vtkSmartPointer<vtkAlgorithm>);
+    vtkSmartPointer<vtkAlgorithm> Transform_Filter(vtkSmartPointer<vtkAlgorithm>);
 
 private:
     //UI and rendered elements
@@ -85,18 +85,13 @@ private:
     vtkSmartPointer<vtkSphereSource> sphereSource;
     QString fileName;
     QByteArray ba;
+    vtkSmartPointer<vtkAlgorithm> ModelData;
 
     //Actors
-    vtkSmartPointer<vtkActor> STL_actor;
-    vtkSmartPointer<vtkActor> Cube_actor;
-    vtkSmartPointer<vtkActor> sphere_actor;
     vtkSmartPointer<vtkActor> Current_actor;
     vtkSmartPointer<vtkActor> Source_actor = vtkSmartPointer<vtkActor>::New();
 
     //Mappers
-    vtkSmartPointer<vtkDataSetMapper> STL_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-    vtkSmartPointer<vtkDataSetMapper> Cube_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-    vtkSmartPointer<vtkDataSetMapper> sphere_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
     vtkSmartPointer<vtkDataSetMapper> Current_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
     vtkSmartPointer<vtkDataSetMapper> Source_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 
@@ -108,10 +103,12 @@ private:
 
     vtkSmartPointer<vtkClipDataSet> Current_clipFilter;
 
+    //Actor Arrays
     std::vector<vtkSmartPointer<vtkActor>> Rendered_Cube_Actor_Array;
     std::vector<vtkSmartPointer<vtkActor>> Rendered_Sphere_Actor_Array;
     std::vector<vtkSmartPointer<vtkActor>> Rendered_STL_Actor_Array;
 
+    //STL FileName Array
     std::vector<QString> File_Name_Array;
 
     //Colour pointer
@@ -125,12 +122,6 @@ private:
     float Background_RedF=0;
     float Background_BlueF=0;
     float Background_Green=0;
-
-    int Tracker=0;
-
-
-    vtkSmartPointer<vtkAlgorithm> ModelData;
-
 };
 
 #endif // MAINWINDOW_H
