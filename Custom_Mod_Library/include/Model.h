@@ -1,5 +1,5 @@
 ﻿///
-/// @class Model
+/// @file
 /// @brief Class used to open, save and store .mod files
 /// 
 /// This class is responsible for reading model entities from a .mod file.
@@ -118,7 +118,7 @@ public:
 
 private:
 
-    std::vector <cell> cellArray;
+    std::vector <Cell> cellArray;
     std::vector <Vector3D> verticeArray;
 
     Vector3D ModelCentre;

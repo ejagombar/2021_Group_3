@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
 foreach(p
     CMP0071 # 3.10: Let AUTOMOC and AUTOUIC process GENERATED files
@@ -36,19 +36,43 @@ qt6_add_resources( QRC_Srcs ${ICONS} )
 find_package( VTK REQUIRED )
 include( ${VTK_USE_FILE} )
 
+set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/myapp.rc")
+
 # Define the executable output and its sources
-add_executable( QtVTKExample MACOSX_BUNDLE
+add_executable( QtVTKExample MACOSX_BUNDLE myapp.rc
 				main.cpp mainwindow.cpp 
 				mainwindow.h 
 				mainwindow.ui
-				filter.cpp filter.h
-				mediator.cpp mediator.h
+                                                                    filter.cpp
+                                                                    filter.h
+                                                                    ModelRender.cpp
+                                                                    ModelRender.h
+                                                                    form.h
+                                                                    form.ui
+                                                                    form.cpp
+                                                                    listview.h
+                                                                    listview.cpp
 				${UI_Srcs}
 				${QRC_Srcs}
+                                ${APP_ICON_RESOURCE_WINDOWS}
 				)
+
 
 # Tell CMake that the executable depends on the Qt::Widget libraries.
 target_link_libraries( QtVTKExample Qt6::Widgets )
 
 # Tell CMake that the executable depends on the VTK libraries
 target_link_libraries( QtVTKExample ${VTK_LIBRARIES} )
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -17,6 +17,11 @@ jobs:
 
     - name: Install doxygen
       run: sudo apt-get install -y doxygen
+
+
+
+
+
     # Run Doxygen on Worksheet7 folder
     - name: Run Doxygen
       working-directory: ${{github.workspace}}/Doxygen

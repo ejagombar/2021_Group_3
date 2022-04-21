@@ -1,5 +1,3 @@
-/// \file
-
 #include <iostream>
 #include "../include/Material.h"
 #include "../include/Model.h"
@@ -29,8 +27,8 @@ int main()
     Test_Vector_Array[5] = Test_Six;
     Test_Vector_Array[6] = Test_Seven;
 
-    cout << "attempting to create cell...";
-    cell Test_Cell(8, Test_Vector_Array, 100);
+    cout << "attempting to create Cell...";
+    Cell Test_Cell(8, Test_Vector_Array, 100);
     cout << "done";
 
     //cout << "Test_Cell Vertice " << 3 << " X: " << Test_Cell.Get_VecPtrs(3).Get_x() << ", Y: " << Test_Cell.Get_VecPtrs(3).Get_y() << ", Z: " << Test_Cell.Get_VecPtrs(3).Get_z() << endl;
@@ -41,10 +39,10 @@ int main()
     }
 
 
-    cell Copy_Test(Test_Cell);
+    Cell Copy_Test(Test_Cell);
     Copy_Test.Set_VecPtrs(7, Test_One);
 
-    cout << "cell copied";
+    cout << "Cell copied";
 
     for (int i = 0; i < 8; i++)
     {

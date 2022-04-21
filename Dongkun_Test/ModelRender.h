@@ -44,24 +44,22 @@ public:
 
     ModelRender();
     ModelRender(const ModelRender & ModelCopy);
+    //void SetModel(const ModelRender ModelCopy);
+    //void SetModel(const ModelRender * ModelCopy);
 
-    vtkSmartPointer<vtkRenderer> getRenderer();
     vtkSmartPointer<vtkActor> getActor();
     vtkSmartPointer<vtkProperty> getProp();
     vtkSmartPointer<vtkSTLReader> getSTLReader();
     vtkSmartPointer<vtkDataSetMapper> getMapper();
-    vtkSmartPointer<vtkGenericOpenGLRenderWindow> getRenderWindow();
     vtkSmartPointer<vtkPolyData> getPolyData();
     vtkSmartPointer<vtkDataSetSurfaceFilter> getSurfaceFilter();
 
     QString  getFileName();
     void setFileName(QString Name);
     void STLfileReader(QString fileName);
-    void RenderingStarts();
+    void RenderingStarts(vtkSmartPointer<vtkRenderer> renderer);
     void RenderingStartsInside();
 
-    vtkSmartPointer<vtkRenderer> renderer ;
-    vtkSmartPointer<vtkGenericOpenGLRenderWindow> renderWindow;
     vtkSmartPointer<vtkPolyData> polydata;
     vtkSmartPointer<vtkDataSetSurfaceFilter> surfacefilter;
     vtkSmartPointer<vtkProperty> prop ;
@@ -70,23 +68,18 @@ public:
     vtkSmartPointer<vtkActor> actor;
     vtkSmartPointer<vtkAxesActor> axesActor;
 
-    void SetRender(vtkSmartPointer<vtkGenericOpenGLRenderWindow> renderw, vtkSmartPointer<vtkRenderer> render);
+    void changeX(float x,vtkSmartPointer<vtkRenderer> renderer);
+    void changeY(float y,vtkSmartPointer<vtkRenderer> renderer);
+    void changeZ(float z,vtkSmartPointer<vtkRenderer> renderer);
+    void changeRX(float x,vtkSmartPointer<vtkRenderer> renderer);
+    void changeRY(float y,vtkSmartPointer<vtkRenderer> renderer);
+    void changeRZ(float z,vtkSmartPointer<vtkRenderer> renderer);
 
-    void changeX(float x);
-    void changeY(float y);
-    void changeZ(float z);
-    void changeRX(float x);
-    void changeRY(float y);
-    void changeRZ(float z);
-
-    void buildSphere();
-    void buildArrow();
-    void buildCone();
-
-    void showaxes();
-
+    void buildSphere(vtkSmartPointer<vtkRenderer> renderer);
+    void buildArrow(vtkSmartPointer<vtkRenderer> renderer);
+    void buildCone(vtkSmartPointer<vtkRenderer> renderer);
+    void showaxes(vtkSmartPointer<vtkRenderer> renderer);
     void setActorColor();
-    void setBackgroundColor();
 
 
 private:
@@ -98,10 +91,6 @@ private:
     float AR=1;
     float AG=1;
     float AB=1;
-
-    float BR=0;
-    float BG=0;
-    float BB=0;
 
     float X=0;
     float Y=0;

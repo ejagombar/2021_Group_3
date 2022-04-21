@@ -66,15 +66,16 @@ public slots:
 private slots:
     void on_tabWidget_tabCloseRequested(int index);
     void on_actionAdd_triggered();
-
     void on_clear_clicked();
+    void on_Test_clicked();
+    void on_list_itemSelectionChanged();
 
 private:
 
     Ui::MainWindow *ui;
 
     ModelRender* Model = new ModelRender();
-    std::vector<ModelRender> ModelList;
+    std::vector<ModelRender>* ModelList = new std::vector<ModelRender>;
     filter * vtkFilter = new filter();
 
     void UiSetup();
@@ -87,6 +88,14 @@ private:
     void BuildPreLoad();
     std::vector<QString> FileName;
     int file = 0;
+
+    float x = 0;
+    float y = 0;
+    float z = 0;
+
+    float BR = 0.6;
+    float BG = 0.6;
+    float BB = 0.6;
 
 };
 #endif // MAINWINDOW_H
