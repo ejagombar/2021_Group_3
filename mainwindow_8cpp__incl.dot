@@ -45,8 +45,10 @@ digraph "/home/runner/work/2021_Group_3/2021_Group_3/Current_Working_Program/mai
   Node20 [label="vtkClipDataSet.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node2 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node21 [label="vtkSTLReader.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
-  Node1 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node22 [label="ui_mainwindow.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
+  Node2 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="QMessageBox",height=0.2,width=0.4,color="grey75",tooltip=" "];
+  Node1 -> Node23 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node23 [label="ui_mainwindow.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
@@ -65,14 +67,13 @@ digraph "/home/runner/work/2021_Group_3/2021_Group_3/Current_Working_Program/mai
   Node1 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node1 -> Node23 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node23 [label="vtkPolyDataMapper.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node1 -> Node24 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node24 [label="vtkDataSet.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
+  Node24 [label="vtkPolyDataMapper.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node1 -> Node25 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node25 [label="vtkOutlineFilter.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
+  Node25 [label="vtkDataSet.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node1 -> Node26 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node26 [label="QMessageBox",height=0.2,width=0.4,color="grey75",tooltip=" "];
+  Node26 [label="vtkOutlineFilter.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
+  Node1 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node27 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node27 [label="QFileDialog",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node1 -> Node28 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
@@ -103,4 +104,6 @@ digraph "/home/runner/work/2021_Group_3/2021_Group_3/Current_Working_Program/mai
   Node40 [label="vtkTransform.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node1 -> Node41 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node41 [label="vector",height=0.2,width=0.4,color="grey75",tooltip=" "];
+  Node1 -> Node42 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node42 [label="form.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
 }

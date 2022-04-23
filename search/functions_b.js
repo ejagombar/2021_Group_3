@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['reset_5ffunction_178',['reset_function',['../class_main_window.html#a74d67c027f03c2e922411e723ccca6ae',1,'MainWindow']]]
+  ['reset_5ffunction_177',['reset_function',['../class_main_window.html#a74d67c027f03c2e922411e723ccca6ae',1,'MainWindow']]]
 ];

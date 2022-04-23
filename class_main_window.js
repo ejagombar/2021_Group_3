@@ -5,7 +5,6 @@ var class_main_window =
     [ "Add_Rendered_Actors_To_Combo", "class_main_window.html#a6d16916adce6ec44296250bb8e9db3f2", null ],
     [ "Clip_Filter", "class_main_window.html#a1d7d0d341373867df66c9af644a7132b", null ],
     [ "Elevation_Filter", "class_main_window.html#a226c7874b2736bb0e20969c7315d4295", null ],
-    [ "Filter", "class_main_window.html#af755e386a4205665f3e3c3eca9a2a000", null ],
     [ "FindActor", "class_main_window.html#ad381c65c6f577e2ea76912ab37900d5b", null ],
     [ "handlactionFileOpen", "class_main_window.html#ac90ddadf825a4db1def2d4bab8bf09cd", null ],
     [ "handleBtn_Camera_Reset", "class_main_window.html#a06b9eddf9174a67e9ce80dd6c99066f6", null ],
@@ -25,5 +24,6 @@ var class_main_window =
     [ "reset_function", "class_main_window.html#a74d67c027f03c2e922411e723ccca6ae", null ],
     [ "Shrink_Filter", "class_main_window.html#a031909d77d245e1cb505ffc64af6f5e6", null ],
     [ "statusUpdateMessage", "class_main_window.html#a86443ea744fda3e9bad328c2fd1c3d6b", null ],
+    [ "Tab_Changed", "class_main_window.html#abdabc0c75985895208e875a57a378106", null ],
     [ "Transform_Filter", "class_main_window.html#a6f08d3c8731115a52e51a3abb3682a72", null ]
 ];

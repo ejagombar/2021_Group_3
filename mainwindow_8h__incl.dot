@@ -43,4 +43,6 @@ digraph "/home/runner/work/2021_Group_3/2021_Group_3/Current_Working_Program/mai
   Node19 [label="vtkClipDataSet.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node1 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node20 [label="vtkSTLReader.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
+  Node1 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="QMessageBox",height=0.2,width=0.4,color="grey75",tooltip=" "];
 }
