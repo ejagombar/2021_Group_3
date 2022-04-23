@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1109</width>
-    <height>610</height>
+    <width>1101</width>
+    <height>634</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -103,13 +103,37 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QVTKOpenGLWidget" name="qvtkWidget" native="true">
-        <property name="minimumSize">
-         <size>
-          <width>600</width>
-          <height>400</height>
-         </size>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="currentIndex">
+         <number>0</number>
         </property>
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>Tab 1</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QVTKOpenGLWidget" name="qvtkWidget_Tab1" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>600</width>
+              <height>400</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_2">
+         <attribute name="title">
+          <string>Tab 2</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QVTKOpenGLWidget" name="qvtkWidget_Tab2" native="true"/>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
       <item>
@@ -492,8 +516,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1109</width>
-     <height>26</height>
+     <width>1101</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
