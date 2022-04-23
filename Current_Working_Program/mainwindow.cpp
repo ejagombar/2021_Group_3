@@ -8,7 +8,7 @@
 #include <vtkActor.h>
 #include <vtkProperty.h>
 #include <vtkCamera.h>
-#include <vtkPolyData.h>
+
 #include <vtkDataSetMapper.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
@@ -20,9 +20,10 @@
 #include <vtkShrinkFilter.h>
 #include <vtkPlane.h>
 #include <vtkClipDataSet.h>
-#include <vtkPolyDataMapper.h>
 #include <vtkDataSet.h>
-#include<vtkOutlineFilter.h>
+#include <vtkElevationFilter.h>
+#include <vtkTransformFilter.h>
+#include <vtkTransform.h>
 
 #include <QMessageBox>
 #include <QFileDialog>
@@ -32,19 +33,6 @@
 
 #include <stdio.h>
 #include <string.h>
-
-#include "filter.h"
-#include <vtkDelaunay3D.h>
-#include <vtkAppendFilter.h>
-#include <vtkConnectivityFilter.h>
-
-#include <vtkCutter.h>
-#include <vtkElevationFilter.h>
-#include <vtkTransformFilter.h>
-#include <vtkTransform.h>
-
-#include <vector>
-#include "form.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -223,79 +211,14 @@ void MainWindow::NewSource(QString Source_Type) //General source function - need
 
 void MainWindow::handleBtn_Test()
 {
-
-      //vtkSmartPointer<vtkAlgorithm> sphereSource1 = (vtkSmartPointer<vtkAlgorithm>) vtkSmartPointer<vtkSphereSource>::New();
-
-      vtkNew<vtkSphereSource> sphereSource1;
-      sphereSource1->Update();
-      vtkNew<vtkDelaunay3D> delaunay1;
-      delaunay1->SetInputConnection(sphereSource1->GetOutputPort());
-      delaunay1->Update();
-
-      vtkNew<vtkSphereSource> sphereSource2;
-      sphereSource2->SetCenter(5, 0, 0);
-      sphereSource2->Update();
-
-      vtkNew<vtkDelaunay3D> delaunay2;
-      delaunay2->SetInputConnection(sphereSource2->GetOutputPort());
-      delaunay2->Update();
-
-      vtkNew<vtkAppendFilter> appendFilter;
-      appendFilter->AddInputConnection(delaunay1->GetOutputPort());
-      appendFilter->AddInputConnection(delaunay2->GetOutputPort());
-      appendFilter->Update();
-
-      vtkNew<vtkConnectivityFilter> connectivityFilter;
-      connectivityFilter->SetInputConnection(appendFilter->GetOutputPort());
-      connectivityFilter->SetExtractionModeToAllRegions();
-      connectivityFilter->ColorRegionsOn();
-      connectivityFilter->Update();
-
-      ModelData = vtkSmartPointer<vtkAlgorithm>::New();
-      ModelData = (vtkSmartPointer<vtkAlgorithm>) connectivityFilter;
-
-      ModelData = Shrink_Filter(ModelData);
-
-      vtkNew<vtkDataSetMapper> mapper;
-      mapper->SetInputConnection(ModelData->GetOutputPort());
-      mapper->Update();
-
-      vtkNew<vtkActor> actor;
-      actor->SetMapper(mapper);
-
-      renderer->AddActor(actor);
-      Rendered_Sphere_Actor_Array.push_back(actor);
-      renderWindow->Render();
-      Add_Rendered_Actors_To_Combo();
-
 }
 
 void MainWindow::handleBtn_Test2()
 {
-       //vtkNew<vtkCubeSource> CubeSource;
-       sphereSource->SetThetaResolution(30);
-       sphereSource->SetPhiResolution(15);
-       sphereSource->Update();
-
-       ModelData = vtkSmartPointer<vtkAlgorithm> (sphereSource);
-
-       ModelData = Clip_Filter(ModelData);
-       vtkNew<vtkDataSetMapper> mapper;
-       mapper->SetInputConnection(ModelData->GetOutputPort());
-       mapper->Update();
-
-       vtkNew<vtkActor> actor;
-       actor->SetMapper(mapper);
-       renderer_Tab2->AddActor(actor); // display the sphere
-
-       renderWindow_Tab2->Render();
-       Rendered_Sphere_Actor_Array.push_back(actor);
-       Add_Rendered_Actors_To_Combo();   
 }
 
 void MainWindow::handlactionFileOpen()
 {
-
     if (Rendered_STL_Actor_Array.size()<9)
     {
         NewSource(QString("STL"));
@@ -308,7 +231,6 @@ void MainWindow::handlactionFileOpen()
         warning_box.setText(QString("Cannot have more than 9 STL models!"));
         warning_box.show();
     }
-
 }
 
 void MainWindow::handleBtn_Cube()
@@ -416,7 +338,7 @@ void MainWindow::handleBtn_Camera_Reset()
     emit statusUpdateMessage( QString("Camera reset!"), 0 );
 }
 
-void MainWindow::reset_function() //NEEDS UPDATING
+void MainWindow::reset_function()
 {
     if(ui->checkBox_Clip->isChecked()==true)
     {
