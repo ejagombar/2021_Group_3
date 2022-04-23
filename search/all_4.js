@@ -5,6 +5,8 @@ var searchData=
   ['cell_2ecpp_7',['Cell.cpp',['../_cell_8cpp.html',1,'']]],
   ['cell_2eh_8',['Cell.h',['../_cell_8h.html',1,'']]],
   ['clip_5ffilter_9',['Clip_Filter',['../class_main_window.html#a1d7d0d341373867df66c9af644a7132b',1,'MainWindow']]],
-  ['cog_5fof_5fcell_10',['COG_Of_Cell',['../class_cell.html#ab4c8c03469538dd9e34859d7be222e4c',1,'Cell']]],
-  ['colour_11',['colour',['../structcolour.html',1,'']]]
+  ['closeevent_10',['closeEvent',['../class_main_window.html#a4e20a4a065fbb0e4d3532a45a0a91425',1,'MainWindow']]],
+  ['cog_5fof_5fcell_11',['COG_Of_Cell',['../class_cell.html#ab4c8c03469538dd9e34859d7be222e4c',1,'Cell']]],
+  ['colour_12',['colour',['../structcolour.html',1,'']]],
+  ['combo_5fcheck_13',['Combo_Check',['../class_main_window.html#ac40247a74b327e92e79964735eaf4edb',1,'MainWindow']]]
 ];

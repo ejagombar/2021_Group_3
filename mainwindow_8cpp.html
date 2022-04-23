@@ -96,7 +96,6 @@ $(document).ready(function(){initNavTree('mainwindow_8cpp.html',''); initResizab
 <code>#include &lt;vtkActor.h&gt;</code><br />
 <code>#include &lt;vtkProperty.h&gt;</code><br />
 <code>#include &lt;vtkCamera.h&gt;</code><br />
-<code>#include &lt;vtkPolyData.h&gt;</code><br />
 <code>#include &lt;vtkDataSetMapper.h&gt;</code><br />
 <code>#include &lt;vtkRenderWindow.h&gt;</code><br />
 <code>#include &lt;vtkRenderWindowInteractor.h&gt;</code><br />
@@ -108,9 +107,10 @@ $(document).ready(function(){initNavTree('mainwindow_8cpp.html',''); initResizab
 <code>#include &lt;vtkShrinkFilter.h&gt;</code><br />
 <code>#include &lt;vtkPlane.h&gt;</code><br />
 <code>#include &lt;vtkClipDataSet.h&gt;</code><br />
-<code>#include &lt;vtkPolyDataMapper.h&gt;</code><br />
 <code>#include &lt;vtkDataSet.h&gt;</code><br />
-<code>#include &lt;vtkOutlineFilter.h&gt;</code><br />
+<code>#include &lt;vtkElevationFilter.h&gt;</code><br />
+<code>#include &lt;vtkTransformFilter.h&gt;</code><br />
+<code>#include &lt;vtkTransform.h&gt;</code><br />
 <code>#include &lt;QMessageBox&gt;</code><br />
 <code>#include &lt;QFileDialog&gt;</code><br />
 <code>#include &lt;QTextStream&gt;</code><br />
@@ -118,16 +118,8 @@ $(document).ready(function(){initNavTree('mainwindow_8cpp.html',''); initResizab
 <code>#include &lt;QColorDialog&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;filter.h&quot;</code><br />
-<code>#include &lt;vtkDelaunay3D.h&gt;</code><br />
-<code>#include &lt;vtkAppendFilter.h&gt;</code><br />
-<code>#include &lt;vtkConnectivityFilter.h&gt;</code><br />
-<code>#include &lt;vtkCutter.h&gt;</code><br />
-<code>#include &lt;vtkElevationFilter.h&gt;</code><br />
-<code>#include &lt;vtkTransformFilter.h&gt;</code><br />
-<code>#include &lt;vtkTransform.h&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &quot;form.h&quot;</code><br />
+<code>#include &lt;QCloseEvent&gt;</code><br />
+<code>#include &lt;QDesktopServices&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for mainwindow.cpp:</div>
 <div class="dyncontent">
