@@ -8,7 +8,7 @@
 #include <vtkActor.h>
 #include <vtkProperty.h>
 #include <vtkCamera.h>
-#include <vtkPolyData.h>
+
 #include <vtkDataSetMapper.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
@@ -20,9 +20,10 @@
 #include <vtkShrinkFilter.h>
 #include <vtkPlane.h>
 #include <vtkClipDataSet.h>
-#include <vtkPolyDataMapper.h>
 #include <vtkDataSet.h>
-#include<vtkOutlineFilter.h>
+#include <vtkElevationFilter.h>
+#include <vtkTransformFilter.h>
+#include <vtkTransform.h>
 
 #include <QMessageBox>
 #include <QFileDialog>
@@ -32,49 +33,56 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <QCloseEvent>
 
-#include "filter.h"
-#include <vtkDelaunay3D.h>
-#include <vtkAppendFilter.h>
-#include <vtkConnectivityFilter.h>
-
-#include <vtkCutter.h>
-#include <vtkElevationFilter.h>
-#include <vtkTransformFilter.h>
-#include <vtkTransform.h>
-
-#include <vector>
-#include "form.h"
+#include <QDesktopServices>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
+    //------------------------------------------------- Program render setup -----------------------------------------------------------*/
+
     // standard call to setup Qt UI (same as previously)
     ui->setupUi( this );
 
-    // Now need to create a VTK render window and link it to the QtVTK widget
-    ui->qvtkWidget_Tab1->SetRenderWindow( renderWindow );// note that vtkWidget is the name I gave to my QtVTKOpenGLWidget in Qt creator
-
-    // Create a renderer, and render window
-    renderer = vtkSmartPointer<vtkRenderer>::New();
-    ui->qvtkWidget_Tab1->GetRenderWindow()->AddRenderer( renderer );
-
+    // Link the renderWindows to their respective QtVTK widgets in each tab
+    ui->qvtkWidget_Tab1->SetRenderWindow( renderWindow );
     ui->qvtkWidget_Tab2->SetRenderWindow( renderWindow_Tab2 );
+
+    // Create new renderers, and add to render windows
+    renderer = vtkSmartPointer<vtkRenderer>::New();
     renderer_Tab2 = vtkSmartPointer<vtkRenderer>::New();
+    ui->qvtkWidget_Tab1->GetRenderWindow()->AddRenderer( renderer );
     ui->qvtkWidget_Tab2->GetRenderWindow()->AddRenderer( renderer_Tab2 );
 
-    // Set background to black
+    // Set background to default to black
     renderer->SetBackground( colors->GetColor3d("black").GetData() );
+    renderer_Tab2->SetBackground( colors->GetColor3d("black").GetData() );
 
-    // Setup the renderers's camera
+    // Setup the renderers's cameras
     renderer->ResetCamera();
     renderer->GetActiveCamera()->Azimuth(30);
     renderer->GetActiveCamera()->Elevation(30);
     renderer->ResetCameraClippingRange();
+    renderer_Tab2->ResetCamera();
+    renderer_Tab2->GetActiveCamera()->Azimuth(30);
+    renderer_Tab2->GetActiveCamera()->Elevation(30);
+    renderer_Tab2->ResetCameraClippingRange();
 
     //Adds status bar
     QStatusBar *statusbar = new QStatusBar(this);
-    ui->verticalLayout->addWidget(statusbar);
+    ui->verticalLayout_VTK_Widget->addWidget(statusbar);
 
+    //------------------------------------------------ Sources for use in program ---------------------------------------------------------*/
+
+    // Create a cube using a vtkCubeSource
+    CubeSource = vtkSmartPointer<vtkCubeSource>::New();
+    // Create a cube using a vtkCubeSource
+    sphereSource = vtkSmartPointer<vtkSphereSource>::New();
+    sphereSource->SetThetaResolution(30);
+    sphereSource->SetPhiResolution(15);
+    sphereSource->Update();
+
+    //----------------------------------------------- Program setup to default state -------------------------------------------------------*/
 
     //Disable filter options until a source is loaded
     ui->Btn_Filter->setEnabled(0);
@@ -88,47 +96,39 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->Btn_Remove->setEnabled(0);
     ui->Btn_Reset->setEnabled(0);
 
-    ui->doubleSpinBox->hide(); //Hide uneccesary spin box used for filters
-    ui->Lbl_Shrink_Filter->hide();
-
+    ui->verticalWidget_Shrink->hide();
     ui->verticalWidget_Transform->hide();
 
-    //--------------------------------------------- /Code From Example 1 -------------------------------------------------------------------------*/
-
+    //------------------------------------------------------- Slots -------------------------------------------------------------------------*/
     //Connecting slots
-    connect( ui->Btn_Change_Background, &QPushButton::released, this, &MainWindow::handleBtn_Change_Background );
-    connect( ui->Btn_Model_Colour, &QPushButton::released, this, &MainWindow::handleBtn_Model_Colour );
 
-    connect( ui->Btn_Clear, &QPushButton::released, this, &MainWindow::handleBtn_Clear );
-    connect( ui->Btn_Reset, &QPushButton::released, this, &MainWindow::handleBtn_Reset_Actor );
-    connect( ui->Btn_Remove, &QPushButton::released, this, &MainWindow::handleBtn_Remove );
-
+    //Slots to render models
     connect( ui->Btn_Cube, &QPushButton::released, this, &MainWindow::handleBtn_Cube );
     connect( ui->Btn_Sphere, &QPushButton::released, this, &MainWindow::handleBtn_Sphere );
     connect( ui->actionFileOpen, &QAction::triggered, this, &MainWindow::handlactionFileOpen );
 
-    connect( ui->Btn_Camera_Reset, &QPushButton::released, this, &MainWindow::handleBtn_Camera_Reset );
+    //Slots to edit models
     connect( ui->Btn_Position, &QPushButton::released, this, &MainWindow::handleBtn_Change_Position );
-
+    connect( ui->Btn_Model_Colour, &QPushButton::released, this, &MainWindow::handleBtn_Model_Colour );
     connect( ui->Btn_Filter, &QPushButton::released, this, &MainWindow::handleBtn_Filter );
+    connect( ui->Btn_Reset, &QPushButton::released, this, &MainWindow::handleBtn_Reset_Actor );
+    connect( ui->Btn_Remove, &QPushButton::released, this, &MainWindow::handleBtn_Remove_Actor );
+
+    //Slots to run UI
+    connect( ui->Btn_Clear, &QPushButton::released, this, &MainWindow::handleBtn_Clear );
+    connect( ui->Btn_Camera_Reset, &QPushButton::released, this, &MainWindow::handleBtn_Camera_Reset );
+    connect( ui->Btn_Change_Background, &QPushButton::released, this, &MainWindow::handleBtn_Change_Background );
+    connect( ui->actionHelp, &QAction::triggered, this, &MainWindow::Help );
+    connect( ui->tabWidget, &QTabWidget::currentChanged,this,&MainWindow::Tab_Changed );
+    connect( ui->comboBox_Actors, &QComboBox::currentTextChanged,this,&MainWindow::New_Actor_Selected );
+    connect( ui->checkBox_Shrink, &QCheckBox::stateChanged,this,&MainWindow::Shrink_Box_Checked );
+    connect( ui->checkBox_Transform, &QCheckBox::stateChanged,this,&MainWindow::Transform_Box_Checked );
+
+    //Connecting the status bar
+    connect( this, &MainWindow::statusUpdateMessage, ui->statusbar, &QStatusBar::showMessage );
 
     connect( ui->Btn_Test, &QPushButton::released, this, &MainWindow::handleBtn_Test );
     connect( ui->Btn_Test2, &QPushButton::released, this, &MainWindow::handleBtn_Test2 );
-
-    connect( ui->comboBox_Actors, &QComboBox::currentTextChanged,this,&MainWindow::New_Actor_Selected );
-
-    connect ( ui->tabWidget, &QTabWidget::currentChanged,this,&MainWindow::Tab_Changed);
-
-    //connecting statusUpdateMessage()
-    connect( this, &MainWindow::statusUpdateMessage, ui->statusbar, &QStatusBar::showMessage );
-
-    // Create a cube using a vtkCubeSource
-    CubeSource = vtkSmartPointer<vtkCubeSource>::New();
-    // Create a cube using a vtkCubeSource
-    sphereSource = vtkSmartPointer<vtkSphereSource>::New();
-    sphereSource->SetThetaResolution(30);
-    sphereSource->SetPhiResolution(15);
-    sphereSource->Update();
 }
 
 void MainWindow::NewSource(QString Source_Type) //General source function - need
@@ -171,6 +171,22 @@ void MainWindow::NewSource(QString Source_Type) //General source function - need
         //Read file into Qstring object using QFileDialog::getOpenFileName
         fileName.clear();
         fileName = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
+
+        if(fileName.isEmpty()) //Checks to make sure the user selected a file (it is possible to cancel out of the file selection)
+        {
+            QMessageBox::StandardButton reply;
+            reply = warning_box.question(this, "Please select an option", "Invalid file name or type! Please try again.",QMessageBox::Retry|QMessageBox::Close);
+
+            if (reply == QMessageBox::Retry) //If the user wishes to retry file selection, re run-the function, then quit if successful;
+            {
+                NewSource(QString("STL"));
+                return;
+            }
+            else if(reply == QMessageBox::Close) //If the user does not wish to continue, quit the function so there is not an error
+            {
+                return;
+            }
+        }
 
         //Convert the filename from qstring to a char pointer (char array)
         ba.clear();
@@ -223,79 +239,14 @@ void MainWindow::NewSource(QString Source_Type) //General source function - need
 
 void MainWindow::handleBtn_Test()
 {
-
-      //vtkSmartPointer<vtkAlgorithm> sphereSource1 = (vtkSmartPointer<vtkAlgorithm>) vtkSmartPointer<vtkSphereSource>::New();
-
-      vtkNew<vtkSphereSource> sphereSource1;
-      sphereSource1->Update();
-      vtkNew<vtkDelaunay3D> delaunay1;
-      delaunay1->SetInputConnection(sphereSource1->GetOutputPort());
-      delaunay1->Update();
-
-      vtkNew<vtkSphereSource> sphereSource2;
-      sphereSource2->SetCenter(5, 0, 0);
-      sphereSource2->Update();
-
-      vtkNew<vtkDelaunay3D> delaunay2;
-      delaunay2->SetInputConnection(sphereSource2->GetOutputPort());
-      delaunay2->Update();
-
-      vtkNew<vtkAppendFilter> appendFilter;
-      appendFilter->AddInputConnection(delaunay1->GetOutputPort());
-      appendFilter->AddInputConnection(delaunay2->GetOutputPort());
-      appendFilter->Update();
-
-      vtkNew<vtkConnectivityFilter> connectivityFilter;
-      connectivityFilter->SetInputConnection(appendFilter->GetOutputPort());
-      connectivityFilter->SetExtractionModeToAllRegions();
-      connectivityFilter->ColorRegionsOn();
-      connectivityFilter->Update();
-
-      ModelData = vtkSmartPointer<vtkAlgorithm>::New();
-      ModelData = (vtkSmartPointer<vtkAlgorithm>) connectivityFilter;
-
-      ModelData = Shrink_Filter(ModelData);
-
-      vtkNew<vtkDataSetMapper> mapper;
-      mapper->SetInputConnection(ModelData->GetOutputPort());
-      mapper->Update();
-
-      vtkNew<vtkActor> actor;
-      actor->SetMapper(mapper);
-
-      renderer->AddActor(actor);
-      Rendered_Sphere_Actor_Array.push_back(actor);
-      renderWindow->Render();
-      Add_Rendered_Actors_To_Combo();
-
 }
 
 void MainWindow::handleBtn_Test2()
 {
-       //vtkNew<vtkCubeSource> CubeSource;
-       sphereSource->SetThetaResolution(30);
-       sphereSource->SetPhiResolution(15);
-       sphereSource->Update();
-
-       ModelData = vtkSmartPointer<vtkAlgorithm> (sphereSource);
-
-       ModelData = Clip_Filter(ModelData);
-       vtkNew<vtkDataSetMapper> mapper;
-       mapper->SetInputConnection(ModelData->GetOutputPort());
-       mapper->Update();
-
-       vtkNew<vtkActor> actor;
-       actor->SetMapper(mapper);
-       renderer_Tab2->AddActor(actor); // display the sphere
-
-       renderWindow_Tab2->Render();
-       Rendered_Sphere_Actor_Array.push_back(actor);
-       Add_Rendered_Actors_To_Combo();   
 }
 
 void MainWindow::handlactionFileOpen()
 {
-
     if (Rendered_STL_Actor_Array.size()<9)
     {
         NewSource(QString("STL"));
@@ -308,7 +259,6 @@ void MainWindow::handlactionFileOpen()
         warning_box.setText(QString("Cannot have more than 9 STL models!"));
         warning_box.show();
     }
-
 }
 
 void MainWindow::handleBtn_Cube()
@@ -345,15 +295,7 @@ void MainWindow::handleBtn_Sphere()
 
 void MainWindow::handleBtn_Model_Colour()
 {
-    if(ui->comboBox_Actors->currentText() == "")
-    {
-        warning_box.setIcon(warning_box.Information);
-        warning_box.setStandardButtons(warning_box.Ok);
-        warning_box.setWindowTitle(QString("Warning"));
-        warning_box.setText(QString("No model selected!"));
-        warning_box.show();
-    }
-    else
+    if(Combo_Check(QString("Warning"),QString("No model selected!")))
     {
         QColor ColourDialog = QColorDialog::getColor();
 
@@ -410,13 +352,10 @@ void MainWindow::handleBtn_Camera_Reset()
         renderer_Tab2->ResetCameraClippingRange();
         renderWindow_Tab2->Render();
     }
-
-
-
     emit statusUpdateMessage( QString("Camera reset!"), 0 );
 }
 
-void MainWindow::reset_function() //NEEDS UPDATING
+void MainWindow::reset_function()
 {
     if(ui->checkBox_Clip->isChecked()==true)
     {
@@ -425,8 +364,7 @@ void MainWindow::reset_function() //NEEDS UPDATING
     if (ui->checkBox_Shrink->isChecked()==true)
     {
         ui->doubleSpinBox->setValue(1);
-        ui->doubleSpinBox->hide();
-        ui->Lbl_Shrink_Filter->hide();
+        ui->verticalWidget_Shrink->hide();
         ui->checkBox_Shrink->setChecked(false);
     }
     if(ui->checkBox_Elevation->isChecked()==true)
@@ -472,8 +410,7 @@ void MainWindow::handleBtn_Clear() //Function to clear whole program
     ui->Btn_Remove->setEnabled(0);
     ui->Btn_Reset->setEnabled(0);
     ui->Btn_Filter->setEnabled(0);
-    ui->doubleSpinBox->hide(); //Hide uneccesary spin box used for filters
-    ui->Lbl_Shrink_Filter->hide();
+    ui->verticalWidget_Shrink->hide();
     ui->verticalWidget_Transform->hide(); //Hide uneccesary spin boxes9 used for transform filter.
 
     renderer->RemoveAllViewProps(); //Remove all currently rendered objects.
@@ -493,15 +430,7 @@ void MainWindow::handleBtn_Clear() //Function to clear whole program
 
 void MainWindow::handleBtn_Change_Position() //Function to change the position of the currently selected actor from the drop down menue
 {
-    if(ui->comboBox_Actors->currentText() == "")
-    {
-        warning_box.setIcon(warning_box.Information);
-        warning_box.setStandardButtons(warning_box.Ok);
-        warning_box.setWindowTitle(QString("Warning"));
-        warning_box.setText(QString("No model selected!"));
-        warning_box.show();
-    }
-    else
+    if(Combo_Check(QString("Warning"),QString("No model selected!")))
     {
         //Using the FindActor function to find the pointer to the actor currently selected from the drop down menue by the user,
         //Set it's position to the values the user has entered into the spin boxes for x, y and z, and then re-render
@@ -622,17 +551,9 @@ void MainWindow::Add_Rendered_Actors_To_Combo() //Function to add the pointers t
        }
 }
 
-void MainWindow::handleBtn_Remove()
+void MainWindow::handleBtn_Remove_Actor()
 {
-    if(ui->comboBox_Actors->currentText() == "")
-    {
-        warning_box.setIcon(warning_box.Information);
-        warning_box.setStandardButtons(warning_box.Ok);
-        warning_box.setWindowTitle(QString("Warning"));
-        warning_box.setText(QString("No model selected!"));
-        warning_box.show();
-    }
-    else
+    if(Combo_Check(QString("Warning"),QString("No model selected!")))
     {
         QMessageBox::StandardButton reply;
         reply = warning_box.question(this, "Please select an option", "Are you sure you wish to remove this model?",QMessageBox::Yes|QMessageBox::No);
@@ -681,15 +602,7 @@ void MainWindow::handleBtn_Remove()
 
 void MainWindow::handleBtn_Reset_Actor() //Button to reset selected actor/model
 {
-    if(ui->comboBox_Actors->currentText() == "")
-    {
-        warning_box.setIcon(warning_box.Information);
-        warning_box.setStandardButtons(warning_box.Ok);
-        warning_box.setWindowTitle(QString("Warning"));
-        warning_box.setText(QString("No model selected!"));
-        warning_box.show();
-    }
-    else
+    if(Combo_Check(QString("Warning"),QString("No model selected!")))
     {
         QMessageBox::StandardButton reply;
         reply = warning_box.question(this, "Please select an option", "Are you sure you wish to reset this model?",QMessageBox::Yes|QMessageBox::No);
@@ -813,11 +726,11 @@ vtkSmartPointer<vtkActor> MainWindow::FindActor() //Function to find the current
 vtkSmartPointer<vtkAlgorithm> MainWindow::Shrink_Filter(vtkSmartPointer<vtkAlgorithm> ModelData)
 {
     vtkSmartPointer<vtkAlgorithm> Data = ModelData;
-    Cube_shrinkFilter = vtkSmartPointer<vtkShrinkFilter>::New();
-    Cube_shrinkFilter->SetInputConnection(Data->GetOutputPort() );
-    Cube_shrinkFilter->SetShrinkFactor(ui->doubleSpinBox->value());
-    Cube_shrinkFilter->Update();
-    return((vtkSmartPointer<vtkAlgorithm>) Cube_shrinkFilter);
+    vtkSmartPointer<vtkShrinkFilter> Current_shrinkFilter = vtkSmartPointer<vtkShrinkFilter>::New();
+    Current_shrinkFilter->SetInputConnection(Data->GetOutputPort() );
+    Current_shrinkFilter->SetShrinkFactor(ui->doubleSpinBox->value());
+    Current_shrinkFilter->Update();
+    return((vtkSmartPointer<vtkAlgorithm>) Current_shrinkFilter);
 }
 
 vtkSmartPointer<vtkAlgorithm> MainWindow::Clip_Filter(vtkSmartPointer<vtkAlgorithm> ModelData)
@@ -826,7 +739,7 @@ vtkSmartPointer<vtkAlgorithm> MainWindow::Clip_Filter(vtkSmartPointer<vtkAlgorit
     planeLeft->SetOrigin(0.0, 0.0, 0.0);
     planeLeft->SetNormal(-1.0, 0.0, 0.0);
     vtkSmartPointer<vtkAlgorithm> Data = ModelData;
-    Current_clipFilter= vtkSmartPointer<vtkClipDataSet>::New();
+    vtkSmartPointer<vtkClipDataSet> Current_clipFilter= vtkSmartPointer<vtkClipDataSet>::New();
     Current_clipFilter->SetInputConnection( Data->GetOutputPort() ) ;
     Current_clipFilter->SetClipFunction( planeLeft.Get() );
     return ((vtkSmartPointer<vtkAlgorithm>) Current_clipFilter);
@@ -856,18 +769,8 @@ vtkSmartPointer<vtkAlgorithm> MainWindow::Transform_Filter(vtkSmartPointer<vtkAl
 
 void MainWindow::handleBtn_Filter()
 {
-
-   if(ui->comboBox_Actors->currentText() == "")
+   if(Combo_Check(QString("Warning"),QString("No model selected!")))
    {
-       warning_box.setIcon(warning_box.Information);
-       warning_box.setStandardButtons(warning_box.Ok);
-       warning_box.setWindowTitle(QString("Warning"));
-       warning_box.setText(QString("No model selected!"));
-       warning_box.show();
-   }
-   else
-   {
-
         QString Combo_text = ui->comboBox_Actors->currentText();
         QChar Num = Combo_text.back();
         int Index = Num.digitValue();
@@ -883,13 +786,11 @@ void MainWindow::handleBtn_Filter()
         if(ui->comboBox_Actors->currentText().contains("cube"))
         {
             ModelData = (vtkSmartPointer<vtkAlgorithm>) CubeSource;
-            emit statusUpdateMessage(QString("Source is a cube"), 0 );
             Current_actor = FindActor();
         }
         else if(ui->comboBox_Actors->currentText().contains("sphere"))
         {
             ModelData = (vtkSmartPointer<vtkAlgorithm>) sphereSource;
-            emit statusUpdateMessage(QString("Source is a sphere"), 0 );
             Current_actor = FindActor();
         }
         else if(ui->comboBox_Actors->currentText().contains("STL"))
@@ -908,7 +809,6 @@ void MainWindow::handleBtn_Filter()
             reader->SetFileName(c_str); //reader object to point to the filename
             reader->Update();
             ModelData = (vtkSmartPointer<vtkAlgorithm>) reader; //Creates a new pointer to avoid overwrite issues.
-            emit statusUpdateMessage(QString("Source is an STL"), 0 );
             Current_actor = FindActor();
         }
 
@@ -920,8 +820,6 @@ void MainWindow::handleBtn_Filter()
         {
             renderer_Tab2->RemoveActor(Current_actor);
         }
-
-
 
         //Below are if statements for every combination of the four filter checkboxes. The combination of all four
         //checkboxes not having been selected is not needed as in this case the ModelData should remain unchanged.
@@ -1039,13 +937,11 @@ void MainWindow::handleBtn_Filter()
 
         if (ui->checkBox_Shrink->isChecked()==true)
         {
-            ui->doubleSpinBox->show();
-            ui->Lbl_Shrink_Filter->show();
+            ui->verticalWidget_Shrink->show();
         }
         else
         {
-            ui->doubleSpinBox->hide();
-            ui->Lbl_Shrink_Filter->hide();
+            ui->verticalWidget_Shrink->hide();
         }
 
         if (ui->checkBox_Transform->isChecked()==true)
@@ -1056,6 +952,67 @@ void MainWindow::handleBtn_Filter()
         {
             ui->verticalWidget_Transform->hide();
         }
+        emit statusUpdateMessage(QString("Filters applied!"), 0 );
+    }
+}
+
+bool MainWindow::Combo_Check(QString Title, QString Message)
+{
+    if(ui->comboBox_Actors->currentText() == "")
+    {
+        warning_box.setIcon(warning_box.Information);
+        warning_box.setStandardButtons(warning_box.Ok);
+        warning_box.setWindowTitle(Title);
+        warning_box.setText(Message);
+        warning_box.show();
+        return(0);
+    }
+    else
+    {
+        return(1);
+    }
+}
+
+void MainWindow::Shrink_Box_Checked()
+{
+    if(ui->checkBox_Shrink->isChecked())
+    {
+        ui->verticalWidget_Shrink->show();
+    }
+    else if(ui->checkBox_Shrink->isChecked() != 1)
+    {
+        ui->verticalWidget_Shrink->hide();
+    }
+}
+
+void MainWindow::Transform_Box_Checked()
+{
+    if(ui->checkBox_Transform->isChecked())
+    {
+        ui->verticalWidget_Transform->show();
+    }
+    else if(ui->checkBox_Transform->isChecked() != 1)
+    {
+        ui->verticalWidget_Transform->hide();
+    }
+}
+
+void MainWindow::Help()
+{
+    QDesktopServices::openUrl(QUrl("https://ejagombar.github.io/2021_Group_3/", QUrl::TolerantMode));
+}
+
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+    QMessageBox::StandardButton reply;
+    reply = warning_box.question(this, "Please select an option", "Are you sure you wish quit?",QMessageBox::Yes|QMessageBox::No);
+    if (reply == QMessageBox::Yes)
+    {
+        event->accept();//Quits the program
+    }
+    if (reply == QMessageBox::No)
+    {
+        event->ignore(); //Ignores the close button press
     }
 }
 
@@ -1064,15 +1021,15 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//NEED TO SORT STL WHEN FILE NOT SELECTED
-
-//IDEA :  Roatate sliders for objects using actor->rotateX e.g. or rotateZXWY
-
 //NEEDED:
-
-//      function to control which render window is used
-//      get rotation and volume/size code from donkun
-
-//Link QApplication::quit(); to x button to check if user wants to quit
+//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//          :Get rotation and volume/size code from donkun
+//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//          :Comment code + Doxygen
 
 

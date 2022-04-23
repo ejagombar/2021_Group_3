@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1101</width>
-    <height>634</height>
+    <width>1192</width>
+    <height>662</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout_Actor_Section">
       <item>
        <widget class="QLabel" name="Lbl_Actor">
         <property name="text">
@@ -64,7 +64,7 @@
       <item>
        <widget class="QLabel" name="Lbl_Change">
         <property name="text">
-         <string>Change Source</string>
+         <string>Edit Source</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -74,14 +74,14 @@
       <item>
        <widget class="QPushButton" name="Btn_Remove">
         <property name="text">
-         <string>Remove Actor</string>
+         <string>Remove</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="Btn_Reset">
         <property name="text">
-         <string>Reset Actor</string>
+         <string>Reset</string>
         </property>
        </widget>
       </item>
@@ -101,7 +101,7 @@
      </layout>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout_VTK_Widget">
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
@@ -137,17 +137,17 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="horizontalLayout_Object_And_Project">
         <property name="topMargin">
          <number>15</number>
         </property>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <layout class="QHBoxLayout" name="horizontalLayout_Position">
           <property name="rightMargin">
            <number>0</number>
           </property>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_4">
+           <layout class="QVBoxLayout" name="verticalLayout_Position">
             <property name="rightMargin">
              <number>0</number>
             </property>
@@ -162,9 +162,9 @@
              </widget>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <layout class="QHBoxLayout" name="horizontalLayout_Position_Spin_Boxes">
               <item>
-               <layout class="QVBoxLayout" name="verticalLayout_11">
+               <layout class="QVBoxLayout" name="verticalLayout_Spinbox_X">
                 <item>
                  <widget class="QLabel" name="Lbl_X_Position">
                   <property name="text">
@@ -185,7 +185,7 @@
                </layout>
               </item>
               <item>
-               <layout class="QVBoxLayout" name="verticalLayout_17">
+               <layout class="QVBoxLayout" name="verticalLayout_Spinbox_Y">
                 <property name="rightMargin">
                  <number>0</number>
                 </property>
@@ -209,7 +209,7 @@
                </layout>
               </item>
               <item>
-               <layout class="QVBoxLayout" name="verticalLayout_13">
+               <layout class="QVBoxLayout" name="verticalLayout_Spinbox_X_2">
                 <item>
                  <widget class="QLabel" name="Lbl_Z_Position">
                   <property name="text">
@@ -288,7 +288,7 @@
      </layout>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_5">
+     <layout class="QVBoxLayout" name="verticalLayout_Filters">
       <property name="sizeConstraint">
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
@@ -310,32 +310,41 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="Lbl_Shrink_Filter">
-        <property name="text">
-         <string>Shrink Factor</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox">
-        <property name="decimals">
-         <number>3</number>
-        </property>
-        <property name="minimum">
-         <double>0.000000000000000</double>
-        </property>
-        <property name="maximum">
-         <double>1.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.100000000000000</double>
-        </property>
-        <property name="value">
-         <double>1.000000000000000</double>
-        </property>
+       <widget class="QWidget" name="verticalWidget_Shrink" native="true">
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="topMargin">
+          <number>1</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="Lbl_Shrink_Filter">
+           <property name="text">
+            <string>Shrink Factor</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="doubleSpinBox">
+           <property name="decimals">
+            <number>3</number>
+           </property>
+           <property name="minimum">
+            <double>0.000000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>1.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
+           </property>
+           <property name="value">
+            <double>1.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
@@ -387,7 +396,7 @@
             <number>0</number>
            </property>
            <item>
-            <layout class="QVBoxLayout" name="verticalLayout_12">
+            <layout class="QVBoxLayout" name="verticalLayout_Scale_X">
              <property name="topMargin">
               <number>0</number>
              </property>
@@ -411,7 +420,7 @@
             </layout>
            </item>
            <item>
-            <layout class="QVBoxLayout" name="verticalLayout_10">
+            <layout class="QVBoxLayout" name="verticalLayout_Scale_Y">
              <item>
               <widget class="QLabel" name="label_2">
                <property name="text">
@@ -432,7 +441,7 @@
             </layout>
            </item>
            <item>
-            <layout class="QVBoxLayout" name="verticalLayout_8">
+            <layout class="QVBoxLayout" name="verticalLayout_Scale_Z">
              <property name="rightMargin">
               <number>0</number>
              </property>
@@ -516,8 +525,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1101</width>
-     <height>21</height>
+     <width>1192</width>
+     <height>31</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
