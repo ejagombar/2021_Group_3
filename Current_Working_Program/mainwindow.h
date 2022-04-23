@@ -21,6 +21,7 @@
 #include <vtkPlane.h>
 #include <vtkClipDataSet.h>
 #include <vtkSTLReader.h>
+#include <QMessageBox>
 
 
 namespace Ui {
@@ -56,9 +57,11 @@ public slots:
     void reset_function(); //Resets the program UI to state after a model has been loaded + appropriate UI
     void New_Actor_Selected(); //Runs ever time the user selects new actor from drop down menue to update UI (e.g. location box)
 
+    void Tab_Changed();
+
     vtkSmartPointer<vtkActor> FindActor(); //
     void Add_Rendered_Actors_To_Combo();
-    void handleBtn_Filter();
+
     void handleBtn_Reset_Actor();
     void handleBtn_Remove();
     void handleBtn_Change_Position();
@@ -67,7 +70,7 @@ public slots:
     void handleBtn_Test2();
 
     //Filter pipeline functions
-    void Filter();
+    void handleBtn_Filter();
     vtkSmartPointer<vtkAlgorithm> Shrink_Filter(vtkSmartPointer<vtkAlgorithm>);
     vtkSmartPointer<vtkAlgorithm> Clip_Filter(vtkSmartPointer<vtkAlgorithm>);
     vtkSmartPointer<vtkAlgorithm> Elevation_Filter(vtkSmartPointer<vtkAlgorithm>);
@@ -78,6 +81,9 @@ private:
     Ui::MainWindow *ui;
     vtkSmartPointer<vtkRenderer> renderer;
     vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
+
+    vtkSmartPointer<vtkRenderer> renderer_Tab2;
+    vtkNew<vtkGenericOpenGLRenderWindow> renderWindow_Tab2;
 
     //Sources
     vtkNew<vtkSTLReader> reader;
@@ -122,6 +128,8 @@ private:
     float Background_RedF=0;
     float Background_BlueF=0;
     float Background_Green=0;
+
+    QMessageBox warning_box;
 };
 
 #endif // MAINWINDOW_H
