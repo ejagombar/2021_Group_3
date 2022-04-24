@@ -35,7 +35,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Worksheet_6_Exercise_3
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-	${QRC_Srcs}
+        ${QRC_Srcs}
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Worksheet_6_Exercise_3 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -45,14 +45,14 @@ else()
     if(ANDROID)
         add_library(Worksheet_6_Exercise_3 SHARED
             ${PROJECT_SOURCES}
-	    ${QRC_Srcs}
+            ${QRC_Srcs}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
         add_executable(Worksheet_6_Exercise_3
             ${PROJECT_SOURCES}
-	    ${QRC_Srcs}
+            ${QRC_Srcs}
         )
     endif()
 endif()
