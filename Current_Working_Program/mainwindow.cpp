@@ -36,6 +36,7 @@
 #include <QCloseEvent>
 
 #include <QDesktopServices>
+#include <Filter.h>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -239,6 +240,8 @@ void MainWindow::NewSource(QString Source_Type) //General source function - need
 
 void MainWindow::handleBtn_Test()
 {
+
+
 }
 
 void MainWindow::handleBtn_Test2()
@@ -352,7 +355,6 @@ void MainWindow::handleBtn_Camera_Reset()
         renderer_Tab2->ResetCameraClippingRange();
         renderWindow_Tab2->Render();
     }
-    emit statusUpdateMessage( QString("Camera reset!"), 0 );
 }
 
 void MainWindow::reset_function()
@@ -1031,5 +1033,6 @@ MainWindow::~MainWindow()
 //          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //          :Comment code + Doxygen
+//          :Check includes in header and main
 
 
