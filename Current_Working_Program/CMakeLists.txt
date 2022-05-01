@@ -22,14 +22,11 @@ set(CPACK_GENERATOR "ZIP")
 endif()
 include(CPack)
 
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(VTK 6.0 REQUIRED COMPONENTS vtkCommonCore vtkGUISupportQt vtkCommonColor vtkIOGeometry)
+
 add_subdirectory(Custom_Mod_Library)
 link_directories(${CMAKE_SOURCE_DIR}/Custom_Mod_Library)
-
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
-find_package(Qt6 REQUIRED COMPONENTS Core)
-find_package(Qt6Widgets)
-#qt_standard_project_setup()
 
 set(PROJECT_SOURCES
         main.cpp
@@ -44,37 +41,16 @@ qt6_wrap_ui( UI_Srcs ${UIS} )
 set( ICONS Icons/icons.qrc )
 qt6_add_resources( QRC_Srcs ${ICONS} )
 
-find_package( VTK REQUIRED )
-#include( ${VTK_USE_FILE} )
+message("QT version =  ${QT_VERSION_MAJOR}")
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(Worksheet_6_Exercise_3
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
-        ${QRC_Srcs}
-    )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET Worksheet_6_Exercise_3 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-else()
-    if(ANDROID)
-        add_library(Worksheet_6_Exercise_3 SHARED
-            ${PROJECT_SOURCES}
-            ${QRC_Srcs}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(Worksheet_6_Exercise_3
-            ${PROJECT_SOURCES}
-            ${QRC_Srcs}
-        )
-    endif()
-endif()
+qt_add_executable(Worksheet_6_Exercise_3
+                  MANUAL_FINALIZATION
+                  ${PROJECT_SOURCES}
+                  ${QRC_Srcs}
+                  )
 
-target_link_libraries(Worksheet_6_Exercise_3 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(Worksheet_6_Exercise_3 PRIVATE ${VTK_LIBRARIES})
+target_link_libraries(Worksheet_6_Exercise_3 PRIVATE Qt6::Widgets)
+target_link_libraries(Worksheet_6_Exercise_3 PRIVATE VTK::CommonCore VTK::GUISupportQt VTK::CommonColor VTK::IOGeometry)
 
 set_target_properties(Worksheet_6_Exercise_3 PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
@@ -82,11 +58,101 @@ set_target_properties(Worksheet_6_Exercise_3 PROPERTIES
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
 )
 
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(Worksheet_6_Exercise_3)
-endif()
+qt_finalize_executable(Worksheet_6_Exercise_3)
 
-install(TARGETS Worksheet_6_Exercise_3 LibsModule
+set(CMAKE_INSTALL_DEBUG_LIBRARIES true)
+include (InstallRequiredSystemLibraries)
+
+message( "QT dir = ${QRC_Srcs}")
+message( "dir = ${VTK_PREFIX_PATH}")
+message( "libs = ${VTK_LIBRARIES}")
+
+install(IMPORTED_RUNTIME_ARTIFACTS 
+        Qt6::Widgets 
+        VTK::CommonCore 
+        VTK::GUISupportQt 
+        VTK::CommonColor 
+        VTK::IOGeometry 
+        # remainng libraries are dependencies of the above (but can't work out how to automatically install them)
+        VTK::RenderingOpenGL2 
+        #Qt6::Gui 
+        #Qt6::Core 
+        VTK::RenderingCore 
+        VTK::FiltersSources 
+        VTK::FiltersGeneral 
+        VTK::FiltersCore 
+        VTK::CommonExecutionModel
+        VTK::CommonTransforms 
+        VTK::InteractionWidgets 
+        VTK::InteractionStyle 
+        VTK::jsoncpp 
+        VTK::FiltersHybrid 
+        VTK::IOImage 
+        VTK::IOCore
+        VTK::GUISupportQt
+        VTK::IOGeometry
+        VTK::RenderingOpenGL2
+        VTK::RenderingCore
+        VTK::CommonColor
+        VTK::FiltersSources
+        VTK::FiltersGeneral
+        VTK::FiltersCore
+        VTK::CommonExecutionModel
+        VTK::CommonDataModel
+        VTK::CommonTransforms
+        VTK::CommonCore
+        VTK::InteractionWidgets
+        VTK::InteractionStyle
+        #Qt6::OpenGLWidgets
+        VTK::FiltersExtraction
+        VTK::CommonSystem
+        #Qt6::OpenGL
+        VTK::RenderingContext2D
+        VTK::FiltersHybrid
+        VTK::FiltersModeling
+        VTK::FiltersTexture
+        VTK::ImagingGeneral
+        VTK::ImagingHybrid
+        VTK::RenderingAnnotation
+        VTK::RenderingFreeType
+        VTK::CommonComputationalGeometry
+        VTK::ImagingCore
+        VTK::CommonMath
+        VTK::ImagingSources
+        VTK::FiltersGeometry
+        VTK::vtksys
+        VTK::CommonMisc
+        VTK::ImagingColor
+        VTK::freetype
+        VTK::zlib
+        VTK::kissfft
+        VTK::FiltersStatistics
+        VTK::ParallelDIY
+        VTK::ParallelCore
+        VTK::IOXML
+        VTK::IOXMLParser
+        VTK::IOCore
+        VTK::expat
+        VTK::doubleconversion
+        VTK::lz4
+        VTK::lzma
+        VTK::IOLegacy
+        VTK::jsoncpp
+        VTK::IOImage
+        VTK::DICOMParser
+        VTK::metaio
+        VTK::png
+        VTK::tiff
+        VTK::pugixml
+        VTK::jpeg
+        VTK::RenderingUI
+        VTK::glew
+        VTK::fmt
+        VTK::loguru
+        RUNTIME_DEPENDENCY_SET thirdPartyLibs
+        DESTINATION bin)
+
+install(TARGETS Worksheet_6_Exercise_3 LibsModule 
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib/static)
