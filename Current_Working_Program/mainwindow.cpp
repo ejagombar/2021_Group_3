@@ -63,14 +63,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi( this );
 
     // Link the renderWindows to their respective QtVTK widgets in each tab
-    ui->qvtkWidget_Tab1->SetRenderWindow( renderWindow );
-    ui->qvtkWidget_Tab2->SetRenderWindow( renderWindow_Tab2 );
+    ui->qvtkWidget_Tab1->setRenderWindow( renderWindow );
+    ui->qvtkWidget_Tab2->setRenderWindow( renderWindow_Tab2 );
 
     // Create new renderers, and add to their respective render windows
     renderer = vtkSmartPointer<vtkRenderer>::New();
     renderer_Tab2 = vtkSmartPointer<vtkRenderer>::New();
-    ui->qvtkWidget_Tab1->GetRenderWindow()->AddRenderer( renderer );
-    ui->qvtkWidget_Tab2->GetRenderWindow()->AddRenderer( renderer_Tab2 );
+    ui->qvtkWidget_Tab1->renderWindow()->AddRenderer( renderer );
+    ui->qvtkWidget_Tab2->renderWindow()->AddRenderer( renderer_Tab2 );
 
     // Set backgrounds to default black colour
     renderer->SetBackground( colors->GetColor3d("black").GetData() );
