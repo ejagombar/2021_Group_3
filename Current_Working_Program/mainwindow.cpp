@@ -1,42 +1,59 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+//Header files for model visualisation
 #include <vtkSmartPointer.h>
 #include <vtkCubeSource.h>
 #include <vtkSphereSource.h>
-
-#include <vtkActor.h>
-#include <vtkProperty.h>
-#include <vtkCamera.h>
-
-#include <vtkDataSetMapper.h>
+#include <vtkSTLReader.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
-#include <vtkRenderer.h>
-#include <vtkNamedColors.h>
-#include <vtkNew.h>
 #include <vtkGenericOpenGLRenderWindow.h>
-#include <vtkSTLReader.h>
+#include <vtkRenderer.h>
+#include <vtkActor.h>
+#include <vtkDataSetMapper.h>
+
+//Header files for filtering
 #include <vtkShrinkFilter.h>
-#include <vtkPlane.h>
 #include <vtkClipDataSet.h>
-#include <vtkDataSet.h>
+#include <vtkPlane.h>
 #include <vtkElevationFilter.h>
 #include <vtkTransformFilter.h>
 #include <vtkTransform.h>
 
+//Header files for model editing/program operation
+//#include <vtkProperty.h>
+#include <vtkCamera.h>
+#include <vtkNamedColors.h>
+#include <vtkNew.h>
 #include <QMessageBox>
 #include <QFileDialog>
-#include <QTextStream>
-#include <QFile>
 #include <QColorDialog>
-
 #include <stdio.h>
 #include <string.h>
 #include <QCloseEvent>
-
 #include <QDesktopServices>
-#include <Filter.h>
+
+//-------------------------------------------------------------
+// EEEE2046 Computing Lab work program
+//-------------------------------------------------------------
+
+// Authors      : Ben Richards, Edward Agombar,
+
+// Required
+// header
+// files        : iostream
+
+// README       :
+//              :
+//              :
+
+// Restrictions/:
+// improvements :
+//              :
+//              :
+//              :
+//-------------------------------------------------------------
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -49,25 +66,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->qvtkWidget_Tab1->SetRenderWindow( renderWindow );
     ui->qvtkWidget_Tab2->SetRenderWindow( renderWindow_Tab2 );
 
-    // Create new renderers, and add to render windows
+    // Create new renderers, and add to their respective render windows
     renderer = vtkSmartPointer<vtkRenderer>::New();
     renderer_Tab2 = vtkSmartPointer<vtkRenderer>::New();
     ui->qvtkWidget_Tab1->GetRenderWindow()->AddRenderer( renderer );
     ui->qvtkWidget_Tab2->GetRenderWindow()->AddRenderer( renderer_Tab2 );
 
-    // Set background to default to black
+    // Set backgrounds to default black colour
     renderer->SetBackground( colors->GetColor3d("black").GetData() );
     renderer_Tab2->SetBackground( colors->GetColor3d("black").GetData() );
 
     // Setup the renderers's cameras
-    renderer->ResetCamera();
-    renderer->GetActiveCamera()->Azimuth(30);
-    renderer->GetActiveCamera()->Elevation(30);
-    renderer->ResetCameraClippingRange();
-    renderer_Tab2->ResetCamera();
-    renderer_Tab2->GetActiveCamera()->Azimuth(30);
-    renderer_Tab2->GetActiveCamera()->Elevation(30);
-    renderer_Tab2->ResetCameraClippingRange();
+    handleBtn_Camera_Reset();
 
     //Adds status bar
     QStatusBar *statusbar = new QStatusBar(this);
@@ -130,6 +140,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     connect( ui->Btn_Test, &QPushButton::released, this, &MainWindow::handleBtn_Test );
     connect( ui->Btn_Test2, &QPushButton::released, this, &MainWindow::handleBtn_Test2 );
+}
+
+void MainWindow::handleBtn_Test()
+{
+}
+
+void MainWindow::handleBtn_Test2()
+{
 }
 
 void MainWindow::NewSource(QString Source_Type) //General source function - need
@@ -238,18 +256,10 @@ void MainWindow::NewSource(QString Source_Type) //General source function - need
     ui->Btn_Filter->setEnabled(1);
 }
 
-void MainWindow::handleBtn_Test()
+void MainWindow::handlactionFileOpen() //Function to render an STL model from a file
 {
-
-
-}
-
-void MainWindow::handleBtn_Test2()
-{
-}
-
-void MainWindow::handlactionFileOpen()
-{
+    //Checks to see if STL limit has been reached, if it has not, render a new STL using the NewSource function.
+    //If it has, inform the user and exit function.
     if (Rendered_STL_Actor_Array.size()<9)
     {
         NewSource(QString("STL"));
@@ -264,8 +274,10 @@ void MainWindow::handlactionFileOpen()
     }
 }
 
-void MainWindow::handleBtn_Cube()
+void MainWindow::handleBtn_Cube()//Function to render a cube
 {
+    //Checks to see if cube limit has been reached, if it has not, render a new cube using the NewSource function.
+    //If it has, inform the user and exit function.
     if (Rendered_Cube_Actor_Array.size()<9)
     {
         NewSource(QString("Cube"));
@@ -280,8 +292,10 @@ void MainWindow::handleBtn_Cube()
     }
 }
 
-void MainWindow::handleBtn_Sphere()
+void MainWindow::handleBtn_Sphere() //Function to render a sphere
 {
+    //Checks to see if sphere limit has been reached, if it has not, render a new sphere using the NewSource function.
+    //If it has, inform the user and exit function.
     if (Rendered_Sphere_Actor_Array.size()<9)
     {
         NewSource(QString("Sphere"));
@@ -296,8 +310,14 @@ void MainWindow::handleBtn_Sphere()
     }
 }
 
-void MainWindow::handleBtn_Model_Colour()
+void MainWindow::handleBtn_Model_Colour() //Button to change the colour of the currently selected model
 {
+    // The function checks if the user has selected a model (a.k.a. if the drop down menue is not empty), and then
+    //uses the built in QColorDialog function (Qt) to get the user to pick a colour, and then update the selected
+    //model to this colour.
+
+    //NOTE! if the elevation filter is applied, the colour change will not be visible until this filter is removed.
+
     if(Combo_Check(QString("Warning"),QString("No model selected!")))
     {
         QColor ColourDialog = QColorDialog::getColor();
@@ -317,27 +337,34 @@ void MainWindow::handleBtn_Model_Colour()
         }
         emit statusUpdateMessage( QString("Model colour changed!"), 0 );
     }
-
-
-
-
 }
 
-void MainWindow::handleBtn_Change_Background()
+void MainWindow::handleBtn_Change_Background() //Function to change backround to colour selected from colour picker by user
 {
+    // The function checks if the user has selected a model (a.k.a. if the drop down menue is not empty), and then
+    //uses the built in QColorDialog function (Qt) to get the user to pick a colour, and then update the background of the tab
+    //currently selected by the user.
+
     QColor ColourDialog = QColorDialog::getColor();
     float Red,Green,Blue=0.;
     Red=ColourDialog.redF();
     Green=ColourDialog.greenF();
     Blue=ColourDialog.blueF();
 
-    renderer->SetBackground(Red,Green,Blue);
-    renderWindow->Render();
-
+    if(ui->tabWidget->currentIndex()==0)
+    {
+        renderer->SetBackground(Red,Green,Blue);
+        renderWindow->Render();
+    }
+    else if (ui->tabWidget->currentIndex()==1)
+    {
+        renderer_Tab2->SetBackground(Red,Green,Blue);
+        renderWindow_Tab2->Render();
+    }
     emit statusUpdateMessage( QString("Background colour changed!"), 0 );
 }
 
-void MainWindow::handleBtn_Camera_Reset()
+void MainWindow::handleBtn_Camera_Reset() //Function to reset camera to default position
 {
     if(ui->tabWidget->currentIndex()==0)
     {
@@ -357,7 +384,7 @@ void MainWindow::handleBtn_Camera_Reset()
     }
 }
 
-void MainWindow::reset_function()
+void MainWindow::reset_function() //Function to reset UI to default state
 {
     if(ui->checkBox_Clip->isChecked()==true)
     {
@@ -394,40 +421,49 @@ void MainWindow::reset_function()
 
 }
 
-void MainWindow::handleBtn_Clear() //Function to clear whole program
+void MainWindow::handleBtn_Clear() //Function to clear whole program if user wants to
 {
-    //Function should: disable position elements, actor colour picker and filter checkboxes
-    //Function should fully clear all source and actor arrays, the rendered actor collection and the rendered actor array
-    //Function should also clear drop down menue, and the values on all boxes where values can be entered, including
-    //colour pickers
+    //Function disables position elements, actor colour picker and filter checkboxes, fully clears all source and actor
+    //arrays, the rendered actor collection and the rendered actor array. It also clears the drop down menue and both tabs'
+    //renderers.
 
-    reset_function();
-    //Disable filter options until a source is loaded
-    ui->checkBox_Clip->setEnabled(0);
-    ui->checkBox_Shrink->setEnabled(0);
-    ui->checkBox_Elevation->setEnabled(0);
-    ui->checkBox_Transform->setEnabled(0);
-    ui->Btn_Model_Colour->setEnabled(0);
-    ui->Btn_Position->setEnabled(0);
-    ui->Btn_Remove->setEnabled(0);
-    ui->Btn_Reset->setEnabled(0);
-    ui->Btn_Filter->setEnabled(0);
-    ui->verticalWidget_Shrink->hide();
-    ui->verticalWidget_Transform->hide(); //Hide uneccesary spin boxes9 used for transform filter.
+    QMessageBox::StandardButton reply;
+    reply = warning_box.question(this, "Please select an option", "Are you sure you wish to clear? This will reset both tabs completely.",QMessageBox::Yes|QMessageBox::No);
+    if (reply == QMessageBox::Yes)
+    {
+        reset_function();
+        //Disable filter options until a source is loaded
+        ui->checkBox_Clip->setEnabled(0);
+        ui->checkBox_Shrink->setEnabled(0);
+        ui->checkBox_Elevation->setEnabled(0);
+        ui->checkBox_Transform->setEnabled(0);
+        ui->Btn_Model_Colour->setEnabled(0);
+        ui->Btn_Position->setEnabled(0);
+        ui->Btn_Remove->setEnabled(0);
+        ui->Btn_Reset->setEnabled(0);
+        ui->Btn_Filter->setEnabled(0);
 
-    renderer->RemoveAllViewProps(); //Remove all currently rendered objects.
-    renderWindow->Render();
+        //Remove all currently rendered objects.
+        renderer->RemoveAllViewProps();
+        renderWindow->Render();
+        renderer_Tab2->RemoveAllViewProps();
+        renderWindow_Tab2->Render();
 
-    renderer_Tab2->RemoveAllViewProps();
-    renderWindow_Tab2->Render();
+        //Clear the actor arrays
+        Rendered_Cube_Actor_Array.clear();
+        Rendered_Sphere_Actor_Array.clear();
+        Rendered_STL_Actor_Array.clear();
+        File_Name_Array.clear();
 
-    //Clear the actor array
-    Rendered_Cube_Actor_Array.clear();
-    Rendered_Sphere_Actor_Array.clear();
-    Rendered_STL_Actor_Array.clear();
-    File_Name_Array.clear();
+        //Clear the drop down menue
+        ui->comboBox_Actors->clear();
+    }
+    else if (reply == QMessageBox::No)
+    {
+        //Do nothing
+    }
 
-    ui->comboBox_Actors->clear();
+
 }
 
 void MainWindow::handleBtn_Change_Position() //Function to change the position of the currently selected actor from the drop down menue
@@ -452,7 +488,7 @@ void MainWindow::handleBtn_Change_Position() //Function to change the position o
 void MainWindow::New_Actor_Selected() //Function run whenever user selects one of the rendered actors from the drop down menue
 {
     //The function uses the FindActor function to find the pointer to the selected actor, and uses the GetPosition funciton
-    //(a member of the actor class) to find the position of the currently selected actor and read it into a 3*1 array
+    //(a member function of the actor class) to find the position of the currently selected actor and read it into a 3*1 array
     //called Position, where postion[0] is the x, postion[1] is the y and postion[2] is the z values.
     //The corresponding spin boxes are then updated.
 
@@ -468,31 +504,31 @@ void MainWindow::New_Actor_Selected() //Function run whenever user selects one o
     }
 }
 
-void MainWindow::Tab_Changed()
+void MainWindow::Tab_Changed() //Function run whenever the user selecs a different tab to update UI.
 {
     reset_function();
     Add_Rendered_Actors_To_Combo();
 }
 
-void MainWindow::Add_Rendered_Actors_To_Combo() //Function to add the pointers to all currently rendered actors to respective arrays,   
-{                                               //with different arrays for each source type.
-    //The function first created an array to store the pointers of all rendered actors, and an actor collection to read all the pointers
+void MainWindow::Add_Rendered_Actors_To_Combo() //Function to add the pointers to all currently rendered actors to respective arrays
+{
+    //The function first creates an array to store the pointers of all rendered actors, and an actor collection to read all the pointers
     //into initially, using the "GetActors" member function of the renderer class.
     //This collection of actor pointers is then readied for traversal using the "InitTraversal" member function of the vtkActorCollection
     //class. Then, the collection is stepped through for all values, which are read into the Rendered_Actor_Array.
 
     //This Rendered_Actor_Array is then used to populate the combo box (drop down menue). This is done by comparing every element
-    //of the Rendered_Actor_Array to all the elements in thestored actor arrays (e.g. Rendered_Cube_Actor_Array) created when a
+    //of the Rendered_Actor_Array to all the elements in the stored actor arrays (e.g. Rendered_Cube_Actor_Array) created when a
     //new source is rendered by the user. This has benifit of there being only one match to each pointer, as such the array the pointer
     //is matched to (e.g. the cube, sphere, or STL arrays) can be used to identify the origional source type. This is needed in the combo
     //box both to display the correct name, and later for use in applying filters.
 
-    //The other function performed is that once the source of the actor is known, the index of the actor pointer in the
+    //The other function performed is that once the source type of the actor is known, the index of the actor pointer in the
     //associated rendered source type specific array (e.g. Rendered_Cube_Actor_Array) is added to the end. Whilst for
     //cubes and spheres this is not particularly useful apart from telling the different cubes and spheres apart (as the cube
     //and sphere are all created from the same source), this added index is particularly useful in the case of STL sources,
-    //as the index value of the Rendered_STL_Actor_Array is used to find the correct source (stored in the NAME NEEDED AAAAAAAAAAAAA)
-    //array for re-rendering/filtering in other parts of the code.
+    //as the index value of the Rendered_STL_Actor_Array is used to find the correct source (stored in "File_Name_Array")
+    //for re-rendering/filtering in other parts of the code.
 
     std::vector<vtkSmartPointer<vtkActor>> Rendered_Actor_Array;
 
@@ -553,14 +589,14 @@ void MainWindow::Add_Rendered_Actors_To_Combo() //Function to add the pointers t
        }
 }
 
-void MainWindow::handleBtn_Remove_Actor()
+void MainWindow::handleBtn_Remove_Actor() //Function to remove the model selected by the user if remove button pressed and user agrees to remove
 {
     if(Combo_Check(QString("Warning"),QString("No model selected!")))
     {
         QMessageBox::StandardButton reply;
         reply = warning_box.question(this, "Please select an option", "Are you sure you wish to remove this model?",QMessageBox::Yes|QMessageBox::No);
         if (reply == QMessageBox::Yes)
-        {
+        {   //Remove from renderer
             if(ui->tabWidget->currentIndex()==0)
             {
                 renderer->RemoveActor(FindActor());
@@ -570,10 +606,12 @@ void MainWindow::handleBtn_Remove_Actor()
                 renderer_Tab2->RemoveActor(FindActor());
             }
 
+            //Get the source type and actor array index from combo box
             QString Combo_text = ui->comboBox_Actors->currentText();
             QChar Num = Combo_text.back();
             int Index = Num.digitValue();
 
+            //Remove the relevant actor from the releval array
             if(ui->comboBox_Actors->currentText().contains("cube"))
             {
                 Rendered_Cube_Actor_Array.erase(Rendered_Cube_Actor_Array.begin()+Index);
@@ -699,12 +737,12 @@ vtkSmartPointer<vtkActor> MainWindow::FindActor() //Function to find the current
     //Qchar, selecting it using the "back" function, a member function of the QString class. The "digitvalue" member function of
     //the QChar class is then used to read it's numeric value into an integer.
 
-    //This number is the index of the selected actor in the actor array. The function then uses the text in the combo box
+    //This number is the index of the selected actor in it's rendered actor array. The function then uses the text in the combo box
     //to find what type of source is being rendered using the actor e.g. "cube", so it knows which actor array to search.
     //The function then returns the vtkSmartPointer found.
 
     //The function would break if there was no text to analyse or if there was no number, however this function is all back-end code
-    //and use should be controlled through enabling/disabling of the correct UI elements, so error control is not strictly needed.
+    //and use should be controlled through UI elements such as messageboxes to prevent misuse, so error control is not strictly needed.
 
     QString Combo_text = ui->comboBox_Actors->currentText();
     QChar Num = Combo_text.back();
@@ -769,7 +807,7 @@ vtkSmartPointer<vtkAlgorithm> MainWindow::Transform_Filter(vtkSmartPointer<vtkAl
     return ((vtkSmartPointer<vtkAlgorithm>) test);
 }
 
-void MainWindow::handleBtn_Filter()
+void MainWindow::handleBtn_Filter() //function to apply filters selected by the user to the currently selected model
 {
    if(Combo_Check(QString("Warning"),QString("No model selected!")))
    {
@@ -958,8 +996,9 @@ void MainWindow::handleBtn_Filter()
     }
 }
 
-bool MainWindow::Combo_Check(QString Title, QString Message)
+bool MainWindow::Combo_Check(QString Title, QString Message) //Function to check if the combo box is empty
 {
+    //If the combo box is empty, display an information message box with the title and message passed to this function when called.
     if(ui->comboBox_Actors->currentText() == "")
     {
         warning_box.setIcon(warning_box.Information);
@@ -975,7 +1014,7 @@ bool MainWindow::Combo_Check(QString Title, QString Message)
     }
 }
 
-void MainWindow::Shrink_Box_Checked()
+void MainWindow::Shrink_Box_Checked() //Function to handle displaying the appropriate UI elemts when the shrink checkbox is checked
 {
     if(ui->checkBox_Shrink->isChecked())
     {
@@ -987,7 +1026,7 @@ void MainWindow::Shrink_Box_Checked()
     }
 }
 
-void MainWindow::Transform_Box_Checked()
+void MainWindow::Transform_Box_Checked() //Function to handle displaying the appropriate UI elemts when the transform checkbox is checked
 {
     if(ui->checkBox_Transform->isChecked())
     {
@@ -999,13 +1038,14 @@ void MainWindow::Transform_Box_Checked()
     }
 }
 
-void MainWindow::Help()
+void MainWindow::Help() //Function to connect the help button to help webpage
 {
     QDesktopServices::openUrl(QUrl("https://ejagombar.github.io/2021_Group_3/", QUrl::TolerantMode));
 }
 
-void MainWindow::closeEvent(QCloseEvent* event)
+void MainWindow::closeEvent(QCloseEvent* event) //Function which runs when user closes program to check
 {
+    //Checks if the user wishes to exit, if yes the program closes, if not the program exits this function
     QMessageBox::StandardButton reply;
     reply = warning_box.question(this, "Please select an option", "Are you sure you wish quit?",QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes)
@@ -1018,21 +1058,15 @@ void MainWindow::closeEvent(QCloseEvent* event)
     }
 }
 
-MainWindow::~MainWindow()
+MainWindow::~MainWindow() //Destructor function called when the program terminates
 {
     delete ui;
 }
 
 //NEEDED:
-//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-//          :Get rotation and volume/size code from donkun
-//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
-//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-//          :XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-//          :Comment code + Doxygen
-//          :Check includes in header and main
-
+//          :Comment code + Doxygen + Rearrange function layout
+//          :Make transform fit to actor size? try y axis?
+//          :In readme discuss how "actor", "mapper" refered to interchangable as pointer or just the thing itself - disambiguation section
+//          :Comment filter function(s)
+//          : limit of 9 could be upgraded to 99 by selecting back 2 digits easily but 9 reasonable (report)
 

@@ -1,31 +1,42 @@
+///
+/// @file
+///
+/// @brief QMainWindow class used to render and edit models.
+///
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
 
+//Header files for model visualisation
 #include <vtkSmartPointer.h>
 #include <vtkCubeSource.h>
 #include <vtkSphereSource.h>
-#include <vtkActor.h>
-#include <vtkProperty.h>
-#include <vtkCamera.h>
-#include <vtkPolyData.h>
-#include <vtkDataSetMapper.h>
+#include <vtkSTLReader.h>
 #include <vtkRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
+#include <vtkGenericOpenGLRenderWindow.h>
 #include <vtkRenderer.h>
+#include <vtkActor.h>
+#include <vtkDataSetMapper.h>
+
+//Header files for filtering
+#include <vtkShrinkFilter.h>
+#include <vtkClipDataSet.h>
+#include <vtkPlane.h>
+
+//Header files for model editing/program operation
+#include <vtkProperty.h>
+#include <vtkCamera.h>
 #include <vtkNamedColors.h>
 #include <vtkNew.h>
-#include <vtkGenericOpenGLRenderWindow.h>
-#include <vtkShrinkFilter.h>
-#include <vtkPlane.h>
-#include <vtkClipDataSet.h>
-#include <vtkSTLReader.h>
 #include <QMessageBox>
 
 
+
 namespace Ui {
-class MainWindow;
+class MainWindow; //Definition
 }
 
 class MainWindow : public QMainWindow
@@ -33,11 +44,14 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    ///
+    ///Auto-Generated constructor
+    ///
+    explicit MainWindow(QWidget *parent = 0); //Constructor
+    ~MainWindow(); //Destructor
 
 signals:
-    void statusUpdateMessage( const QString & message, int timeout );
+    void statusUpdateMessage( const QString & message, int timeout ); //Used to update the status bar
 
 public slots:
 
@@ -74,6 +88,12 @@ public slots:
     void New_Actor_Selected();
     bool Combo_Check(QString,QString);
     void Tab_Changed();
+
+    ///
+    /// Function to find the currently selected model's actor
+    ///
+    /// @return(vtkSmartPointer<vtkActor>) current model's actor
+    ///
     vtkSmartPointer<vtkActor> FindActor();
     void Add_Rendered_Actors_To_Combo();
 
