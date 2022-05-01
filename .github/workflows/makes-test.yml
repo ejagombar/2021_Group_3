@@ -21,7 +21,7 @@ jobs:
     # Step 1: Run CMake on Worksheet7 folder
     
     - name: Configure CMake # A name for the step for analysis later
-      run: cmake -B ${{github.workspace}}/build Current_Working_Program # The command to run at this step
+      run: cmake -B ${{github.workspace}}/build Current_Working_Program/Custom_Mod_Library # The command to run at this step
     # Step 2: Run make to build (remember - use Linux build command)
     - name: Build
       working-directory: ${{github.workspace}}/build  # cd to the build directory before running

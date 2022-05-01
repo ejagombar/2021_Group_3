@@ -493,3 +493,5 @@ build-QtVTK_Template-Desktop_x86_windows_msvc2019_pe_64bit-Debug/
 doxygen-awesome-css
 
 build-Current_Working_Program-Desktop_x86_windows_msvc2019_pe_64bit-Debug/
+
+build-Current_Working_Program-Desktop_Qt_6_3_0_MSVC2019_64bit-Debug/.cmake/api/v1/reply/
