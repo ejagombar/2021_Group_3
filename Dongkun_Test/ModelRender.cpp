@@ -7,7 +7,7 @@ VTK_MODULE_INIT(vtkInteractionStyle);
 
 ModelRender::ModelRender(){
     actor = vtkSmartPointer<vtkActor>::New();
-    prop= vtkSmartPointer<vtkProperty>::New() ;
+    prop= vtkSmartPointer<vtkProperty>::New();
     reader= vtkSmartPointer<vtkSTLReader>::New();
     mapper= vtkSmartPointer<vtkDataSetMapper>::New();
     polydata = vtkSmartPointer<vtkPolyData>::New();
@@ -39,6 +39,7 @@ void ModelRender::RenderingStarts(vtkSmartPointer<vtkRenderer> renderer)
     actor->RotateX(RX);
     actor->RotateY(RY);
     actor->RotateZ(RZ);
+    renderer->AddActor(actor);
 }
 
 void ModelRender::setActorColor()

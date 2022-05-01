@@ -50,8 +50,6 @@ add_executable( QtVTKExample MACOSX_BUNDLE myapp.rc
                                                                     form.h
                                                                     form.ui
                                                                     form.cpp
-                                                                    listview.h
-                                                                    listview.cpp
 				${UI_Srcs}
 				${QRC_Srcs}
                                 ${APP_ICON_RESOURCE_WINDOWS}

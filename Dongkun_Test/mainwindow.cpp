@@ -225,6 +225,7 @@ void MainWindow::readSTL()
     QString file = QFileDialog::getOpenFileName(this, tr("Open STL File"), "./", tr("STL Files(*.stl)"));
     Model->STLfileReader(file);
     Model->RenderingStarts(renderer);
+    //renderWindow->Render();
     ModelList->push_back(*Model);
     FileName.push_back(file);
     upDateList();
@@ -342,7 +343,7 @@ void MainWindow::on_list_itemSelectionChanged()
     int row;
     row = ui->list->currentRow();
 
-    ModelList->at(0).setActorColor();
+    ModelList->at(row).setActorColor();
 
     renderWindow->Render();
     ui->statusbar->showMessage(tr("Selection Changed"),2000);

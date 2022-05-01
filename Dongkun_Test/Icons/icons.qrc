@@ -1,9 +1,6 @@
 <RCC>
     <qresource prefix="/Icons">
-        <file>fileopen.png</file>
-        <file>filesave.png</file>
         <file>print.png</file>
-        <file>help.png</file>
         <file>dark.png</file>
         <file>file.png</file>
         <file>save.png</file>

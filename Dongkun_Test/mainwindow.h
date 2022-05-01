@@ -75,6 +75,7 @@ private:
     Ui::MainWindow *ui;
 
     ModelRender* Model = new ModelRender();
+    //std::vector<ModelRender*> ModelList;
     std::vector<ModelRender>* ModelList = new std::vector<ModelRender>;
     filter * vtkFilter = new filter();
 
