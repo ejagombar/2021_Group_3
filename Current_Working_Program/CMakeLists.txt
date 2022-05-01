@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.16)
 
 project(Worksheet_6_Exercise_3 VERSION 0.1 LANGUAGES CXX)
 
-include(CTest)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
