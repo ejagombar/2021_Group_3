@@ -94,6 +94,9 @@ $(document).ready(function(){initNavTree('class_main_window.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 
+<p>QMainWindow class used to render and edit models.  
+ <a href="class_main_window.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="mainwindow_8h_source.html">mainwindow.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for MainWindow:</div>
@@ -175,7 +178,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae98d00a93bc118200eeef9f9bba1dba7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#ae98d00a93bc118200eeef9f9bba1dba7">~MainWindow</a> ()</td></tr>
 <tr class="separator:ae98d00a93bc118200eeef9f9bba1dba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>QMainWindow class used to render and edit models. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8b244be8b7b7db1b08de2a2acb9409db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8b244be8b7b7db1b08de2a2acb9409db">&#9670;&nbsp;</a></span>MainWindow()</h2>
 
@@ -200,7 +205,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Auto-Generated constructor </p>
-<p>The <a class="el" href="class_main_window.html">MainWindow</a> function is what the program is built on, and runs on program start. The function initialises the UI, connects the qvtkWidgets to their respective renderWindows, and those renderWindows to their respective renderers. It also sets up the status bar, camera and backgrounds for each of the tabs. It creates the global sphere and cube sources used by the program, and finally connects all the slots with the correct UI elements and actions.</p>
+<p>The <a class="el" href="class_main_window.html" title="QMainWindow class used to render and edit models.">MainWindow</a> function is what the program is built on, and runs on program start. The function initialises the UI, connects the qvtkWidgets to their respective renderWindows, and those renderWindows to their respective renderers. It also sets up the status bar, camera and backgrounds for each of the tabs. It creates the global sphere and cube sources used by the program, and finally connects all the slots with the correct UI elements and actions.</p>
 
 </div>
 </div>
@@ -613,7 +618,7 @@ Public Member Functions</h2></td></tr>
 <p>The filter function works by applying the filters selected by the user with a pipeline of filter functions.These filter functions all take inputs of vtkSmartPointer&lt;vtkAlgorithm&gt;, and output the same. This can be done as for the source files used, vtkAlgotrithm is a parent class, and as such each source type of sphere, cube and STL can be cast to vtkAlgorithm. vtkAlgorithm is also a parent class of all the filters used, and as such the filter outputs (e.g "vtkShrinkFilter") can also be cast to vtkAlgorithm types. This allows for the functions to be used one after the other to apply the neccessary filters.</p>
 <p>The source type is found from the drop down menu text. If the type is cube or sphere, a new source "ModelData" is set to the vtkAlgorithm cast of the cube or sphere sources created in the "MainWindow function". If the source type is STL, the STL source file is found from the "File_Name_Array", which stores the filenames of all rendered STL actors in the same order as the "Rendered_STL_Actor_Array" which orders the drop down menu. As such for a given rendered STL, it's filename index in the file name array is the same as the index in the drop down menu. ModelData is then set to the vtkAlgorithm cast of a reader created with the filename.</p>
 <p>Once the correct source file has been cast to vtkAlgorithm, it can be passed through the correct filters in combination using a large number of if statements to allow for every combination of the four filter checkboxes (in this case 15), as the in the 16th case no if statement is needed as the filter function simply does nothing.</p>
-<p>Once the filters have generated the new filtered source file, this is then rendered in the correct tab using the vtk visualisation pipeline discussed in the <a class="el" href="class_main_window.html">MainWindow</a> function. Finally, the new actor overwrites the old actor in the relevant rendered actor array allowing for it to keep the same name in the drop down menu but with the new filtered apperance.</p>
+<p>Once the filters have generated the new filtered source file, this is then rendered in the correct tab using the vtk visualisation pipeline discussed in the <a class="el" href="class_main_window.html" title="QMainWindow class used to render and edit models.">MainWindow</a> function. Finally, the new actor overwrites the old actor in the relevant rendered actor array allowing for it to keep the same name in the drop down menu but with the new filtered apperance.</p>
 
 </div>
 </div>
