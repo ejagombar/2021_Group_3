@@ -11,7 +11,5 @@ var searchData=
   ['handlebtn_5fremove_5factor_39',['handleBtn_Remove_Actor',['../class_main_window.html#a9bf59a1ef867d2a5079cfd0e089b9eaa',1,'MainWindow']]],
   ['handlebtn_5freset_5factor_40',['handleBtn_Reset_Actor',['../class_main_window.html#aa98ac844e56992a3754fd45b4b3d736e',1,'MainWindow']]],
   ['handlebtn_5fsphere_41',['handleBtn_Sphere',['../class_main_window.html#a2fa73ec654ed92e73dc7e526aec6eeaa',1,'MainWindow']]],
-  ['handlebtn_5ftest_42',['handleBtn_Test',['../class_main_window.html#a58d0347c0079916cdde1139782da94a9',1,'MainWindow']]],
-  ['handlebtn_5ftest2_43',['handleBtn_Test2',['../class_main_window.html#a93d2e478e77efcb6539c5f9eba2d570f',1,'MainWindow']]],
-  ['help_44',['Help',['../class_main_window.html#a65f1518c779c8b610b67129d97290b03',1,'MainWindow']]]
+  ['help_42',['Help',['../class_main_window.html#a65f1518c779c8b610b67129d97290b03',1,'MainWindow']]]
 ];

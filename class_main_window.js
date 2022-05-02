@@ -19,8 +19,6 @@ var class_main_window =
     [ "handleBtn_Remove_Actor", "class_main_window.html#a9bf59a1ef867d2a5079cfd0e089b9eaa", null ],
     [ "handleBtn_Reset_Actor", "class_main_window.html#aa98ac844e56992a3754fd45b4b3d736e", null ],
     [ "handleBtn_Sphere", "class_main_window.html#a2fa73ec654ed92e73dc7e526aec6eeaa", null ],
-    [ "handleBtn_Test", "class_main_window.html#a58d0347c0079916cdde1139782da94a9", null ],
-    [ "handleBtn_Test2", "class_main_window.html#a93d2e478e77efcb6539c5f9eba2d570f", null ],
     [ "Help", "class_main_window.html#a65f1518c779c8b610b67129d97290b03", null ],
     [ "New_Actor_Selected", "class_main_window.html#a197ca0f60c4a15fb34f7737b9f28e4eb", null ],
     [ "NewSource", "class_main_window.html#a6b31097dcfd59533c801cbc79c0d98b3", null ],
