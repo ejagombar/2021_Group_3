@@ -388,6 +388,9 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Function to find the currently selected model's actor</p>
 <dl class="section return"><dt>Returns</dt><dd>(vtkSmartPointer&lt;vtkActor&gt;) current model's actor </dd></dl>
+<p>The function uses the Qstring in the combo box (drop down menue) to find the pointer to the currently selected actor The function first reads the text into the Combo_text variable, before converting the last element of the string to a Qchar, selecting it using the "back" function, a member function of the QString class. The "digitvalue" member function of the QChar class is then used to read it's numeric value into an integer.</p>
+<p>This number is the index of the selected actor in it's rendered actor array. The function then uses the text in the combo box to find what type of source is being rendered using the actor e.g. "cube", so it knows which actor array to search. The function then returns the vtkSmartPointer found.</p>
+<p>The function would break if there was no text to analyse or if there was no number, however this function is all back-end code and use should be controlled through UI elements such as messageboxes to prevent misuse, so error control is not strictly needed.</p>
 
 </div>
 </div>
