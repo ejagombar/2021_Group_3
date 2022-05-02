@@ -736,18 +736,19 @@ void MainWindow::handleBtn_Reset_Actor() //Button to reset selected actor/model
 
 vtkSmartPointer<vtkActor> MainWindow::FindActor() //Function to find the currently selected actor from the drop down menue
 {
-    //The function uses the Qstring in the combo box (drop down menue) to find the pointer to the currently selected actor
-    //The function first reads the text into the Combo_text variable, before converting the last element of the string to a
-    //Qchar, selecting it using the "back" function, a member function of the QString class. The "digitvalue" member function of
-    //the QChar class is then used to read it's numeric value into an integer.
+    ///
+    ///The function uses the Qstring in the combo box (drop down menue) to find the pointer to the currently selected actor
+    ///The function first reads the text into the Combo_text variable, before converting the last element of the string to a
+    ///Qchar, selecting it using the "back" function, a member function of the QString class. The "digitvalue" member function of
+    ///the QChar class is then used to read it's numeric value into an integer.
 
-    //This number is the index of the selected actor in it's rendered actor array. The function then uses the text in the combo box
-    //to find what type of source is being rendered using the actor e.g. "cube", so it knows which actor array to search.
-    //The function then returns the vtkSmartPointer found.
+    ///This number is the index of the selected actor in it's rendered actor array. The function then uses the text in the combo box
+    ///to find what type of source is being rendered using the actor e.g. "cube", so it knows which actor array to search.
+    ///The function then returns the vtkSmartPointer found.
 
-    //The function would break if there was no text to analyse or if there was no number, however this function is all back-end code
-    //and use should be controlled through UI elements such as messageboxes to prevent misuse, so error control is not strictly needed.
-
+    ///The function would break if there was no text to analyse or if there was no number, however this function is all back-end code
+    ///and use should be controlled through UI elements such as messageboxes to prevent misuse, so error control is not strictly needed.
+    ///
     QString Combo_text = ui->comboBox_Actors->currentText();
     QChar Num = Combo_text.back();
     int Index = Num.digitValue();
