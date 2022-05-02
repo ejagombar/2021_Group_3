@@ -1,3 +1,7 @@
+///
+/// @file
+/// 
+
 #include "../include/Cell.h"
 
 Cell::Cell() //Default constructor

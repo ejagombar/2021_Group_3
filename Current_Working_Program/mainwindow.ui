@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1192</width>
-    <height>662</height>
+    <height>672</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -89,7 +89,7 @@
        </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer">
+       <spacer name="ActorSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -289,7 +289,7 @@
        </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer_7">
+       <spacer name="FilterSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -476,7 +476,7 @@
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer">
+         <spacer name="ObjectSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -489,56 +489,6 @@
          </spacer>
         </item>
        </layout>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_Filters">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetDefaultConstraint</enum>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <spacer name="verticalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="Btn_Test">
-        <property name="text">
-         <string>TEST</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="Btn_Test2">
-        <property name="text">
-         <string>TEST2</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_6">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </item>
