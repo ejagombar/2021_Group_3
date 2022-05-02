@@ -135,87 +135,88 @@ $(document).ready(function(){initNavTree('mainwindow_8h_source.html',''); initRe
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a86443ea744fda3e9bad328c2fd1c3d6b">statusUpdateMessage</a>( <span class="keyword">const</span> QString &amp; message, <span class="keywordtype">int</span> timeout ); <span class="comment">//Used to update the status bar</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#ac90ddadf825a4db1def2d4bab8bf09cd">handlactionFileOpen</a>();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a27448f4e60abdc4c893cb56e64ed7bf2">handleBtn_Cube</a>();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a2fa73ec654ed92e73dc7e526aec6eeaa">handleBtn_Sphere</a>();</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a6b31097dcfd59533c801cbc79c0d98b3">NewSource</a>(QString);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="comment">//Functions to edit models</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#ac5bcde48b6d497ba34d157f0661c1ef4">handleBtn_Change_Position</a>();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a01b2260cd12d295e4e1b16122650c699">handleBtn_Model_Colour</a>();</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#aa98ac844e56992a3754fd45b4b3d736e">handleBtn_Reset_Actor</a>();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a9bf59a1ef867d2a5079cfd0e089b9eaa">handleBtn_Remove_Actor</a>();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment">//Filter pipeline functions</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a8c49230150aefcfad7a1c44e861aac21">handleBtn_Filter</a>();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    vtkSmartPointer&lt;vtkAlgorithm&gt; <a class="code" href="class_main_window.html#a031909d77d245e1cb505ffc64af6f5e6">Shrink_Filter</a>(vtkSmartPointer&lt;vtkAlgorithm&gt;);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    vtkSmartPointer&lt;vtkAlgorithm&gt; <a class="code" href="class_main_window.html#a1d7d0d341373867df66c9af644a7132b">Clip_Filter</a>(vtkSmartPointer&lt;vtkAlgorithm&gt;);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    vtkSmartPointer&lt;vtkAlgorithm&gt; <a class="code" href="class_main_window.html#a226c7874b2736bb0e20969c7315d4295">Elevation_Filter</a>(vtkSmartPointer&lt;vtkAlgorithm&gt;);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    vtkSmartPointer&lt;vtkAlgorithm&gt; <a class="code" href="class_main_window.html#a6f08d3c8731115a52e51a3abb3682a72">Transform_Filter</a>(vtkSmartPointer&lt;vtkAlgorithm&gt;);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="comment">//Functions to manage the program UI</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#aab543412a763c8d55dc2bad82122f4ab">handleBtn_Change_Background</a>();</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a06b9eddf9174a67e9ce80dd6c99066f6">handleBtn_Camera_Reset</a>();</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a50d984ac01227f565f78fc3406c15aff">handleBtn_Clear</a>();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a74d67c027f03c2e922411e723ccca6ae">reset_function</a>();</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a38d057beca989494196916468a9409fd">Shrink_Box_Checked</a>();</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a8bdc2f07c62afa46b8e53cf6ab60b17e">Transform_Box_Checked</a>();</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a65f1518c779c8b610b67129d97290b03">Help</a>();</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a4e20a4a065fbb0e4d3532a45a0a91425">closeEvent</a>(QCloseEvent* event);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="comment">//Functions used to run program</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a197ca0f60c4a15fb34f7737b9f28e4eb">New_Actor_Selected</a>();</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_main_window.html#ac40247a74b327e92e79964735eaf4edb">Combo_Check</a>(QString,QString);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#abdabc0c75985895208e875a57a378106">Tab_Changed</a>();</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    vtkSmartPointer&lt;vtkActor&gt; <a class="code" href="class_main_window.html#ad381c65c6f577e2ea76912ab37900d5b">FindActor</a>();</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a6d16916adce6ec44296250bb8e9db3f2">Add_Rendered_Actors_To_Combo</a>();</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="comment">//UI and rendered elements</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    Ui::MainWindow *ui;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    vtkSmartPointer&lt;vtkRenderer&gt; renderer;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    vtkNew&lt;vtkGenericOpenGLRenderWindow&gt; renderWindow;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    vtkSmartPointer&lt;vtkRenderer&gt; renderer_Tab2;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    vtkNew&lt;vtkGenericOpenGLRenderWindow&gt; renderWindow_Tab2;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="comment">//Sources and associated variables</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    vtkNew&lt;vtkSTLReader&gt; reader;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    vtkSmartPointer&lt;vtkCubeSource&gt; CubeSource;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    vtkSmartPointer&lt;vtkSphereSource&gt; sphereSource;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    QString fileName;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    QByteArray ba;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    vtkSmartPointer&lt;vtkAlgorithm&gt; ModelData;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="comment">//Actors</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    vtkSmartPointer&lt;vtkActor&gt; Current_actor;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    vtkSmartPointer&lt;vtkActor&gt; Source_actor = vtkSmartPointer&lt;vtkActor&gt;::New();</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="comment">//Mappers</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    vtkSmartPointer&lt;vtkDataSetMapper&gt; Current_mapper = vtkSmartPointer&lt;vtkDataSetMapper&gt;::New();</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    vtkSmartPointer&lt;vtkDataSetMapper&gt; Source_mapper = vtkSmartPointer&lt;vtkDataSetMapper&gt;::New();</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="comment">//Actor Arrays</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    std::vector&lt;vtkSmartPointer&lt;vtkActor&gt;&gt; Rendered_Cube_Actor_Array;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    std::vector&lt;vtkSmartPointer&lt;vtkActor&gt;&gt; Rendered_Sphere_Actor_Array;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    std::vector&lt;vtkSmartPointer&lt;vtkActor&gt;&gt; Rendered_STL_Actor_Array;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="comment">//STL FileName Array</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    std::vector&lt;QString&gt; File_Name_Array;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="comment">//Message box</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    QMessageBox warning_box;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#ac90ddadf825a4db1def2d4bab8bf09cd">handlactionFileOpen</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a27448f4e60abdc4c893cb56e64ed7bf2">handleBtn_Cube</a>();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a2fa73ec654ed92e73dc7e526aec6eeaa">handleBtn_Sphere</a>();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a6b31097dcfd59533c801cbc79c0d98b3">NewSource</a>(QString);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#ac5bcde48b6d497ba34d157f0661c1ef4">handleBtn_Change_Position</a>();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a01b2260cd12d295e4e1b16122650c699">handleBtn_Model_Colour</a>();</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#aa98ac844e56992a3754fd45b4b3d736e">handleBtn_Reset_Actor</a>();</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a9bf59a1ef867d2a5079cfd0e089b9eaa">handleBtn_Remove_Actor</a>();</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="comment">//Filter pipeline functions</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a8c49230150aefcfad7a1c44e861aac21">handleBtn_Filter</a>();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    vtkSmartPointer&lt;vtkAlgorithm&gt; <a class="code" href="class_main_window.html#a031909d77d245e1cb505ffc64af6f5e6">Shrink_Filter</a>(vtkSmartPointer&lt;vtkAlgorithm&gt;);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    vtkSmartPointer&lt;vtkAlgorithm&gt; <a class="code" href="class_main_window.html#a1d7d0d341373867df66c9af644a7132b">Clip_Filter</a>(vtkSmartPointer&lt;vtkAlgorithm&gt;);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    vtkSmartPointer&lt;vtkAlgorithm&gt; <a class="code" href="class_main_window.html#a226c7874b2736bb0e20969c7315d4295">Elevation_Filter</a>(vtkSmartPointer&lt;vtkAlgorithm&gt;);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    vtkSmartPointer&lt;vtkAlgorithm&gt; <a class="code" href="class_main_window.html#a6f08d3c8731115a52e51a3abb3682a72">Transform_Filter</a>(vtkSmartPointer&lt;vtkAlgorithm&gt;);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="comment">//Functions to manage the program UI</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#aab543412a763c8d55dc2bad82122f4ab">handleBtn_Change_Background</a>();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a06b9eddf9174a67e9ce80dd6c99066f6">handleBtn_Camera_Reset</a>();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a50d984ac01227f565f78fc3406c15aff">handleBtn_Clear</a>();</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a74d67c027f03c2e922411e723ccca6ae">reset_function</a>();</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a38d057beca989494196916468a9409fd">Shrink_Box_Checked</a>();</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a8bdc2f07c62afa46b8e53cf6ab60b17e">Transform_Box_Checked</a>();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a65f1518c779c8b610b67129d97290b03">Help</a>();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a4e20a4a065fbb0e4d3532a45a0a91425">closeEvent</a>(QCloseEvent* event);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="comment">//Functions used to run program</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a197ca0f60c4a15fb34f7737b9f28e4eb">New_Actor_Selected</a>();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_main_window.html#ac40247a74b327e92e79964735eaf4edb">Combo_Check</a>(QString,QString);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#abdabc0c75985895208e875a57a378106">Tab_Changed</a>();</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    vtkSmartPointer&lt;vtkActor&gt; <a class="code" href="class_main_window.html#ad381c65c6f577e2ea76912ab37900d5b">FindActor</a>();</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_main_window.html#a6d16916adce6ec44296250bb8e9db3f2">Add_Rendered_Actors_To_Combo</a>();</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="comment">//UI and rendered elements</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    Ui::MainWindow *ui;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    vtkSmartPointer&lt;vtkRenderer&gt; renderer;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    vtkNew&lt;vtkGenericOpenGLRenderWindow&gt; renderWindow;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    vtkSmartPointer&lt;vtkRenderer&gt; renderer_Tab2;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    vtkNew&lt;vtkGenericOpenGLRenderWindow&gt; renderWindow_Tab2;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="comment">//Sources and associated variables</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    vtkNew&lt;vtkSTLReader&gt; reader;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    vtkSmartPointer&lt;vtkCubeSource&gt; CubeSource;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    vtkSmartPointer&lt;vtkSphereSource&gt; sphereSource;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    QString fileName;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    QByteArray ba;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    vtkSmartPointer&lt;vtkAlgorithm&gt; ModelData;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="comment">//Actors</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    vtkSmartPointer&lt;vtkActor&gt; Current_actor;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    vtkSmartPointer&lt;vtkActor&gt; Source_actor = vtkSmartPointer&lt;vtkActor&gt;::New();</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="comment">//Mappers</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    vtkSmartPointer&lt;vtkDataSetMapper&gt; Current_mapper = vtkSmartPointer&lt;vtkDataSetMapper&gt;::New();</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    vtkSmartPointer&lt;vtkDataSetMapper&gt; Source_mapper = vtkSmartPointer&lt;vtkDataSetMapper&gt;::New();</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="comment">//Colour pointer</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    vtkSmartPointer&lt;vtkNamedColors&gt; colors = vtkSmartPointer&lt;vtkNamedColors&gt;::New();</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="comment">//Colour values for the object as to not lose the colours when re-doing filters</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordtype">float</span> Object_RedF=1;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordtype">float</span> Object_BlueF=1;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordtype">float</span> Object_GreenF=1;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="comment">//Actor Arrays</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    std::vector&lt;vtkSmartPointer&lt;vtkActor&gt;&gt; Rendered_Cube_Actor_Array;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    std::vector&lt;vtkSmartPointer&lt;vtkActor&gt;&gt; Rendered_Sphere_Actor_Array;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    std::vector&lt;vtkSmartPointer&lt;vtkActor&gt;&gt; Rendered_STL_Actor_Array;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="comment">//STL FileName Array</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    std::vector&lt;QString&gt; File_Name_Array;</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;};</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor">#endif // MAINWINDOW_H</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="comment">//Message box</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    QMessageBox warning_box;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="comment">//Colour pointer</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    vtkSmartPointer&lt;vtkNamedColors&gt; colors = vtkSmartPointer&lt;vtkNamedColors&gt;::New();</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="comment">//Colour values for the object as to not lose the colours when re-doing filters</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordtype">float</span> Object_RedF=1;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordtype">float</span> Object_BlueF=1;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordtype">float</span> Object_GreenF=1;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;};</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="preprocessor">#endif // MAINWINDOW_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_main_window_html_a27448f4e60abdc4c893cb56e64ed7bf2"><div class="ttname"><a href="class_main_window.html#a27448f4e60abdc4c893cb56e64ed7bf2">MainWindow::handleBtn_Cube</a></div><div class="ttdeci">void handleBtn_Cube()</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:270</div></div>
