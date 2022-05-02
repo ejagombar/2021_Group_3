@@ -56,8 +56,17 @@ signals:
 public slots:
 
     //Functions to render models
+    ///
+    /// Function to find the currently selected model's actor
+    ///
     void handlactionFileOpen();
+    ///
+    /// Function to find the currently selected model's actor1
+    ///
     void handleBtn_Cube();
+    ///
+    /// Function to find the currently selected model's actor2
+    ///
     void handleBtn_Sphere();
     void NewSource(QString);
 
