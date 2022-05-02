@@ -217,6 +217,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Auto-Generated destructor </p>
 
 </div>
 </div>
@@ -243,6 +244,10 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function to add all the actors in a renderer to the drop down menue </p>
+<p>The function first creates an array to store the pointers of all rendered actors, and an actor collection to read all the pointers into initially, using the "GetActors" member function of the renderer class. This collection of actor pointers is then readied for traversal using the "InitTraversal" member function of the vtkActorCollection class. Then, the collection is stepped through for all values, which are read into the Rendered_Actor_Array.</p>
+<p>This Rendered_Actor_Array is then used to populate the combo box (drop down menue). This is done by comparing every element of the Rendered_Actor_Array to all the elements in the stored actor arrays (e.g. Rendered_Cube_Actor_Array) created when a new source is rendered by the user. This has benifit of there being only one match to each pointer, as such the array the pointer is matched to (e.g. the cube, sphere, or STL arrays) can be used to identify the origional source type. This is needed in the combo box both to display the correct name, and later for use in applying filters.</p>
+<p>The other function performed is that once the source type of the actor is known, the index of the actor pointer in the associated rendered source type specific array (e.g. Rendered_Cube_Actor_Array) is added to the end. Whilst for cubes and spheres this is not particularly useful apart from telling the different cubes and spheres apart (as the cube and sphere models are all created from the same source), this added index is particularly useful in the case of STL sources, as the index value of the Rendered_STL_Actor_Array is used to find the correct source (stored in "File_Name_Array") for re-rendering/filtering STL models in other parts of the code.</p>
 
 </div>
 </div>
@@ -269,6 +274,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that applies a clip filter to the currently selected model. </p>
 
 </div>
 </div>
@@ -295,6 +301,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function called when user closes program to check they meant to do so </p>
+<p>The function checks if the user wishes to exit using a messagebox, if the user presses yes the program closes, if not the program exits this function and continues as normal.</p>
 
 </div>
 </div>
@@ -331,6 +339,16 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function to check if the drop down menue is blank, returns 0 if blank, 1 if not blank.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">(QString)</td><td>Title </td></tr>
+    <tr><td class="paramname">(QString)</td><td>Message </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>(bool) status </dd></dl>
+<p>If the combo box is empty, display an information message box with the title and message passed to this function when called.</p>
 
 </div>
 </div>
@@ -357,6 +375,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that applies an elevation filter (along the y-axis) to the currently selected model. </p>
 
 </div>
 </div>
@@ -382,8 +401,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Function to find the currently selected model's actor</p>
-<dl class="section return"><dt>Returns</dt><dd>(vtkSmartPointer&lt;vtkActor&gt;) current model's actor </dd></dl>
+<p>//Function to find the actor of the currently selected model in the drop down menue</p>
+<dl class="section return"><dt>Returns</dt><dd>(vtkSmartPointer&lt;vtkActor&gt;) currently selected model's actor </dd></dl>
 <p>The function uses the Qstring in the combo box (drop down menue) to find the pointer to the currently selected actor The function first reads the text into the Combo_text variable, before converting the last element of the string to a Qchar, selecting it using the "back" function, a member function of the QString class. The "digitvalue" member function of the QChar class is then used to read it's numeric value into an integer.</p>
 <p>This number is the index of the selected actor in it's rendered actor array. The function then uses the text in the combo box to find what type of source is being rendered using the actor e.g. "cube", so it knows which actor array to search. The function then returns the vtkSmartPointer found.</p>
 <p>The function would break if there was no text to analyse or if there was no number, however this function is all back-end code and use should be controlled through UI elements such as messageboxes to prevent misuse, so error control is not strictly needed.</p>
@@ -412,7 +431,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Functions to render models Function to render Function to call the NewSource function to render an STL file. The function also enforces the limit of only 9 STL files being allowed to be rendered at any time. </p>
+<p>Function to call the NewSource function to render an STL file. The function also enforces the limit of only 9 STL files being allowed to be rendered at any time. </p>
 
 </div>
 </div>
@@ -438,6 +457,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that resets the camera of the currently selected tab to default settings. </p>
 
 </div>
 </div>
@@ -463,6 +483,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that changes the colour of the currently selected tab's background to a colour selected from a colour picker by the user. </p>
 
 </div>
 </div>
@@ -488,7 +509,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Functions to edit models Function that changes to x,y and z co-ordinates of the currently selected model </p>
+<p>Function that changes the x,y and z co-ordinates of the currently selected model. </p>
+<p>The function uses the "FindActor" function to find the pointer to the actor currently selected from the drop down menue by the user, and the sets it's position to the values the user has entered into the spin boxes for x, y and z using the vtkactor member function of "SetPosition".</p>
 
 </div>
 </div>
@@ -514,6 +536,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that resets the program to it's inital state, clearing all relevant variables and rendered models. </p>
+<p>The function first asks the user to confirm they wish to clear the program. If the user selects no, the function ends. If the user selects yes, the function then disables all UI elements which interact with rendered models e.g. the position or colour changer UI. The function the removes all actors from all renderers, and clears all the rendered actor arrays. The drop down menue is also cleared.</p>
 
 </div>
 </div>
@@ -565,6 +589,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that applies the filters selected by the user to the currently selected model. </p>
 
 </div>
 </div>
@@ -590,6 +615,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that changes the colour of the currently selected model to a colour selected from a colour picker by the user. </p>
 
 </div>
 </div>
@@ -615,6 +641,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that removes the currently selected model. </p>
+<p>The function first checks there is a model selected (i.e. the drop down menue is not blank) using the Combo_Check function. Then function then checks if the user wishes to delete the model. If the user selects no, the function ends. If the user selects yes, the function removes the model's actor from the current tabs renderer, and also from the appropriate rendered actor array The function then callsthe "New_Actor_Selected" and "reset_function" functions to reset the UI and appropriate elements.</p>
 
 </div>
 </div>
@@ -640,6 +668,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that resets the currently selected model to the default version without any filters or colour changes applied. </p>
+<p>The function first checks there is a model selected (i.e. the drop down menue is not blank) using the Combo_Check function. Then function then checks if the user wishes to reset the model. If the user selects no, the function ends. If the user selects yes, the function removes the actor of that model from the current tabs renderer. The funciton then checks the type of the model by checking the text of the drop down menue. It then re-renders a default model of this type, overwrites the old actor in the appropriate rendered actor array, and then adds the new actor to the current tabs renderer. The function then calls the "New_Actor_Selected" and "reset_function" functions to reset the UI and appropriate elements.</p>
 
 </div>
 </div>
@@ -691,6 +721,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function to connect the help button in the UI to the doxygen documentation for the program via URL. </p>
 
 </div>
 </div>
@@ -716,6 +747,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function called whenever the user selects a different model in the drop down menue to update the UI. </p>
+<p>The function uses the FindActor function to find the pointer to the selected actor, and uses the GetPosition funciton (a member function of the actor class) to find the position of the currently selected actor and read it into a 3*1 array called Position, where postion[0] is the x, postion[1] is the y and postion[2] is the z values. The corresponding spin boxes are then updated.</p>
 
 </div>
 </div>
@@ -742,10 +775,10 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Function that handles the rendering of the chosen model type, given through the Qstring input "Source_Type"</p>
+<p>Function that handles the rendering of the chosen model type, given through the Qstring input "Source_Type".</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">(QString)</td><td>Source_Type </td></tr>
+    <tr><td class="paramname">(QString)</td><td>Source_Type, e.g. "cube" or "STL". </td></tr>
   </table>
   </dd>
 </dl>
@@ -774,6 +807,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that resets the program UI to the default state for when a model is rendered. </p>
+<p>The function resets the UI to the default state for when a model is rendered. The filter checkboxes are set to unchecked, and are enabled, and the UI elements that interact with models (e.g. the model colour selection button) are also enabled.</p>
 
 </div>
 </div>
@@ -799,6 +834,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that displayes the shrink factor UI when the shrink filter is selected so the user may enter a value. The function also hides the shrink factor UI when the shrink filter is de-selected . </p>
 
 </div>
 </div>
@@ -825,6 +861,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that applies a shrink filter to the currently selected model with the shrink factor set by the user. </p>
 
 </div>
 </div>
@@ -861,6 +898,14 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Signal to allow for the use of a status bar in the program. Displays the text passed as variable "message".</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">(const</td><td>QString &amp;) message </td></tr>
+    <tr><td class="paramname">(int)</td><td>timeout </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -886,6 +931,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function called whenever the user selects a different tab from the tab menue to refresh the drop down menue with the models currently rendered in that tab, and to refresh the program UI. </p>
 
 </div>
 </div>
@@ -911,6 +957,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that displayes the transform filter UI when the transform filter is selected so the user may enter appropriate values. The function also hides the transform filter UI when the transform filter is de-selected . </p>
 
 </div>
 </div>
@@ -937,6 +984,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Function that applies a transform filter to the currently selected modelm, with the stretch factors for x,y and z set by the user. </p>
 
 </div>
 </div>
