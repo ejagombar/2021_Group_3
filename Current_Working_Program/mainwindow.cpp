@@ -141,17 +141,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     //Connecting the status bar
     connect( this, &MainWindow::statusUpdateMessage, ui->statusbar, &QStatusBar::showMessage );
-
-    connect( ui->Btn_Test, &QPushButton::released, this, &MainWindow::handleBtn_Test );
-    connect( ui->Btn_Test2, &QPushButton::released, this, &MainWindow::handleBtn_Test2 );
-}
-
-void MainWindow::handleBtn_Test()
-{
-}
-
-void MainWindow::handleBtn_Test2()
-{
 }
 
 void MainWindow::NewSource(QString Source_Type) //General source function - need
