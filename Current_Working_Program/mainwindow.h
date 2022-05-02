@@ -1,9 +1,6 @@
 ///
 /// @file
 ///
-/// @brief QMainWindow class used to render and edit models.
-///
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -36,6 +33,9 @@
 
 
 namespace Ui {
+///
+/// @brief QMainWindow class used to render and edit models.
+///
 class MainWindow; //Definition
 }
 
