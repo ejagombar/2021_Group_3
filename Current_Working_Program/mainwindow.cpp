@@ -379,6 +379,10 @@ void MainWindow::handleBtn_Camera_Reset() //Function to reset camera to default 
 
 void MainWindow::reset_function() //Function to reset UI to default state
 {
+    ///
+    /// The function resets the UI to the default state for when a model is rendered. The filter checkboxes are set to unchecked,
+    /// and are enabled, and the UI elements that interact with models (e.g. the model colour selection button) are also enabled.
+    ///
     if(ui->checkBox_Clip->isChecked()==true)
     {
          ui->checkBox_Clip->setChecked(false);
@@ -416,9 +420,11 @@ void MainWindow::reset_function() //Function to reset UI to default state
 
 void MainWindow::handleBtn_Clear() //Function to clear whole program if user wants to
 {
-    //Function disables position elements, actor colour picker and filter checkboxes, fully clears all source and actor
-    //arrays, the rendered actor collection and the rendered actor array. It also clears the drop down menue and both tabs'
-    //renderers.
+    ///
+    /// The function first asks the user to confirm they wish to clear the program. If the user selects no, the function ends. If the user
+    /// selects yes, the function then disables all UI elements which interact with rendered models e.g. the position or colour changer UI.
+    /// The function the removes all actors from all renderers, and clears all the rendered actor arrays. The drop down menue is also cleared.
+    ///
 
     QMessageBox::StandardButton reply;
     reply = warning_box.question(this, "Please select an option", "Are you sure you wish to clear? This will reset both tabs completely.",QMessageBox::Yes|QMessageBox::No);
@@ -455,16 +461,17 @@ void MainWindow::handleBtn_Clear() //Function to clear whole program if user wan
     {
         //Do nothing
     }
-
-
 }
 
 void MainWindow::handleBtn_Change_Position() //Function to change the position of the currently selected actor from the drop down menue
 {
+    ///
+    /// The function uses the "FindActor" function to find the pointer to the actor currently selected from the drop down menue
+    /// by the user, and the sets it's position to the values the user has entered into the spin boxes for x, y and z using the
+    /// vtkactor member function of "SetPosition".
+    ///
     if(Combo_Check(QString("Warning"),QString("No model selected!")))
-    {
-        //Using the FindActor function to find the pointer to the actor currently selected from the drop down menue by the user,
-        //Set it's position to the values the user has entered into the spin boxes for x, y and z, and then re-render
+    { 
         FindActor()->SetPosition(ui->doubleSpinBox_X->value(),ui->doubleSpinBox_Y->value(),ui->doubleSpinBox_Z->value());
         if(ui->tabWidget->currentIndex()==0)
         {
@@ -480,10 +487,11 @@ void MainWindow::handleBtn_Change_Position() //Function to change the position o
 
 void MainWindow::New_Actor_Selected() //Function run whenever user selects one of the rendered actors from the drop down menue
 {
-    //The function uses the FindActor function to find the pointer to the selected actor, and uses the GetPosition funciton
-    //(a member function of the actor class) to find the position of the currently selected actor and read it into a 3*1 array
-    //called Position, where postion[0] is the x, postion[1] is the y and postion[2] is the z values.
-    //The corresponding spin boxes are then updated.
+    ///
+    ///The function uses the FindActor function to find the pointer to the selected actor, and uses the GetPosition funciton
+    ///(a member function of the actor class) to find the position of the currently selected actor and read it into a 3*1 array
+    ///called Position, where postion[0] is the x, postion[1] is the y and postion[2] is the z values.
+    ///The corresponding spin boxes are then updated.
 
     if (ui->comboBox_Actors->currentText()!="")
     {
@@ -505,23 +513,25 @@ void MainWindow::Tab_Changed() //Function run whenever the user selecs a differe
 
 void MainWindow::Add_Rendered_Actors_To_Combo() //Function to add the pointers to all currently rendered actors to respective arrays
 {
-    //The function first creates an array to store the pointers of all rendered actors, and an actor collection to read all the pointers
-    //into initially, using the "GetActors" member function of the renderer class.
-    //This collection of actor pointers is then readied for traversal using the "InitTraversal" member function of the vtkActorCollection
-    //class. Then, the collection is stepped through for all values, which are read into the Rendered_Actor_Array.
+    ///
+    ///The function first creates an array to store the pointers of all rendered actors, and an actor collection to read all the pointers
+    ///into initially, using the "GetActors" member function of the renderer class.
+    ///This collection of actor pointers is then readied for traversal using the "InitTraversal" member function of the vtkActorCollection
+    ///class. Then, the collection is stepped through for all values, which are read into the Rendered_Actor_Array.
 
-    //This Rendered_Actor_Array is then used to populate the combo box (drop down menue). This is done by comparing every element
-    //of the Rendered_Actor_Array to all the elements in the stored actor arrays (e.g. Rendered_Cube_Actor_Array) created when a
-    //new source is rendered by the user. This has benifit of there being only one match to each pointer, as such the array the pointer
-    //is matched to (e.g. the cube, sphere, or STL arrays) can be used to identify the origional source type. This is needed in the combo
-    //box both to display the correct name, and later for use in applying filters.
+    ///This Rendered_Actor_Array is then used to populate the combo box (drop down menue). This is done by comparing every element
+    ///of the Rendered_Actor_Array to all the elements in the stored actor arrays (e.g. Rendered_Cube_Actor_Array) created when a
+    ///new source is rendered by the user. This has benifit of there being only one match to each pointer, as such the array the pointer
+    ///is matched to (e.g. the cube, sphere, or STL arrays) can be used to identify the origional source type. This is needed in the combo
+    ///box both to display the correct name, and later for use in applying filters.
 
-    //The other function performed is that once the source type of the actor is known, the index of the actor pointer in the
-    //associated rendered source type specific array (e.g. Rendered_Cube_Actor_Array) is added to the end. Whilst for
-    //cubes and spheres this is not particularly useful apart from telling the different cubes and spheres apart (as the cube
-    //and sphere are all created from the same source), this added index is particularly useful in the case of STL sources,
-    //as the index value of the Rendered_STL_Actor_Array is used to find the correct source (stored in "File_Name_Array")
-    //for re-rendering/filtering in other parts of the code.
+    ///The other function performed is that once the source type of the actor is known, the index of the actor pointer in the
+    ///associated rendered source type specific array (e.g. Rendered_Cube_Actor_Array) is added to the end. Whilst for
+    ///cubes and spheres this is not particularly useful apart from telling the different cubes and spheres apart (as the cube
+    ///and sphere models are all created from the same source), this added index is particularly useful in the case of STL sources,
+    ///as the index value of the Rendered_STL_Actor_Array is used to find the correct source (stored in "File_Name_Array")
+    ///for re-rendering/filtering STL models in other parts of the code.
+    ///
 
     std::vector<vtkSmartPointer<vtkActor>> Rendered_Actor_Array;
 
@@ -584,6 +594,13 @@ void MainWindow::Add_Rendered_Actors_To_Combo() //Function to add the pointers t
 
 void MainWindow::handleBtn_Remove_Actor() //Function to remove the model selected by the user if remove button pressed and user agrees to remove
 {
+    ///
+    /// The function first checks there is a model selected (i.e. the drop down menue is not blank) using the Combo_Check function.
+    /// Then function then checks if the user wishes to delete the model. If the user selects no, the function ends. If the user
+    /// selects yes, the function removes the model's actor from the current tabs renderer, and also from the appropriate rendered
+    /// actor array The function then callsthe "New_Actor_Selected" and "reset_function" functions to reset the UI and appropriate elements.
+    ///
+
     if(Combo_Check(QString("Warning"),QString("No model selected!")))
     {
         QMessageBox::StandardButton reply;
@@ -619,22 +636,26 @@ void MainWindow::handleBtn_Remove_Actor() //Function to remove the model selecte
                 File_Name_Array.erase(File_Name_Array.begin()+Index);
             }
             Add_Rendered_Actors_To_Combo();
-
-            renderWindow->Render();
-            renderWindow_Tab2->Render();
             reset_function();
         }
         else
         {
-
+            //Do nothing
         }
     }
-
-
 }
 
 void MainWindow::handleBtn_Reset_Actor() //Button to reset selected actor/model
 {
+    ///
+    /// The function first checks there is a model selected (i.e. the drop down menue is not blank) using the Combo_Check function.
+    /// Then function then checks if the user wishes to reset the model. If the user selects no, the function ends. If the user
+    /// selects yes, the function removes the actor of that model from the current tabs renderer. The funciton then checks the type
+    /// of the model by checking the text of the drop down menue. It then re-renders a default model of this type, overwrites the old
+    /// actor in the appropriate rendered actor array, and then adds the new actor to the current tabs renderer. The function then calls
+    /// the "New_Actor_Selected" and "reset_function" functions to reset the UI and appropriate elements.
+    ///
+
     if(Combo_Check(QString("Warning"),QString("No model selected!")))
     {
         QMessageBox::StandardButton reply;
@@ -992,7 +1013,9 @@ void MainWindow::handleBtn_Filter() //function to apply filters selected by the 
 
 bool MainWindow::Combo_Check(QString Title, QString Message) //Function to check if the combo box is empty
 {
-    //If the combo box is empty, display an information message box with the title and message passed to this function when called.
+    ///
+    ///If the combo box is empty, display an information message box with the title and message passed to this function when called.
+    ///
     if(ui->comboBox_Actors->currentText() == "")
     {
         warning_box.setIcon(warning_box.Information);
@@ -1039,7 +1062,10 @@ void MainWindow::Help() //Function to connect the help button to help webpage
 
 void MainWindow::closeEvent(QCloseEvent* event) //Function which runs when user closes program to check
 {
-    //Checks if the user wishes to exit, if yes the program closes, if not the program exits this function
+    ///
+    /// The function checks if the user wishes to exit using a messagebox, if the user presses yes the program closes, if not
+    /// the program exits this function and continues as normal.
+    ///
     QMessageBox::StandardButton reply;
     reply = warning_box.question(this, "Please select an option", "Are you sure you wish quit?",QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes)
