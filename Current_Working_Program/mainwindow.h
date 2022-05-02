@@ -22,13 +22,22 @@
 #include <vtkShrinkFilter.h>
 #include <vtkClipDataSet.h>
 #include <vtkPlane.h>
+#include <vtkElevationFilter.h>
+#include <vtkTransformFilter.h>
+#include <vtkTransform.h>
 
 //Header files for model editing/program operation
-#include <vtkProperty.h>
 #include <vtkCamera.h>
 #include <vtkNamedColors.h>
 #include <vtkNew.h>
 #include <QMessageBox>
+#include <QFileDialog>
+#include <QColorDialog>
+#include <stdio.h>
+#include <string.h>
+#include <QCloseEvent>
+#include <QDesktopServices>
+#include <vtkProperty.h>
 
 //-----------------------------------------------------------------------------------------------//
 //--------------------------------MainWindow Class Definiton-------------------------------------//
@@ -68,26 +77,24 @@ public slots:
     //-----------------------------------------------------------------------------------------------//
 
     ///
-    /// Function to call the NewSource function to render an STL file. The function also enforces the limit of only 9 STL files being allowed to be
-    /// rendered at any time.
-    ///
-    void handlactionFileOpen();
-    ///
-    /// Function to call the NewSource function to render a cube. The function also enforces the limit of only 9 cubes being allowed to be rendered
-    /// at any time.
-    ///
-    void handleBtn_Cube();
-    ///
-    /// Function to call the NewSource function to render a sphere. The function also enforces the limit of only 9 spheres being allowed to be rendered
-    /// at any time.
-    ///
-    void handleBtn_Sphere();
-    ///
     /// Function that handles the rendering of the chosen model type, given through the Qstring input "Source_Type".
     ///
     /// @param(QString) Source_Type, e.g. "cube" or "STL".
     ///
     void NewSource(QString);
+    ///
+    /// Function to call the NewSource function to render an STL file.
+    ///
+    void handlactionFileOpen();
+    ///
+    /// Function to call the NewSource function to render a cube.
+    ///
+    void handleBtn_Cube();
+    ///
+    /// Function to call the NewSource function to render a sphere.
+    ///
+    void handleBtn_Sphere();
+
 
     //-----------------------------------------------------------------------------------------------//
     //------------Functions to handle changes to be made to currently rendered models----------------//
@@ -121,17 +128,29 @@ public slots:
     ///
     /// Function that applies a shrink filter to the currently selected model with the shrink factor set by the user.
     ///
+    /// @param(vtkSmartPointer<vtkAlgorithm>) Input source
+    /// @return(vtkSmartPointer<vtkAlgorithm>) Output source
+    ///
     vtkSmartPointer<vtkAlgorithm> Shrink_Filter(vtkSmartPointer<vtkAlgorithm>);
     ///
     /// Function that applies a clip filter to the currently selected model.
+    ///
+    /// @param(vtkSmartPointer<vtkAlgorithm>) Input source
+    /// @return(vtkSmartPointer<vtkAlgorithm>) Output source
     ///
     vtkSmartPointer<vtkAlgorithm> Clip_Filter(vtkSmartPointer<vtkAlgorithm>);
     ///
     /// Function that applies an elevation filter (along the y-axis) to the currently selected model.
     ///
+    /// @param(vtkSmartPointer<vtkAlgorithm>) Input source
+    /// @return(vtkSmartPointer<vtkAlgorithm>) Output source
+    ///
     vtkSmartPointer<vtkAlgorithm> Elevation_Filter(vtkSmartPointer<vtkAlgorithm>);
     ///
     /// Function that applies a transform filter to the currently selected modelm, with the stretch factors for x,y and z set by the user.
+    ///
+    /// @param(vtkSmartPointer<vtkAlgorithm>) Input source
+    /// @return(vtkSmartPointer<vtkAlgorithm>) Output source
     ///
     vtkSmartPointer<vtkAlgorithm> Transform_Filter(vtkSmartPointer<vtkAlgorithm>);
 
@@ -196,7 +215,7 @@ public slots:
     ///
     void Tab_Changed();
     ///
-    ///  //Function to find the actor of the currently selected model in the drop down menue
+    /// Function to find the actor of the currently selected model in the drop down menue
     ///
     /// @return(vtkSmartPointer<vtkActor>) currently selected model's actor
     ///
@@ -207,7 +226,7 @@ public slots:
     void Add_Rendered_Actors_To_Combo();
 
 private:
-    //UI and rendered elements
+    //UI and renderer elements
     Ui::MainWindow *ui;
     vtkSmartPointer<vtkRenderer> renderer;
     vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
@@ -230,12 +249,12 @@ private:
     vtkSmartPointer<vtkDataSetMapper> Current_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
     vtkSmartPointer<vtkDataSetMapper> Source_mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 
-    //Actor Arrays
+    //Rendered Actor Arrays
     std::vector<vtkSmartPointer<vtkActor>> Rendered_Cube_Actor_Array;
     std::vector<vtkSmartPointer<vtkActor>> Rendered_Sphere_Actor_Array;
     std::vector<vtkSmartPointer<vtkActor>> Rendered_STL_Actor_Array;
 
-    //STL FileName Array
+    //Rendered STL FileNames Array
     std::vector<QString> File_Name_Array;
 
     //Message box
