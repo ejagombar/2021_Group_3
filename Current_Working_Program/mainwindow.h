@@ -30,37 +30,46 @@
 #include <vtkNew.h>
 #include <QMessageBox>
 
+//-----------------------------------------------------------------------------------------------//
+//--------------------------------MainWindow Class Definiton-------------------------------------//
+//-----------------------------------------------------------------------------------------------//
 
 
 namespace Ui {
 ///
 /// @brief QMainWindow class used to render and edit models.
 ///
-class MainWindow; //Definition
+class MainWindow;
 }
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
 public:
     ///
-    ///Auto-Generated constructor
+    /// Auto-Generated constructor
     ///
-    explicit MainWindow(QWidget *parent = 0); //Constructor
-    ~MainWindow(); //Destructor
-
+    explicit MainWindow(QWidget *parent = 0);
+    ///
+    /// Auto-Generated destructor
+    ///
+    ~MainWindow();
 signals:
+    ///
+    /// Signal to allow for the use of a status bar in the program. Displays the text passed as variable "message".
+    ///
+    /// @param(const QString &) message
+    /// @param(int) timeout
     void statusUpdateMessage( const QString & message, int timeout ); //Used to update the status bar
 
 public slots:
-    ///
-    ///Functions to render models
-    ///
+
+    //-----------------------------------------------------------------------------------------------//
+    //-----------------Functions to handle the rendering of different model types--------------------//
+    //-----------------------------------------------------------------------------------------------//
 
     ///
-    /// Function to render Function to call the NewSource function to render an STL file. The function also enforces the limit of only 9 STL files
-    /// being allowed to be rendered at any time.
+    /// Function to call the NewSource function to render an STL file. The function also enforces the limit of only 9 STL files being allowed to be
+    /// rendered at any time.
     ///
     void handlactionFileOpen();
     ///
@@ -74,53 +83,129 @@ public slots:
     ///
     void handleBtn_Sphere();
     ///
-    /// Function that handles the rendering of the chosen model type, given through the Qstring input "Source_Type"
+    /// Function that handles the rendering of the chosen model type, given through the Qstring input "Source_Type".
     ///
-    /// @param(QString) Source_Type
+    /// @param(QString) Source_Type, e.g. "cube" or "STL".
     ///
     void NewSource(QString);
 
-    ///
-    ///Functions to edit models
-    ///
+    //-----------------------------------------------------------------------------------------------//
+    //------------Functions to handle changes to be made to currently rendered models----------------//
+    //-----------------------------------------------------------------------------------------------//
 
     ///
-    /// Function that changes to x,y and z co-ordinates of the currently selected model
+    /// Function that changes the x,y and z co-ordinates of the currently selected model.
     ///
     void handleBtn_Change_Position();
+    ///
+    /// Function that changes the colour of the currently selected model to a colour selected from a colour picker by the user.
+    ///
     void handleBtn_Model_Colour();
+    ///
+    /// Function that resets the currently selected model to the default version without any filters or colour changes applied.
+    ///
     void handleBtn_Reset_Actor();
+    ///
+    /// Function that removes the currently selected model.
+    ///
     void handleBtn_Remove_Actor();
 
-    //Filter pipeline functions
+    //-----------------------------------------------------------------------------------------------//
+    //----------------------------------Filter pipeline functions------------------------------------//
+    //-----------------------------------------------------------------------------------------------//
+
+    ///
+    /// Function that applies the filters selected by the user to the currently selected model.
+    ///
     void handleBtn_Filter();
+    ///
+    /// Function that applies a shrink filter to the currently selected model with the shrink factor set by the user.
+    ///
     vtkSmartPointer<vtkAlgorithm> Shrink_Filter(vtkSmartPointer<vtkAlgorithm>);
+    ///
+    /// Function that applies a clip filter to the currently selected model.
+    ///
     vtkSmartPointer<vtkAlgorithm> Clip_Filter(vtkSmartPointer<vtkAlgorithm>);
+    ///
+    /// Function that applies an elevation filter (along the y-axis) to the currently selected model.
+    ///
     vtkSmartPointer<vtkAlgorithm> Elevation_Filter(vtkSmartPointer<vtkAlgorithm>);
+    ///
+    /// Function that applies a transform filter to the currently selected modelm, with the stretch factors for x,y and z set by the user.
+    ///
     vtkSmartPointer<vtkAlgorithm> Transform_Filter(vtkSmartPointer<vtkAlgorithm>);
 
-    //Functions to manage the program UI
+    //-----------------------------------------------------------------------------------------------//
+    //-----------------------------Functions to manage the program UI--------------------------------//
+    //-----------------------------------------------------------------------------------------------//
+
+    ///
+    /// Function that changes the colour of the currently selected tab's background to a colour selected from a colour picker by the user.
+    ///
     void handleBtn_Change_Background();
+    ///
+    /// Function that resets the camera of the currently selected tab to default settings.
+    ///
     void handleBtn_Camera_Reset();
+    ///
+    /// Function that resets the program to it's inital state, clearing all relevant variables and rendered models.
+    ///
     void handleBtn_Clear();
+    ///
+    /// Function that resets the program UI to the default state for when a model is rendered.
+    ///
     void reset_function();
+    ///
+    /// Function that displayes the shrink factor UI when the shrink filter is selected so the user may enter a value. The function also
+    /// hides the shrink factor UI when the shrink filter is de-selected .
+    ///
     void Shrink_Box_Checked();
+    ///
+    /// Function that displayes the transform filter UI when the transform filter is selected so the user may enter appropriate values.
+    /// The function also hides the transform filter UI when the transform filter is de-selected .
+    ///
     void Transform_Box_Checked();
+    ///
+    /// Function to connect the help button in the UI to the doxygen documentation for the program via URL.
+    ///
     void Help();
+    ///
+    /// Function called when user closes program to check they meant to do so
+    ///
     void closeEvent(QCloseEvent* event);
 
-    //Functions used to run program
-    void New_Actor_Selected();
-    bool Combo_Check(QString,QString);
-    void Tab_Changed();
+    //-----------------------------------------------------------------------------------------------//
+    //-----------------------------Functions used to run the program---------------------------------//
+    //-----------------------------------------------------------------------------------------------//
 
     ///
-    /// Function to find the currently selected model's actor
+    /// Function called whenever the user selects a different model in the drop down menue to update the UI.
     ///
-    /// @return(vtkSmartPointer<vtkActor>) current model's actor
+    void New_Actor_Selected();
+    ///
+    /// Function to check if the drop down menue is blank, returns 0 if blank, 1 if not blank.
+    ///
+    /// @param(QString) Title
+    /// @param(QString) Message
+    /// @return(bool) status
+    ///
+    bool Combo_Check(QString,QString);
+    ///
+    /// Function called whenever the user selects a different tab from the tab menue to refresh the drop down menue with the models
+    /// currently rendered in that tab, and to refresh the program UI.
+    ///
+    void Tab_Changed();
+    ///
+    ///  //Function to find the actor of the currently selected model in the drop down menue
+    ///
+    /// @return(vtkSmartPointer<vtkActor>) currently selected model's actor
     ///
     vtkSmartPointer<vtkActor> FindActor();
+    ///
+    /// Function to add all the actors in a renderer to the drop down menue
+    ///
     void Add_Rendered_Actors_To_Combo();
+
 private:
     //UI and rendered elements
     Ui::MainWindow *ui;
@@ -131,14 +216,14 @@ private:
 
     //Sources and associated variables
     vtkNew<vtkSTLReader> reader;
-    vtkSmartPointer<vtkCubeSource> CubeSource;
-    vtkSmartPointer<vtkSphereSource> sphereSource;
     QString fileName;
     QByteArray ba;
+    vtkSmartPointer<vtkCubeSource> CubeSource;
+    vtkSmartPointer<vtkSphereSource> sphereSource;
     vtkSmartPointer<vtkAlgorithm> ModelData;
 
     //Actors
-    vtkSmartPointer<vtkActor> Current_actor;
+    vtkSmartPointer<vtkActor> Current_actor = vtkSmartPointer<vtkActor>::New();
     vtkSmartPointer<vtkActor> Source_actor = vtkSmartPointer<vtkActor>::New();
 
     //Mappers
@@ -159,7 +244,7 @@ private:
     //Colour pointer
     vtkSmartPointer<vtkNamedColors> colors = vtkSmartPointer<vtkNamedColors>::New();
 
-    //Colour values for the object as to not lose the colours when re-doing filters
+    //Colour values for the object as to not lose the colours when applying filters
     float Object_RedF=1;
     float Object_BlueF=1;
     float Object_GreenF=1;
