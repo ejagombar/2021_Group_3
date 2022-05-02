@@ -57,25 +57,36 @@ public slots:
     ///
     ///Functions to render models
     ///
-    /// Function to render Function to call the NewSource function to render an STL file
+
+    ///
+    /// Function to render Function to call the NewSource function to render an STL file. The function also enforces the limit of only 9 STL files
+    /// being allowed to be rendered at any time.
     ///
     void handlactionFileOpen();
     ///
-    /// Function to call the NewSource function to render a cube
+    /// Function to call the NewSource function to render a cube. The function also enforces the limit of only 9 cubes being allowed to be rendered
+    /// at any time.
     ///
     void handleBtn_Cube();
     ///
-    /// Function to call the NewSource function to render a sphere
+    /// Function to call the NewSource function to render a sphere. The function also enforces the limit of only 9 spheres being allowed to be rendered
+    /// at any time.
     ///
     void handleBtn_Sphere();
     ///
-    /// Function that
+    /// Function that handles the rendering of the chosen model type, given through the Qstring input "Source_Type"
     ///
     /// @param(QString) Source_Type
     ///
     void NewSource(QString);
 
-    //Functions to edit models
+    ///
+    ///Functions to edit models
+    ///
+
+    ///
+    /// Function that changes to x,y and z co-ordinates of the currently selected model
+    ///
     void handleBtn_Change_Position();
     void handleBtn_Model_Colour();
     void handleBtn_Reset_Actor();

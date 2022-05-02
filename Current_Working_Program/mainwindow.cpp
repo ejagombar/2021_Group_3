@@ -143,7 +143,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect( this, &MainWindow::statusUpdateMessage, ui->statusbar, &QStatusBar::showMessage );
 }
 
-void MainWindow::NewSource(QString Source_Type) //General source function - need
+void MainWindow::NewSource(QString Source_Type)
 //Still need to create 1 cube and sphere globally for use (after they are created), hence use of Cube and SphereSource globals
 {
     if (Source_Type=="Cube")
@@ -1058,9 +1058,7 @@ MainWindow::~MainWindow() //Destructor function called when the program terminat
 }
 
 //NEEDED:
-//          :Comment code + Doxygen + Rearrange function layout
-//          :Make transform fit to actor size? try y axis?
-//          :In readme discuss how "actor", "mapper" refered to interchangable as pointer or just the thing itself - disambiguation section
 //          :Comment filter function(s)
+//          :In readme/report discuss how "actor", "mapper" refered to interchangable as pointer or just the thing itself - disambiguation section
 //          : limit of 9 could be upgraded to 99 by selecting back 2 digits easily but 9 reasonable (report)
 
