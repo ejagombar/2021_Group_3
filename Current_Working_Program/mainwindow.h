@@ -54,20 +54,25 @@ signals:
     void statusUpdateMessage( const QString & message, int timeout ); //Used to update the status bar
 
 public slots:
-
-    //Functions to render models
     ///
-    /// Function to find the currently selected model's actor
+    ///Functions to render models
+    ///
+    /// Function to render Function to call the NewSource function to render an STL file
     ///
     void handlactionFileOpen();
     ///
-    /// Function to find the currently selected model's actor1
+    /// Function to call the NewSource function to render a cube
     ///
     void handleBtn_Cube();
     ///
-    /// Function to find the currently selected model's actor2
+    /// Function to call the NewSource function to render a sphere
     ///
     void handleBtn_Sphere();
+    ///
+    /// Function that
+    ///
+    /// @param(QString) Source_Type
+    ///
     void NewSource(QString);
 
     //Functions to edit models
@@ -105,10 +110,6 @@ public slots:
     ///
     vtkSmartPointer<vtkActor> FindActor();
     void Add_Rendered_Actors_To_Combo();
-
-    void handleBtn_Test();
-    void handleBtn_Test2();
-
 private:
     //UI and rendered elements
     Ui::MainWindow *ui;
