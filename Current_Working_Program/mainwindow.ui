@@ -89,7 +89,7 @@
        </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer">
+       <spacer name="ActorSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -289,7 +289,7 @@
        </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer_7">
+       <spacer name="FilterSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -476,7 +476,7 @@
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer">
+         <spacer name="ObjectSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>

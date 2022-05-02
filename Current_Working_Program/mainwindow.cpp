@@ -15,16 +15,25 @@
 // header
 // files        : See mainwindow.h file
 
-// README       :
-//              :
-//              :
+// README       : This program is roughly split into five sections. One to render models, one to edit
+//              : rendered models, one to apply filters to rendered models, one to manage the program
+//              : user interface, and the last contains function which are purely back-end code.
 
-// Restrictions/:
-// improvements :
+// Restrictions/: The program allows 9 of any of the three model types rendered by this program to be
+// improvements : rendered at any one time due to restrictions caused by the method used to keep track
+//              : of which model is which (the actor index being the last character of the drop down menu).
+//              : This limit could be expanded to 99 by simply allocating the last two digits as the index
+//              : and using a space to deliniate the index, however it was felt 9 was a reasonable limit.
 //              :
-//              :
-//              :
-
+//              : The fundamental improvement to this program would be through the use of a custom class.
+//              : The program currently uses different arrays to store actors, filenames and all kinds of
+//              : information. This means that additional arrays would have to be made to support more
+//              : model types, tabs or many other features.
+//              : If a model class could be made to store the source file/type, mapper, actor,
+//              : the renderer the model is in, the colour and postion of the model and the filters applied to
+//              : it, this class could be used to make the program truly scaleable.
+//              : The team did attempt this, with Dongkun Xu creating a working version with this approach,
+//              : however there was not enough time to implement this as a finished product.
 //-----------------------------------------------------------------------------------------------//
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -999,7 +1008,6 @@ void MainWindow::Tab_Changed() //Function run whenever the user selecs a differe
 
 vtkSmartPointer<vtkActor> MainWindow::FindActor() //Function to find the currently selected actor from the drop down menu
 {
-
     ///
     ///The function uses the Qstring in the combo box (drop down menu) to find the pointer to the currently selected actor
     ///The function first reads the text into the Combo_text variable, before converting the last element of the string to a

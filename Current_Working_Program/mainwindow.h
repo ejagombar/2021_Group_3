@@ -43,13 +43,18 @@
 //--------------------------------MainWindow Class Definiton-------------------------------------//
 //-----------------------------------------------------------------------------------------------//
 
-
+///
+/// @brief namespace UI to run the MainWindow class through.
+///
 namespace Ui {
 ///
 /// @brief QMainWindow class used to render and edit models.
 ///
 class MainWindow;
 }
+///
+/// @brief QMainWindow class used to render and edit models.
+///
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
