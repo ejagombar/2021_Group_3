@@ -8,6 +8,30 @@ foreach(p
   endif()
 endforeach()
 
+
+
+set(PROJECT_NAME_ QtVTKExample)
+set(PROJECT_BIN_NAME_ QtVTKExample)
+set(PROJECT_DESCRIPTION_ "QtVTKExample descriptions")
+set(PROJECT_PKG_NAME_ "QtVTKExample")
+set(PROJECT_PKG_TITLE_ "QtVTKExample Installer")
+set(PROJECT_PKG_PUBLISHER_ "Group_03")
+set(PROJECT_LICENSE_FILE_ ${CMAKE_CURRENT_SOURCE_DIR}/licence.txt)
+set(PROJECT_VERSION_MAJOR_ 2 CACHE STRING "Project major version number.")
+set(PROJECT_VERSION_MINOR_ 3 CACHE STRING "Project minor version number.")
+set(PROJECT_VERSION_PATCH_ 4 CACHE STRING "Project patch version number.")
+mark_as_advanced(VERSION_MAJOR VERSION_MINOR VERSION_PATCH)
+set(CPACK_IFW_ROOT "C:/Qt/Tools/QtInstallerFramework/4.3/")
+set(CPACK_IFW_PACKAGE_WIZARD_STYLE "Aero")
+
+set(BUID_MODE_ $<$<CONFIG:Debug>:Debug>$<$<CONFIG:Release>:Release>)
+set(BUID_MODE_DLL_ $<$<CONFIG:Debug>:d.dll>$<$<CONFIG:Release>:.dll>)
+set(VTK_bin "${VTK_DIR}/bin/${BUID_MODE_}")
+#set(CMAKE_MSVCIDE_RUN_PATH ${VTK_bin})
+#LIST(APPEND CMAKE_PROGRAM_PATH  "${VTK_bin}")
+
+
+
 PROJECT( QtVTKExample )
 
 # The CMake build process might generate some new files in the current
@@ -63,6 +87,12 @@ target_link_libraries( QtVTKExample Qt6::Widgets )
 target_link_libraries( QtVTKExample ${VTK_LIBRARIES} )
 
 
+
+#set(MY_PATH "PATH=%PATH%;${VTK_bin}" )
+#set_target_properties(QtVTKExample PROPERTIES VS_DEBUGGER_ENVIRONMENT "{MY_PATH}")
+set(CMAKE_MSVCIDE_RUN_PATH ${VTK_bin})
+
+include(IFWin.cmake)
 
 
 
