@@ -11,17 +11,18 @@
 
 // Authors      : Ben Richards, Edward Agombar, Dongkun Xu and Odiri Otite
 
-// Required
-// header
-// files        : See mainwindow.h file
+// Required     : This program is created through an installer which should install the vtk header files,
+// header       : however the list of header files required for the program to run can be found at the top
+// files        : of the mainwindow.h file.
+
 
 // README       : This program is roughly split into five sections. One to render models, one to edit
 //              : rendered models, one to apply filters to rendered models, one to manage the program
-//              : user interface, and the last contains function which are purely back-end code.
+//              : user interface, and the last contains functions which are purely back-end code.
 
 // Restrictions/: The program allows 9 of any of the three model types rendered by this program to be
 // improvements : rendered at any one time due to restrictions caused by the method used to keep track
-//              : of which model is which (the actor index being the last character of the drop down menu).
+//              : of which model is which (the actor array index being the last character of the drop down menu).
 //              : This limit could be expanded to 99 by simply allocating the last two digits as the index
 //              : and using a space to deliniate the index, however it was felt 9 was a reasonable limit.
 //              :
@@ -510,8 +511,20 @@ void MainWindow::handleBtn_Remove_Actor() //Function to remove the model selecte
                 Rendered_STL_Actor_Array.erase(Rendered_STL_Actor_Array.begin()+Index);
                 File_Name_Array.erase(File_Name_Array.begin()+Index);
             }
+            //Reset UI and refresh
             Add_Rendered_Actors_To_Combo();
             reset_function();
+
+            if(ui->tabWidget->currentIndex()==0)
+            {
+                renderWindow->Render();
+            }
+            else if (ui->tabWidget->currentIndex()==1)
+            {
+                renderWindow_Tab2->Render();
+            }
+
+
         }
         else
         {
