@@ -1,9 +1,8 @@
- # 2021_Group_3
+ # 2021_Group_3 Version 2
+ 
+This is a second version of the project with improved OOP implementation among other features
 
-A 3D model viewer designed to run on Windows, MacOS and Linux able to render and perform basic manipulation to .stl files and custom .mod files.
-
-[Project Documentation](https://ejagombar.github.io/2021_Group_3/) and
-[GitHub](https://github.com/ejagombar/2021_Group_3)
+[Project Documentation for Version 1](https://ejagombar.github.io/2021_Group_3/)
 
 [![Testing Status(latest by date)](https://img.shields.io/github/workflow/status/ejagombar/2021_Group_3/cmake-test)](https://github.com/ejagombar/2021_Group_3/actions/workflows/makes-test.yml/badge.svg)
 # Task
@@ -27,3 +26,5 @@ You will write a 3D Model Viewer application and deliver it in package/installer
  * Ben Richards
  * Dongkun Xu
  * Odiri Otite
+
+
