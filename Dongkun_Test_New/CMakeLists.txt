@@ -10,11 +10,11 @@ endforeach()
 
 
 
-set(PROJECT_NAME_ QtVTKExample)
+set(PROJECT_NAME_ Group_3D)
 set(PROJECT_BIN_NAME_ QtVTKExample)
 set(PROJECT_DESCRIPTION_ "QtVTKExample descriptions")
-set(PROJECT_PKG_NAME_ "QtVTKExample")
-set(PROJECT_PKG_TITLE_ "QtVTKExample Installer")
+set(PROJECT_PKG_NAME_ "Group_3D")
+set(PROJECT_PKG_TITLE_ "Group 3D Installer")
 set(PROJECT_PKG_PUBLISHER_ "Group_03")
 set(PROJECT_LICENSE_FILE_ ${CMAKE_CURRENT_SOURCE_DIR}/licence.txt)
 set(PROJECT_VERSION_MAJOR_ 2 CACHE STRING "Project major version number.")

@@ -1,0 +1,6 @@
+set(WINDEPLOYQT "C:/Qt/6.2.3/msvc2019_64/bin/windeployqt.exe")
+set(COMPONENT_NAME_MAIN "QtVTKExample")
+set(CMAKE_CURRENT_SOURCE_DIR "D:/GitHub/2021_Group_3/Dongkun_Test_New")
+
+
+execute_process(COMMAND ${WINDEPLOYQT} --verbose 0 --qmldir ${CMAKE_CURRENT_SOURCE_DIR} ${COMPONENT_NAME_MAIN}/data WORKING_DIRECTORY ${CPACK_TEMPORARY_INSTALL_DIRECTORY}/packages)
