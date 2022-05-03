@@ -2,9 +2,9 @@
  
 This is a second version of the project with improved OOP implementation among other features
 
-[Project Documentation for Version 1](https://ejagombar.github.io/2021_Group_3/)
+[Project Documentation](https://ejagombar.github.io/2021_Group_3/) and
+[GitHub](https://github.com/ejagombar/2021_Group_3)
 
-[![Testing Status(latest by date)](https://img.shields.io/github/workflow/status/ejagombar/2021_Group_3/cmake-test)](https://github.com/ejagombar/2021_Group_3/actions/workflows/makes-test.yml/badge.svg)
 # Task
 The aim of this project is described below. As stated in the task sheet.
 Your team has been asked by a client to develop and 3D model viewer that will form part of a larger CAD system  
