@@ -1,5 +1,0 @@
-This app is made for Group 03. 
-
-Computing Project for Practical Engineering Design Solutions and Project Development (EEEE2046 UNUK) course. 
-
-For academic purposes only.
