@@ -27,3 +27,6 @@ You will write a 3D Model Viewer application and deliver it in package/installer
  * Ben Richards
  * Dongkun Xu
  * Odiri Otite
+
+# Repository Contents:
+There are two branches: The main branch contains the more stable and release ready model viewer program. This program is however made

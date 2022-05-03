@@ -3,7 +3,7 @@
 #include <QSurfaceFormat>
 #include <QVTKOpenGLWidget.h>
 #include <QSplashScreen>
-#include <QFile>
+
 #include "mainwindow.h"
 
 int main( int argc, char** argv )
@@ -13,19 +13,16 @@ int main( int argc, char** argv )
 
   QApplication a( argc, argv );
 
-  QPixmap pixmap("B.jpg");
+  //Creates the splash screen while the program loads
+  QPixmap pixmap(":/Icons/Start0.5.2.png");
   QSplashScreen splash(pixmap);
   splash.show();
 
-  // set the app style sheet
-  QFile styleSheetFile(":/Adaptic.qss");
-  styleSheetFile.open(QFile::ReadOnly);
-  QString styleSheet = QLatin1String(styleSheetFile.readAll());
-  a.setStyleSheet(styleSheet);
-
+  //Displays the main program and then ends the splash screen
   MainWindow window;
   window.show();
   splash.finish(&window);
+
   return a.exec();
 }
 // /main.cpp------------------------------------------------------------------
