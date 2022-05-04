@@ -128,9 +128,11 @@ Repository Contents:</h1>
 <p>The first branch is the Main branch, which contains:</p><ul>
 <li>The ReadMe file to detail the project, which also links to the Doxygen page for the code written for the project, and shows the output of the tests in the repository.</li>
 <li>The Doxygen files to run Doxygen in the repository.</li>
-<li>The code files for the most stable “release ready” program, along with the CMakeLists file which builds the project, and the associated files such as the icons used in the program.</li>
+<li>used in the program.</li>
 <li>The MOD file library, which is built into the program, but unused as there was not enough time to integrate this</li>
+<li>The code files for the most stable “release ready” program, along with the CMakeLists file which builds the project, and the associated files such as the icons</li>
 </ul>
+<p>This “Main” version of the program is the release-ready model viewer program. It has error prevention built in to prevent crashes, and has Doxgen and other comments built in. It allows full functionality to render, filter and edit both built in and STL files, in multiple tabs. The MOD file is built as part of the project, however it is not implemented in the program as there was not enough time. The “main” program uses hard-coded methods to run the program, meaning adding new types of models to the program can be difficult. This is why the version two prototype was made, and is in the “Version2” branch, nearly complete.</p>
 <p>The second branch is the “Version2” branch. This branch contains:</p><ul>
 <li>The code files for the object oriented version of the program.</li>
 <li>The code for the installer for the “Version2” program (called)</li>
