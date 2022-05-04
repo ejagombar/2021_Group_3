@@ -29,4 +29,20 @@ You will write a 3D Model Viewer application and deliver it in package/installer
  * Odiri Otite
 
 # Repository Contents:
-There are two branches: The main branch contains the more stable and release ready model viewer program. This program is however made
+The repository was set up during the lab sessions, and contains 3 branches:
+
+The first branch is the Main branch, which contains:
+  * The ReadMe file to detail the project, which also links to the Doxygen page for the code written for the project, and shows the output of the tests in the repository.
+  * The Doxygen files to run Doxygen in the repository.
+  * The code files for the most stable “release ready” program, along with the CMakeLists file which builds the project, and the associated files such as the icons used in the program.
+  * The MOD file library, which is built into the program, but unused as there was not enough time to integrate this 
+
+The second branch is the “Version2” branch. This branch contains:
+  * The code files for the object oriented version of the program. 
+  * The code for the installer for the “Version2” program (called)
+
+This version is a much better solution to the problem, with object oriented programming providing a solution to making the program scalable. This version of the program, however, is less stable as it was achieved late into the process and there was not enough time to fully work out bugs in the code and to add doxygen documentation for it. The decision was therefore made to use the stable version as the “Main program”, however the OOP program was  given its own branch so it could be demonstrated that the group understood and made considerable progress towards making the program scalable. The OOP program had begun to solve having an unlimited number of tabs, an unlimited number of rendered objects of all types (within reason) and keeping track of the filters applied to objects without using the hardcoding methods employed in the “Main program”. This was done with classes, using arrays of these classes and member functions to remove the reliance on the hard-coded methods which limited the “Main program”.
+
+The third branch is the “gh-pages” branch which contains:
+  * The code to run GH-pages which runs the tests on the MOD file library.
+
