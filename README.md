@@ -8,7 +8,7 @@ A 3D model viewer designed to run on Windows, MacOS and Linux able to render and
 [![Testing Status(latest by date)](https://img.shields.io/github/workflow/status/ejagombar/2021_Group_3/cmake-test)](https://github.com/ejagombar/2021_Group_3/actions/workflows/makes-test.yml/badge.svg)
 
 # Released versions
-  * For the "Main Release" version of the code, a partial installer was achieved, and is in the release section, under "Main Release"
+  * For the "Main Release" version of the code, a partial installer was achieved, and is in the release section, under "Main Release".
   * For the "Version2" version of the code, a fully working installer was achieved, and it is also in the release section, under "Version 2 Release for Windows".
 
 # Task
@@ -39,11 +39,11 @@ The repository was set up during the lab sessions, and contains 3 branches:
 The first branch is the Main branch, which contains:
   * The ReadMe file to detail the project, which also links to the Doxygen page for the code written for the project, and shows the output of the tests in the repository.
   * The Doxygen files to run Doxygen in the repository.
-  * used in the program.
+  * The files to generate the installer for the "Main" program, which includes the MOD library.
   * The MOD file library, which is built into the program, but unused as there was not enough time to integrate this 
   * The code files for the most stable “release ready” program, along with the CMakeLists file which builds the project, and the associated files such as the icons
  
-This “Main” version of the program is the release-ready model viewer program. It has error prevention built in to prevent crashes, and has Doxgen and other comments built in. It allows full functionality to render, filter and edit both built in and STL files, in multiple tabs. The MOD file is built as part of the project, however it is not implemented in the program as there was not enough time. The “main” program uses hard-coded methods to run the program, meaning adding new types of models to the program can be difficult. This is why the version two prototype was made, and is in the “Version2” branch, nearly complete.
+This “Main” version of the program is the release-ready model viewer program. It has error prevention built in to prevent crashes, and has Doxgen and other comments built in. It allows full functionality to render, filter and edit both built in models and STL files, in multiple tabs. The MOD file is built as part of the project, however it is not implemented in the program as there was not enough time. The “main” program uses hard-coded methods to run the program, meaning adding new types of models to the program can be difficult. This is why the version two prototype was made, and is in the “Version2” branch, nearly complete.
 
 The second branch is the “Version2” branch. This branch contains:
   * The code files for the object oriented version of the program. 
