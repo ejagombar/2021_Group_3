@@ -169,6 +169,7 @@ install(FILES
     ${VTK_bin}/vtkzlib-9.1${BUID_MODE_DLL_}
     ${QT_BIN_}/Qt6OpenGLWidgets${BUID_MODE_DLL_}
     ${QT_BIN_}/Qt6OpenGL${BUID_MODE_DLL_}
+    ${CMAKE_CURRENT_SOURCE_DIR}/ucrtbase${BUID_MODE_DLL_}
     DESTINATION ${CMAKE_INSTALL_BINDIR}/..)
 #include(InstallRequiredSystemLibraries)
 
