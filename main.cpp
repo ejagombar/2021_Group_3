@@ -8,6 +8,9 @@
 
 int main( int argc, char** argv )
 {
+  //Disables the warning screen
+  vtkObject::GlobalWarningDisplayOff();
+
   // needed to ensure appropriate OpenGL context is created for VTK rendering.
   QSurfaceFormat::setDefaultFormat( QVTKOpenGLWidget::defaultFormat() );
 

@@ -23,7 +23,7 @@
       <item>
        <widget class="QLabel" name="Lbl_Actor">
         <property name="text">
-         <string>Actor Select</string>
+         <string>Model Select</string>
         </property>
         <property name="textFormat">
          <enum>Qt::AutoText</enum>
@@ -43,7 +43,7 @@
       <item>
        <widget class="QLabel" name="Lbl_AddSource">
         <property name="text">
-         <string>AddSource</string>
+         <string>Add Model</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -67,7 +67,7 @@
       <item>
        <widget class="QLabel" name="Lbl_Change">
         <property name="text">
-         <string>Edit Source</string>
+         <string>Edit Model</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
