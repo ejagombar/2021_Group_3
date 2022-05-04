@@ -416,6 +416,9 @@ void MainWindow::on_list_itemSelectionChanged()
     ui->RY->setValue(getCurrentModelList()->at(row)->getRY());
     ui->RZ->setValue(getCurrentModelList()->at(row)->getRZ());
 
+    vtkFilter->outLine(getCurrentModelList()->at(row),getCurentRender(),x,y,z);
+    render();
+
     ui->statusbar->showMessage(tr("Selection Changed"),2000);
 }
 
